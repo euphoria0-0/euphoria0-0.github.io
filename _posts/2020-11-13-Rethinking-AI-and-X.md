@@ -1,8 +1,8 @@
 ---
 title: Rethinking AI + X
-author: Cotes Chung
+author: euphoria0-0
 date: 2020-11-13 14:34:00 +0800
-categories: [Blogging, Tutorial]
+categories: [AI, Thinking]
 tags: [thinking]
 toc: false
 mathjax: true
