@@ -21,7 +21,7 @@
 // use it
 @include selection {
     color: white;
-    background: #0064A2;
+    background: #004771;
 }
 
 
@@ -100,7 +100,8 @@ $sidebar-display: "sidebar-display";
     a {
       font-weight: 900;
       font-size: 1.5rem;
-      font-family: San Serif;
+      font-family: Noto Sans KR;
+      font-color: white;
       letter-spacing: 0.5px;
       &:hover {
         color: #fff;
@@ -111,7 +112,7 @@ $sidebar-display: "sidebar-display";
 
   .site-subtitle {
     font-size: 95%;
-    font-family: Roboto Condensed;
+    font-family: Noto Sans KR;
     text-align: center;
     color: #828282;
     line-height: 1.2rem;
@@ -249,7 +250,7 @@ $sidebar-display: "sidebar-display";
     width: 6rem;
     height: 6rem;
     border-radius: 50%;
-    border: 1px solid #b6b6b6;
+    border: 1px solid #6F7985;
     overflow: hidden;
     transform: translateZ(0); // fixed the zoom in Safari
     -webkit-transition: border-color 0.35s ease-in-out;
