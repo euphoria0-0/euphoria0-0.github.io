@@ -10,13 +10,7 @@ order: 4
 # MIT License
 ---
 
-```r
-<style>
-pre {
-  font-family: San Serif;
-}
-</style>
-```
+
 
 
 
