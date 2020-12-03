@@ -11,4 +11,22 @@ order: 4
 ---
 
 
-> **Note**: Add Markdown syntax content to file `_tabs/about.md` and it will show up on this page.
+
+# SY, Park
+## Data Scientist, ML Engineer
+I think the collaboration of human and data make the worlds better!
+
+### Interests
+I'm interested in various fields in Data Science, basically.
+
+Currently, focusing on Causal Machine Learning in Computer Vision.
+
+### Contact
+[![Gmail Badge](https://img.shields.io/badge/Gmail-d14836?style=flat&logo=Gmail&logoColor=white&link=mailto:1996sypark@gmail.com)](mailto:1996sypark@gmail.com)
+
+## More about me
+[![Linkedin Badge](https://img.shields.io/badge/Linkedin-blue?style=flat&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/su-yeong-p-782a62187//)](https://www.linkedin.com/in/sy-p-782a62187/)
+[![GitHub Badge](http://img.shields.io/badge/-Github-black?style=flat-square&logo=github&link=https://euphoria0-0.github.io)](https://euphoria0-0.github.io)
+
+
+### :hugs: Thank you for your interest!
