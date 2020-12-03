@@ -13,8 +13,12 @@ order: 4
 
 
 # SY, Park
+<<<<<<< HEAD
 
 ### Data Scientist, ML Engineer
+=======
+## Data Scientist, ML Engineer
+>>>>>>> 8cd6ed31540554fe42e92d2b6872f77dc36c11aa
 I think the collaboration of human and data make the worlds better!
 
 ### Interests
@@ -26,8 +30,16 @@ Currently, focusing on Causal Machine Learning in Computer Vision.
 [![Gmail Badge](https://img.shields.io/badge/Gmail-d14836?style=flat&logo=Gmail&logoColor=white&link=mailto:1996sypark@gmail.com)](mailto:1996sypark@gmail.com)
 
 ### More about me
+<<<<<<< HEAD
 [![Linkedin Badge](https://img.shields.io/badge/Linkedin-blue?style=flat&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/su-yeong-p-782a62187//)](https://www.linkedin.com/in/sy-p-782a62187/) [![GitHub Badge](http://img.shields.io/badge/-Github-black?style=flat-square&logo=github&link=https://euphoria0-0.github.io)](https://euphoria0-0.github.io)
 
 
 
 ### :hugs: Thank you for your interest!
+=======
+[![Linkedin Badge](https://img.shields.io/badge/Linkedin-blue?style=flat&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/su-yeong-p-782a62187//)](https://www.linkedin.com/in/sy-p-782a62187/)
+[![GitHub Badge](http://img.shields.io/badge/-Github-black?style=flat-square&logo=github&link=https://euphoria0-0.github.io)](https://euphoria0-0.github.io)
+
+
+### :hugs: Thank you for your interest!
+>>>>>>> 8cd6ed31540554fe42e92d2b6872f77dc36c11aa
