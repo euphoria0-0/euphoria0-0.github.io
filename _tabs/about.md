@@ -10,6 +10,14 @@ order: 4
 # MIT License
 ---
 
+```r
+<style>
+pre {
+  font-family: San Serif;
+}
+</style>
+```
+
 
 
 # SY, Park
@@ -21,6 +29,8 @@ order: 4
 I'm interested in various fields in Data Science, basically.
 
 Currently, focusing on Causal Machine Learning in Computer Vision.
+
+
 
 ### Contact
 [![Gmail Badge](https://img.shields.io/badge/Gmail-d14836?style=flat&logo=Gmail&logoColor=white&link=mailto:1996sypark@gmail.com)](mailto:1996sypark@gmail.com)
