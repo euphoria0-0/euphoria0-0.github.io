@@ -33,7 +33,7 @@ order: 1
         {% endunless %}
       {% endif %}
     {% endfor %}
-
+    
     {% assign sub_categories = sub_categories | sort %}
     {% assign sub_categories_size = sub_categories | size %}
 
@@ -63,7 +63,7 @@ order: 1
             post{% if top_posts_size > 1 %}s{% endif %}
         </span>
       </span>
-
+    
       <!-- arrow -->
       {% if sub_categories_size > 0%}
       <a href="#{{ LIST_PREFIX }}{{ group_index }}" data-toggle="collapse" 
@@ -76,9 +76,9 @@ order: 1
         <i class="fas fa-fw fa-angle-right"></i>
       </span>
       {% endif %}
-
+    
     </div> <!-- .card-header -->
-
+    
     <!-- Sub-categories -->
     {% if sub_categories_size > 0 %}
     <div id="{{ LIST_PREFIX }}{{ group_index }}" class="collapse show" aria-expanded="true">
@@ -104,3 +104,32 @@ order: 1
 
   {% endif %}
 {% endfor %}
+
+
+
+# Tags
+
+{% comment %}
+  'site.tags' looks like a Map, e.g. site.tags.MyTag.[ Post0, Post1, ... ]
+  Print the {{ site.tags }} will help you to understand it.
+{% endcomment %}
+
+<div id="tags" class="d-flex flex-wrap ml-xl-2 mr-xl-2">
+{% assign tags = "" | split: "" %}
+{% for t in site.tags %}
+  {% assign tags = tags | push: t[0] %}
+{% endfor %}
+
+
+{% assign sorted_tags = tags | sort_natural %}
+
+{% for t in sorted_tags %}
+
+  <div>
+    <a class="tag" href="{{ site.baseurl }}/tags/{{ t | replace: ' ', '-' | downcase | url_encode }}/">{{ t }}<span class="text-muted">{{ site.tags[t].size }}</span></a>
+  </div>
+
+{% endfor %}
+
+</div>
+
