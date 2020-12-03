@@ -12,6 +12,19 @@
 @import "_colors/light-typography";
 @import "_colors/dark-typography";
 
+// drag color
+@mixin selection {
+    ::-moz-selection { @content; }
+    ::selection { @content; }
+}
+
+// use it
+@include selection {
+    color: white;
+    background: #0064A2;
+}
+
+
 @mixin set-visible($light-display, $dark-display) {
   [light-mode-invisible] {
     display: $light-display;
@@ -59,7 +72,7 @@ body {
   background: var(--body-bg);
   color: var(--text-color);
   -webkit-font-smoothing: antialiased;
-  font-family: 'Source Sans Pro', 'Microsoft Yahei', sans-serif;
+  font-family: 'Nanum Gothic Coding', 'Microsoft Yahei', sans-serif;
 }
 
 /*--- sidebar layout ---*/
