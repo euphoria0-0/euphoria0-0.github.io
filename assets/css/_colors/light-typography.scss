@@ -27,10 +27,7 @@
   --btn-box-shadow: #eaeaea;
 
   /* Sidebar */
-  --sidebar-bg: radial-gradient(
-    circle,
-    rgba(42, 30, 107, 1) 0%,
-    rgba(35, 37, 46, 1) 100%);
+  --sidebar-bg: #016A96;
   --nav-cursor-color: #fcfcfc;
 
   /* Topbar */
@@ -73,4 +70,8 @@
   --footer-bg-color: #ffffff;
   --footnote-target-bg: lightcyan;
   --footer-link: #424242;
+
+ /* Selection */
+  --color: #016A96;
+
 } // light-scheme
