@@ -9,7 +9,7 @@
 #--------------------------
 title: euphoria                          # the main title
 
-tagline: Think Data Science toward better worlds.  # it will display as the sub-title
+tagline: Toward better worlds.  # it will display as the sub-title
 
 description: >-                        # used by seo meta and the atom feed
   A minimal, portfolio, sidebar,
