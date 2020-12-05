@@ -3,9 +3,9 @@ title: Rethinking AI + X
 author: euphoria0-0
 date: 2020-11-13 14:34:00 +0800
 categories: [AI, Thinking]
-tags: [thinking]
+tags: [AI, thinking]
 toc: false
-mathjax: true
+math: false
 ---
 
 

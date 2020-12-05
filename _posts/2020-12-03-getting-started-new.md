@@ -3,8 +3,8 @@ title: Getting Started! - new
 author: euphoria0-0
 date: 2020-11-03 00:12:00 +0800
 categories: [Blogging]
-tags: [blog]
-math: true
+tags: [blogging]
+math: false
 ---
 
 ### 이것은 첫번째 블로그 글.

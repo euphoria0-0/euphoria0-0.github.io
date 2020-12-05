@@ -1,12 +1,11 @@
 ---
-title: Bayesian Linear Regression
+title: Uncertainty in Bayesian Deep Learning
 author: euphoria0-0
 date: 2020-12-05 23:30:00 +0800
-categories: [AI, PRML]
-tags: [Machine Learning]
+categories: [AI, Machine Learning]
+tags: [Machine Learning, Bayesian, Uncertainty, Computer Vision]
 toc: true
-mathjax: true
-
+math: true
 ---
 
 # Uncertainty in Bayesian Deep Learning
@@ -23,7 +22,13 @@ mathjax: true
 
 
 
+
+
+
+
 ## What Uncertainties Do We Need in Bayesian Deep Learning for Computer Vision?
+
+
 
 
 
