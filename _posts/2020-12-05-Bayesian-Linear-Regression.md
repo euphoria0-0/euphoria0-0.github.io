@@ -9,7 +9,6 @@ math: true
 ---
 
 
-# Bayesian Linear Regression
 
 *먼저, 이 글은 PRML 공부를 바탕으로 작성된 글입니다. 따라서, 간혹 틀리다거나 더 좋은 해석이 있다면 편하게 댓글 부탁드립니다!*
 
@@ -124,3 +123,6 @@ $p(\mathbf{w}|\mathbf{t})=\mathcal{N}(\mathbf{w}|\mathbf{m}_N,\mathbf{S}_N) \qqu
 
 
 
+**Reference**
+
+[1]  *Bishop, Christopher M. (2006). Pattern recognition and machine learning. New York :Springer*

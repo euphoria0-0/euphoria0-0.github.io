@@ -9,7 +9,7 @@ math: false
 ---
 
 
-# Rethinking AI + X
+
 ## About the roles of AI
 
 우리는 현재 AI가 널리 활용되고 있는 사회에 살고 있다. 이제 막 시작한 분야도 있고, 이미 서비스의 뿌리깊게 AI가 활용되고 있는 분야도 있다. 
