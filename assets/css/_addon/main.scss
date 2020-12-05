@@ -72,7 +72,7 @@ body {
   background: var(--body-bg);
   color: var(--text-color);
   -webkit-font-smoothing: antialiased;
-  font-family: 'Noto Sans KR', 'Nanum Gothic Coding', 'Microsoft Yahei', sans-serif;
+  font-family: 'Noto Sans KR', 'Microsoft Yahei', sans-serif;
 }
 
 /*--- sidebar layout ---*/
@@ -101,7 +101,6 @@ $sidebar-display: "sidebar-display";
       font-weight: 900;
       font-size: 1.5rem;
       font-family: Noto Sans KR;
-      font-color: white;
       letter-spacing: 0.5px;
       &:hover {
         color: #fff;
@@ -427,7 +426,7 @@ $sidebar-display: "sidebar-display";
 
 #topbar-title {
   display: none;
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-weight: 600;
   font-family: Noto Sans KR;
   color: var(--topbar-text-color);
