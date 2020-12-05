@@ -5,15 +5,13 @@ date: 2020-12-05 23:00:00 +0800
 categories: [AI, PRML]
 tags: [Machine Learning]
 toc: false
-mathjax: true
-
-
+math: true
 ---
 
 
 # Bayesian Linear Regression
 
-*먼저, 이 글은 PRML 공부를 바탕으로 작성된 글입니다.*
+*먼저, 이 글은 PRML 공부를 바탕으로 작성된 글입니다. 따라서, 간혹 틀리다거나 더 좋은 해석이 있다면 편하게 댓글 부탁드립니다!*
 
 
 
