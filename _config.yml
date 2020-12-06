@@ -66,6 +66,13 @@ disqus:
   comments: False # boolean type, the global switch for posts comments.
   shortname: 'euphoria0-0'    # Fill with your Disqus shortname. › https://help.disqus.com/en/articles/1717111-what-s-a-shortname
 
+utterances:
+  repository: euphoria0-0/utterances-repo   # GitHub username/repository eg. "daattali/beautiful-jekyll"
+  issue-term: pathname   # Mapping between blog posts and GitHub issues
+  theme: github-light # Utterances theme
+  #label: blog-comments # Label that will be assigned to GitHub Issues created by Utterances
+
+
 # Prefer color scheme setting, available values:
 #
 #     dual   - Follow the system prefer color by default, and a toggle will display
