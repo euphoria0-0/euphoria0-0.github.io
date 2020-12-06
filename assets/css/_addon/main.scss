@@ -621,6 +621,7 @@ footer {
 h1 {
   @extend %heading;
   font-size: 1.8rem;
+  font-family: 'Noto Sans KR', 'Microsoft Yahei', sans-serif;
 }
 
 h2 {
@@ -628,6 +629,7 @@ h2 {
   @extend %section;
   @extend %anchor;
   font-size: 1.4rem;
+  font-family: 'Noto Sans KR', 'Microsoft Yahei', sans-serif;
 }
 
 h3 {
@@ -635,6 +637,7 @@ h3 {
   @extend %section;
   @extend %anchor;
   font-size: 1.25rem;
+  font-family: 'Noto Sans KR', 'Microsoft Yahei', sans-serif;
 }
 
 h4 {
@@ -642,6 +645,7 @@ h4 {
   @extend %section;
   @extend %anchor;
   font-size: 1.15rem;
+  font-family: 'Noto Sans KR', 'Microsoft Yahei', sans-serif;
 }
 
 h5 {
@@ -649,12 +653,14 @@ h5 {
   @extend %section;
   @extend %anchor;
   font-size: 1.1rem;
+  font-family: 'Noto Sans KR', 'Microsoft Yahei', sans-serif;
 }
 
 blockquote {
   border-left: 5px solid var(--blockquote-border-color);
   padding-left: 1rem;
   color: var(--blockquote-text-color);
+  font-family: 'Noto Sans KR', 'Microsoft Yahei', sans-serif;
   .post-content & {
     a {
       color: var(--link-color);
