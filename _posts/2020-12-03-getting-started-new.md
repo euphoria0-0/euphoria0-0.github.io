@@ -5,6 +5,7 @@ date: 2020-11-03 00:12:00 +0800
 categories: [Blogging]
 tags: [blogging]
 math: false
+comments: true
 ---
 
 ### 이것은 첫번째 블로그 글.

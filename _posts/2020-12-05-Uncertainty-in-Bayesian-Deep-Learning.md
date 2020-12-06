@@ -6,6 +6,7 @@ categories: [AI, Machine Learning]
 tags: [Machine Learning, Bayesian, Uncertainty, Computer Vision]
 toc: true
 math: true
+comments: true
 ---
 
 
