@@ -62,18 +62,9 @@ google_analytics:
     proxy_endpoint: ''
     cache: false  # pv data local cache, good for the users from GFW area.
 
-#disqus:
-#  comments: True  # boolean type, the global switch for posts comments.
-#  shortname: 'euphoria0-0'    # Fill with your Disqus shortname. › https://help.disqus.com/en/articles/1717111-what-s-a-shortname
-
-<script src="https://utteranc.es/client.js"
-        repo="euphoria0-0/utterances-repo"
-        issue-term="pathname"
-        theme="github-light"
-        crossorigin="anonymous"
-        async>
-</script>
-
+disqus:
+  comments: False # boolean type, the global switch for posts comments.
+  shortname: 'euphoria0-0'    # Fill with your Disqus shortname. › https://help.disqus.com/en/articles/1717111-what-s-a-shortname
 
 # Prefer color scheme setting, available values:
 #
