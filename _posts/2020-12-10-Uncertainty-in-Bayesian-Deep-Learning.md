@@ -33,17 +33,17 @@ comments: true
 
 **Uncertainty**
 
-1. ***Aleatoric Uncertainty*** (data uncertainty)
+1. **Aleatoric Uncertainty** (data uncertainty)
 
-   Aleatoric Uncertainty는 data에 대한 uncertainty로, 관측치에 내재된 노이즈에 대한 불확실성을 의미합니다. 이는 데이터가 포함하고 있는 다양한 noise를 내포하므로 데이터가 많다고 해서 줄일 수 없습니다. 예로 측정 오차 등이 포함될 수 있습니다.
+   <kbd>Aleatoric Uncertainty</kbd>는 data에 대한 uncertainty로, 관측치에 내재된 노이즈에 대한 불확실성을 의미합니다. 이는 데이터가 포함하고 있는 다양한 noise를 내포하므로 데이터가 많다고 해서 줄일 수 없습니다. 예로 측정 오차 등이 포함될 수 있습니다.
 
-   Aleatoric Uncertainty는 Homoscedastic uncertainty, Heteroscedastic uncertainty로 나뉠 수 있습니다. Homoscedastic uncertainty는 다른 input들에 대해서 constant한 불확실성입니다. input에 대해서는 같지만, 어떤 task에 대한 input이냐에 따라 달라질 수 있습니다. Heteroscedastic uncertainty는 모델에서 더 noisy한 output을 잠재적으로 가질 수 있는 input에 의존합니다. 따라서 이는 확실하지 않은 task에 대해 confident prediction을 주지 않도록 하기 위해 Computer Vision에서 더 중요합니다.
+   Aleatoric Uncertainty는 Homoscedastic uncertainty, Heteroscedastic uncertainty로 나뉠 수 있습니다. <kbd>Homoscedastic uncertainty</kbd>는 다른 input들에 대해서 constant한 불확실성입니다. input에 대해서는 같지만, 어떤 task에 대한 input이냐에 따라 달라질 수 있습니다. <kbd>Heteroscedastic uncertainty</kbd>는 모델에서 더 noisy한 output을 잠재적으로 가질 수 있는 input에 의존합니다. 따라서 이는 확실하지 않은 task에 대해 confident prediction을 주지 않도록 하기 위해 Computer Vision에서 더 중요합니다.
 
    Aleatoric Uncertainty는 데이터가 크다고 해도 줄어들지 않으므로 Large data의 상황에서 살펴볼 필요가 있습니다. 또한, (뒤에서 살펴보겠지만) Epistemic Uncertainty와 달리 계산 비용이 많이 필요없기 때문에 Real-time application에서 사용되기 쉽습니다.
 
 2. **Epistemic Uncertainty** (model uncertainty)
 
-   Epistemic Uncertainty는 model parameter에 대한 uncertainty로, 어떤 모델이 데이터를 생성했고 예측하였는지에 대한 무지(ignorance; 無知)에 기인한 불확실성을 의미합니다. 이는 분산의 추정치 형태로 나타나게 되므로 데이터가 많을수록 모델이 (epistemic에 한해) 추정을 잘 하게 되므로 Epistemic uncertainty는 Large data에 의해 설명될 수 있습니다.
+   <kbd>Epistemic Uncertainty</kbd>는 model parameter에 대한 uncertainty로, 어떤 모델이 데이터를 생성했고 예측하였는지에 대한 무지(ignorance; 無知)에 기인한 불확실성을 의미합니다. 이는 분산의 추정치 형태로 나타나게 되므로 데이터가 많을수록 모델이 (epistemic에 한해) 추정을 잘 하게 되므로 Epistemic uncertainty는 Large data에 의해 설명될 수 있습니다.
 
    Epistemic Uncertainty는 training data와 다른 데이터를 이해할 때 도움이 됩니다. 왜냐하면, 이는 (표본) 분산의 형태로 추정되는데, 이 과정에서 이미 주어진 데이터들과 얼마나 다른지를 알 수 있기 때문입니다. 따라서, training data에 없는 새로운 데이터가 왔을 때 불확실성을 제대로 측정할 수 있어야 하므로 safety가 중요한 분야에서 더욱 중요합니다. 또한, large dataset에서는 충분히 줄어들 수 있으므로 small dataset에서 Epistemic Uncertainty를 보는 것이 중요합니다.
 
