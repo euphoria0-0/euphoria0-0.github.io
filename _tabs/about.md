@@ -22,7 +22,7 @@ order: 4
 ### Interests
 I'm interested in various fields in Data Science, basically.
 
-Currently, focusing on Causal Machine Learning in Computer Vision.
+Currently, focusing on (Causal) Machine Learning in Computer Vision.
 
 
 
