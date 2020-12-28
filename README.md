@@ -3,7 +3,7 @@
 Thank you for amazing theme!
 
 [Live Demo](https://chirpy.cotes.info)
-[GitHub](https://github.com/cotes2020/jekyll-theme-chirpy)
+[GitHub](https://github.com/cotes2020/jekyll-theme-chirpy)(original theme sourse)
 
 
 
