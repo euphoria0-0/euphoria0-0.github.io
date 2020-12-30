@@ -20,9 +20,13 @@ order: 4
 
 
 ### Interests
-I'm interested in various fields in Data Science, basically.
+I'm interested in Human-in-the-loop ML in Data Science fields.
 
-Currently, focusing on (Causal) Machine Learning in Computer Vision.
+Basically, I believe that AI and human should interact to solve some problems, not AI algorithms only.
+
+We should note the role of AI and would use that toward better worlds, hopefully.
+
+Currently, I'm interested in Active Learning and Causal Learning.
 
 
 
