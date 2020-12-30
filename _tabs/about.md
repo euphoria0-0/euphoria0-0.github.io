@@ -15,9 +15,7 @@ order: 4
 
 
 # SY, Park
-### Data Scientist, ML Engineer
-
-
+Data Scientist, ML Engineer
 
 
 
