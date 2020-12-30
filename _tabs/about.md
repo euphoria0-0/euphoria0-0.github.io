@@ -26,7 +26,7 @@ Basically, I believe that AI and human should interact to solve some problems, n
 
 We should note the role of AI and would use that toward better worlds, hopefully.
 
-Currently, I'm interested in Active Learning and Causal Learning.
+Currently, I'm focusing on Active Learning and Causal Learning for HITL.
 
 
 
