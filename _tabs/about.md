@@ -30,8 +30,6 @@ Currently, I'm focusing on Active Learning and Causal Learning for HITL.
 
 
 
-
-
 ### Contact
 [![Gmail Badge](https://img.shields.io/badge/Gmail-d14836?style=flat&logo=Gmail&logoColor=white&link=mailto:euphoria9600@gmail.com)](mailto:euphoria9600@gmail.com)
 
