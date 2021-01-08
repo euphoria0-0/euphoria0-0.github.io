@@ -27,7 +27,11 @@ comments: true
 
 **Why Semi-Supervised Learning?**
 
-사실, Semi-Supervised Learning은 Supervised Learning의 성능을 넘어설 수 없습니다. 그럼, 왜 Semi-Supervised Learning이 필요할까요? 우리는 현실적으로 모든 데이터에 레이블, 즉 $y$를 가진 데이터를 찾기가 어렵습니다. 하지만 앞서 말씀드렸듯 우리는 성능이 더 좋은 Supervised Learning을 활용하고 싶습니다. 따라서 label이 없다면? 만들면 됩니다! 하고 data labeling을 시도할 수 있습니다. 하지만 labeling은 많은 시간과 비용이 듭니다. 예를 들어, 의료 이미지 데이터를 학습시키고 싶은데, labeling이 필요하다면 값비싼 전문가들에게 요청을 해야할 것입니다. 따라서 우리는, 레이블 데이터를 가지기도, 추가로 얻기도 꽤나 어려운 상황입니다. 그럼에도 불구하고 우리는 최대한 좋은 성능을 낼 수 있는 머신러닝을 적용해야 하기 때문에, Unsupervised 형태가 아닌 조금이라도 가지고 있는 labeled data를 활용하는 Semi-Supervised Learning을 고려하게 됩니다.
+사실, Semi-Supervised Learning은 Supervised Learning의 성능을 넘어설 수 없습니다. 그럼, 왜 Semi-Supervised Learning이 필요할까요? 우리는 현실적으로 모든 데이터에 레이블, 즉 $y$를 가진 데이터를 찾기가 어렵습니다. 
+
+하지만 앞서 말씀드렸듯 우리는 성능이 더 좋은 Supervised Learning을 활용하고 싶습니다. 따라서 label이 없다면? 만들면 됩니다! 하고 data labeling을 시도할 수 있습니다. 하지만 labeling은 많은 시간과 비용이 듭니다. 예를 들어, 의료 이미지 데이터를 학습시키고 싶은데, labeling이 필요하다면 값비싼 전문가들에게 요청을 해야할 것입니다. 따라서 우리는, 레이블 데이터를 가지기도, 추가로 얻기도 꽤나 어려운 상황입니다. 
+
+그럼에도 불구하고 우리는 최대한 좋은 성능을 낼 수 있는 머신러닝을 적용해야 하기 때문에, Unsupervised 형태가 아닌 조금이라도 가지고 있는 labeled data를 활용하는 Semi-Supervised Learning을 고려하게 됩니다.
 
 **Yes, Semi-Supervised Learning!**
 
@@ -57,7 +61,7 @@ Consistency는, 우리가 input data를 augmentation한 것에 대한 prediction
 
 예를 들어, 우리가 이미지 데이터를 가지고 있다고 합시다. 아래 이미지의 맨 왼쪽 그림입니다. 이 이미지를 회전하고, 끝을 자르고, 대칭 변환으로 하여 변형시키는 방법입니다.
 
-![Data-Augmentation](/assets/img/posts/2021-01-08-Semi-Supervised-Learning-and-MixMatch/DataAugmentation.png)*data augmentation*
+![Data-Augmentation](/assets/img/posts/2021-01-08-Semi-Supervised-Learning-and-MixMatch/DataAugmentation.png)*Data Augmentation*
 
 [^2]:http://www.aitimes.com/news/articleView.html?idxno=132226
 
