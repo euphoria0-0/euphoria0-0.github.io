@@ -35,7 +35,7 @@ comments: true
 
 **Yes, Semi-Supervised Learning!**
 
-![SSL](/assets/img/posts/2021-01-08-Semi-Supervised-Learning-and-MixMatch/SSL.png)*Semi-Supervised Learning*
+![SSL](/assets/img/posts/2021-01-08-Semi-Supervised-Learning-and-MixMatch/SSL.png)*Semi-Supervised Learning: source: Wikipedia*
 
 [^1]: Wikipedia
 
@@ -63,7 +63,7 @@ Consistency는, 우리가 input data를 augmentation한 것에 대한 prediction
 
 예를 들어, 우리가 이미지 데이터를 가지고 있다고 합시다. 아래 이미지의 맨 왼쪽 그림입니다. 이 이미지를 회전하고, 끝을 자르고, 대칭 변환으로 하여 변형시키는 방법입니다.
 
-![Data-Augmentation](/assets/img/posts/2021-01-08-Semi-Supervised-Learning-and-MixMatch/DataAugmentation.png)*Data Augmentation*
+![Data-Augmentation](/assets/img/posts/2021-01-08-Semi-Supervised-Learning-and-MixMatch/DataAugmentation.png)*Data Augmentation: source: http://www.aitimes.com/news/articleView.html?idxno=132226*
 
 [^2]:http://www.aitimes.com/news/articleView.html?idxno=132226
 
