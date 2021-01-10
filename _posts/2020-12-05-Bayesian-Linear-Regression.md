@@ -23,9 +23,12 @@ comments: true
 
 먼저, Linear Regression에 basis function을 이용하면, Linear에서 벗어난 형태를 나타낼 수 있습니다.
 
+
 $$
 y(\mathbf{x},\mathbf{w})=w_0+\sum_{j=1}^{M-1}w_j\phi_j(x)=\mathbf{w}^T\phi(\mathbf{x})
 $$
+
+
 우리는 이러한 Linear Regression에 MLE(Maximum Likelihood Estimation) 방법을 이용해 parameter를 추정(estimation)합니다.
 
 여기에 Bayesian Approach를 이용하면 MLE에서 발생할 수 있는 overfitting 문제를 피하고 training data만으로 model complexity를 결정할 수 있습니다. 이에 대해 자세히 살펴보겠습니다.
@@ -65,7 +68,7 @@ $$
 \mathbf{S}_N^{-1}=\mathbf{S}_0^{-1}+\beta\boldsymbol{\Phi}^T\boldsymbol{\Phi}
 $$
 
-여기서, posterior의 maximum을 구하는 MAP(Maximum A Posterior)의 값은 Gaussian 분포의 특성에 따라 평균이 됩니다. 즉, $$\mathbf{w}_{MAP}=\mathbf{m}_N$$. 또한, Bayesian 방법의 특성이라고 할 수 있는, 데이터가 없는 경우($$N=0$$), prior는 posterior와 같게 되고, $$\mathbf{S}_0=\alpha^{-1}\mathbf{I}$$에서 $$\alpha \rarr0$$인 경우엔 MAP는 MLE와 같게 됩니다.
+여기서, posterior의 maximum을 구하는 MAP(Maximum A Posterior)의 값은 Gaussian 분포의 특성에 따라 평균이 됩니다. 즉, $$\mathbf{w}_{MAP}=\mathbf{m}_N$$. 또한, Bayesian 방법의 특성이라고 할 수 있는, 데이터가 없는 경우($$N=0$$), prior는 posterior와 같게 되고, $$\mathbf{S}_0=\alpha^{-1}\mathbf{I}$$에서 $$\alpha \longrightarrow 0$$인 경우엔 MAP는 MLE와 같게 됩니다.
 
 [**Proof**] 이를 증명해봅시다.
 
