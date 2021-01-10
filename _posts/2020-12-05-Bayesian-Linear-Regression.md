@@ -3,7 +3,7 @@ title: Bayesian Linear Regression
 author: euphoria0-0
 date: 2020-12-05 23:00:00 +0800
 categories: [AI, Machine Learning]
-tags: [Machine Learning, PRML, Bayesian, Linear Regression]
+tags: [Machine Learning, PRML, Bayesian, Regression]
 toc: true
 math: true
 comments: true
@@ -19,7 +19,7 @@ comments: true
 
 
 
-### Linear Regression
+## Linear Regression
 
 먼저, Linear Regression에 basis function을 이용하면, Linear에서 벗어난 형태를 나타낼 수 있습니다.
 
@@ -32,7 +32,7 @@ $$
 
 
 
-### Parameter distribution
+## Parameter distribution
 
 먼저, 데이터에 대한 가능도(likelihood) 함수를 정의합니다. 이때, 데이터의 noise가 Gaussian distribution을 따른다고 가정하므로 likelihood는 다음과 같이 쓸 수 있습니다. 여기서 noise의 variance인 $$\beta$$는 알고 있는 상수값(known constant)라고 가정합니다.
 
@@ -113,7 +113,7 @@ $$
 
 
 
-### Predictive distribution
+## Predictive distribution
 
 이제, 위에서 적합(fit)한 회귀모델을 이용해 예측을 하고자 합니다.
 

@@ -3,7 +3,7 @@ title: Semi-Supervised Learning and MixMatch
 author: euphoria0-0
 date: 2021-01-08 23:00:00 +0800
 categories: [AI, Paper Review]
-tags: [Machine Learning, Semi-Supervised Learning, Paper Review]
+tags: [Machine Learning, Paper Review, Semi-Supervised Learning]
 toc: true
 math: true
 comments: true

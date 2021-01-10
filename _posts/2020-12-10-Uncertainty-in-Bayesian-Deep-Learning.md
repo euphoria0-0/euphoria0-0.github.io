@@ -2,8 +2,8 @@
 title: Uncertainty in Bayesian Deep Learning
 author: euphoria0-0
 date: 2020-12-10 23:30:00 +0800
-categories: [AI, Machine Learning]
-tags: [Machine Learning, Bayesian, Uncertainty, Computer Vision]
+categories: [AI, Paper Review]
+tags: [Machine Learning, Bayesian, Uncertainty, Computer Vision, Paper Review]
 toc: true
 math: true
 comments: true
