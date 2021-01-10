@@ -296,7 +296,7 @@ MixMatch의 알고리즘이자, 전체적인 Overview는 다음과 같이 요약
 
 ### 2-4. Experiments
 
-1. Semi-Supervised Learning
+1. **Semi-Supervised Learning**
 
    ![MixMatch-ex1](/assets/img/posts/2021-01-08-Semi-Supervised-Learning-and-MixMatch/experiments1.png)*SSL Results on CIFAR-10 and SVHN*
 
@@ -306,11 +306,18 @@ MixMatch의 알고리즘이자, 전체적인 Overview는 다음과 같이 요약
 
    
 
-2. Ablation Study
+2. **Ablation Study**
 
    
 
-   ![MixMatch1](/assets/img/posts/2021-01-08-Semi-Supervised-Learning-and-MixMatch/experiment3.png)*Ablation Study Results on CIFAR-10*
+   ![MixMatch1](/assets/img/posts/2021-01-08-Semi-Supervised-Learning-and-MixMatch/experiments3.png)*Ablation Study Results on CIFAR-10*
 
-   
+
+
+
+여기까지 Semi-Supervised Learning에 대한 모델 MixMatch 에 대한 소개였습니다.!
+
+2019년에 나온 후 ReMixMatch와 FixMatch와 같은 MixMatch에 대한 후속 연구들이 생겨났습니다.
+
+이에 대한 소개는 다음에..! ☆
 
