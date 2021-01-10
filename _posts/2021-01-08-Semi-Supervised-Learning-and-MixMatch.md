@@ -205,23 +205,23 @@ MixMatch의 알고리즘이자, 전체적인 Overview는 다음과 같이 요약
 
    이제, 위에서 augmented되고 entropy가 minimize된 labeled data와 unlabeled data를 섞습니다. 여기서 사용한 방법은 기존의 MixUp 방법에 앞쪽 데이터($$x_1$$)에 priority를 두도록 섞는 방법입니다.
 
-   
+
    $$
    \lambda \sim \mathrm{Beta}(\alpha,\alpha) \qquad(8)
    $$
-   
+
    $$
    \lambda' = \max(\lambda,1-\lambda) \qquad(9)
    $$
-   
+
    $$
    x' = \lambda'x_1 + (1-\lambda')x_2 \qquad(10)
    $$
-   
+
    $$
    p' = \lambda'p_1 + (1-\lambda')p_2 \qquad(11)
    $$
-   
+
 
    지금까지의 과정은 다음과 같습니다.
 
@@ -231,7 +231,7 @@ MixMatch의 알고리즘이자, 전체적인 Overview는 다음과 같이 요약
       $$
       \hat{\mathcal{X}} = ((\hat{x}_b),p_b);b\in(1,\cdots,B)) \qquad(12)
       $$
-   
+
       $$
    \hat{\mathcal{U}} = ((\hat{u}_{b,k}),q_b);b\in(1,\cdots,B)) \qquad(13)
       $$
@@ -239,25 +239,25 @@ MixMatch의 알고리즘이자, 전체적인 Overview는 다음과 같이 요약
       $$
       \mathcal{W}=\textrm{Shuffle}(\textrm{Concat}(\hat{\mathcal{X}},\hat{\mathcal{U}})) \qquad(14)
       $$
-   
+
       
-   
-   2. $$i \in (1,\cdots,|\hat{\mathcal{X}}|)$$와 섞은 set $$\mathcal{W}$$에 대해 MixUp을 계산합니다.
-   
-   
-   $$
-       \mathcal{X}'=\textrm{MixUp}(\hat{\mathcal{X}}_i,\mathcal{W}_i) \qquad(15)
-   $$
-   
+
+   2. . $$i \in (1,\cdots,|\hat{\mathcal{X}}|)$$와 섞은 set $$\mathcal{W}$$에 대해 MixUp을 계산합니다.
+
+      
+      $$
+      \mathcal{X}'=\textrm{MixUp}(\hat{\mathcal{X}}_i,\mathcal{W}_i) \qquad(15)
+      $$
+      
+
    3. augmented된 unlabeled data와 위에서 계산하고 남은 $$\mathcal{W}$$에 대해 MixUp을 계산합니다.
-   
-   
-   $$
-   \mathcal{U}'=\textrm{MixUp}(\hat{\mathcal{U}}_i,\mathcal{W}_{i+|\hat{\mathcal{X}}|}) \qquad(16)
-   $$
-   
-   
-   
+
+      
+      $$
+      \mathcal{U}'=\textrm{MixUp}(\hat{\mathcal{U}}_i,\mathcal{W}_{i+|\hat{\mathcal{X}}|}) \qquad(16)
+      $$
+      
+
 5. **Prediction: Loss Function**
 
    그럼 지금까지 MixMatch 를 통해 labeled data와 unlabeled data를 함께 고려하였습니다. 이제 학습을 하기 위한 Loss function을 정의합니다. 이는 2-2.의 2. 에서 Loss function에 나타나있습니다. 다시 한번 언급하겠습니다.
