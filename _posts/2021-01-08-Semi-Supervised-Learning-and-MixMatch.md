@@ -245,9 +245,9 @@ MixMatch의 알고리즘이자, 전체적인 Overview는 다음과 같이 요약
    2. $$i \in (1,\cdots,|\hat{\mathcal{X}}|)$$와 섞은 set $$\mathcal{W}$$에 대해 MixUp을 계산합니다.
    
    
-      $$
+   $$
        \mathcal{X}'=\textrm{MixUp}(\hat{\mathcal{X}}_i,\mathcal{W}_i) \qquad(15)
-      $$
+   $$
    
    3. augmented된 unlabeled data와 위에서 계산하고 남은 $$\mathcal{W}$$에 대해 MixUp을 계산합니다.
    
@@ -261,16 +261,24 @@ MixMatch의 알고리즘이자, 전체적인 Overview는 다음과 같이 요약
 5. **Prediction: Loss Function**
 
    그럼 지금까지 MixMatch 를 통해 labeled data와 unlabeled data를 함께 고려하였습니다. 이제 학습을 하기 위한 Loss function을 정의합니다. 이는 2-2.의 2. 에서 Loss function에 나타나있습니다. 다시 한번 언급하겠습니다.
-
-
+   
+   
    $$
-   \mathcal{X}',\mathcal{U}'=\mathrm{MixMatch}(\mathcal{X},\mathcal{U},T,K,\alpha) \qquad(2) \\
-   \mathcal{L}_{\mathcal{X}}=\frac{1}{|\mathcal{X}'|}\sum_{x,p \in \mathcal{X}'}H(p,p_{\textrm{model}}(y|x;\theta)) \qquad(3) \\
-   \mathcal{L}_{\mathcal{U}}=\frac{1}{L|\mathcal{U}'|}\sum_{u,q \in \mathcal{U}'}\|q-p_{\textrm{model}}(y|u;\theta)\|_2^2 \qquad(4) \\
+   \mathcal{X}',\mathcal{U}'=\mathrm{MixMatch}(\mathcal{X},\mathcal{U},T,K,\alpha) \qquad(2)
+   $$
+   
+   $$
+   \mathcal{L}_{\mathcal{X}}=\frac{1}{|\mathcal{X}'|}\sum_{x,p \in \mathcal{X}'}H(p,p_{\textrm{model}}(y|x;\theta)) \qquad(3)
+   $$
+   
+   $$
+   \mathcal{L}_{\mathcal{U}}=\frac{1}{L|\mathcal{U}'|}\sum_{u,q \in \mathcal{U}'}\|q-p_{\textrm{model}}(y|u;\theta)\|_2^2 \qquad(4)
+   $$
+   
+   $$
    \mathcal{L}=\mathcal{L}_{\mathcal{X}}+\lambda_{\mathcal{U}}\mathcal{L}_{\mathcal{U}} \qquad(5)
    $$
-
-
+   
    여기서 $$\mathcal{L}_{\mathcal{X}}$$는 (augmented) labeled data에 대한 training loss입니다. 다음 $$\mathcal{L}_{\mathcal{U}}$$는 (augmented) unlabeled data에 대한 loss 입니다. 이는 앞에서 언급했던 Consistency Regularization에 의해 나타나며, 모델이 augmentation한 같은 데이터들에 대해 일관된 예측을 하는지를 보기 위한 loss 입니다. 이는 unlabeled data에 대한 loss이자 predictive uncertainty에 대한 measure로써도 해석될 수 있습니다. 여기서 loss function으로 $$L_2$$ norm을 사용하였는데, 이는 bounded 되었고 incorrect prediction에 대해 덜 sensitive하기 때문에 이렇게 사용하였다고 주장하고 있습니다.
 
    
