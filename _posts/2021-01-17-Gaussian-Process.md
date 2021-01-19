@@ -43,6 +43,8 @@ $$
 $$
 
 
+
+
 - $$\mathbf{w}\sim\mathcal{N}(\mathbf{w}|\mathbf{0},\alpha^{-1})$$라 가정했고, $$\mathbf{f}$$는 $$\mathbf{w}$$에 대한 선형결합이므로 $$\mathbf{f}$$는 가우시안 분포
 - $$\mathbb{E}(\mathbf{f})=\Phi\mathbb{E}(\mathbf{w})=\mathbf{0}$$
 - $$\mathrm{Cov}(\mathbf{f})=\mathbb{E}(\mathbf{f}\mathbf{f}^T)=\Phi\mathbb{E}(\mathbf{w}\mathbf{w}^T)\Phi^T=\alpha^{-1}\Phi\Phi^T=\mathbf{K}$$
@@ -58,9 +60,15 @@ $$
 
 - dataset $$\mathcal{D}=\{(\mathbf{x}_i,y_i)\}_{i=1}^n, X=[\mathbf{x}_1^T, \cdots, \mathbf{x}_n^T]$$
 
-- $$\mathbf{f}(\mathbf{x})=\mathbf{x}^T\mathbf{w}$$
+  
 
-- $$\mathbf{y}(\mathbf{x})=\mathbf{f}(\mathbf{x})+\epsilon, \quad \epsilon \sim \mathcal{N}(0,\beta^{-1})$$
+  $$\mathbf{f}(\mathbf{x})=\mathbf{x}^T\mathbf{w}$$
+
+  
+
+  $$\mathbf{y}(\mathbf{x})=\mathbf{f}(\mathbf{x})+\epsilon, \quad \epsilon \sim \mathcal{N}(0,\beta^{-1})$$
+
+  
 
 - likelihood: $$p(\mathbf{y}|X,\mathbf{w})=\mathcal{N}(\mathbf{y}|X^T\mathbf{w},\beta^{-1})$$
 
@@ -68,38 +76,47 @@ $$
 
 - posterior: $$p(\mathbf{w}|\mathbf{y},X)=\mathcal{N}(\bar{\mathbf{w}},A^{-1})$$
 
-  - $$p(\mathbf{w}|\mathbf{y},X) = p(\mathbf{y}|X,\mathbf{w})p(\mathbf{w})/p(\mathbf{y}|X)$$
+  
 
-  - $$
-    \begin{align*}
-    &\log p(\mathbf{w}|\mathbf{y},X) \\
-    &\propto\ [-(\mathbf{y}-X^T\mathbf{w})^T\beta\mathbf{I}(\mathbf{y}-X^T\mathbf{w})][-\frac{1}{2}\mathbf{w}^T\mathbf{\Sigma}_p^{-1}\mathbf{w}] \\
-    &=-\frac{1}{2}(\mathbf{w}-\bar{\mathbf{w}})^TA(\mathbf{w}-\bar{\mathbf{w}}) \\
-    &\textrm{where } \bar{\mathbf{w}}=\beta A^{-1}X\mathbf{y}, A=\beta XX^T+\mathbf{\Sigma}_p^{-1}
-    \end{align*}
-    $$
+  $$p(\mathbf{w}|\mathbf{y},X) = p(\mathbf{y}|X,\mathbf{w})p(\mathbf{w})/p(\mathbf{y}|X)$$
 
-    
+  
+  $$
+  \begin{align*}
+  &\log p(\mathbf{w}|\mathbf{y},X) \\
+  &\propto\ [-(\mathbf{y}-X^T\mathbf{w})^T\beta\mathbf{I}(\mathbf{y}-X^T\mathbf{w})][-\frac{1}{2}\mathbf{w}^T\mathbf{\Sigma}_p^{-1}\mathbf{w}] \\
+  &=-\frac{1}{2}(\mathbf{w}-\bar{\mathbf{w}})^TA(\mathbf{w}-\bar{\mathbf{w}}) \\
+  &\textrm{where } \bar{\mathbf{w}}=\beta A^{-1}X\mathbf{y}, A=\beta XX^T+\mathbf{\Sigma}_p^{-1}
+  \end{align*}
+  $$
+
+  
 
 - predictive distribution
 
-  - $$
-    \begin{align*}
-    &p(\mathbf{f}_*|\mathbf{x}_*,X,\mathbf{y})\\
-    &=\int p(\mathbf{f}_*|X_*,\mathbf{w})p(\mathbf{w}|X,\mathbf{y})d\mathbf{w}\\
-    &=\mathcal{N}(\beta X_*^TA^{-1}X\mathbf{y},\mathbf{x}_*^TA^{-1}\mathbf{x}_*)
-    \end{align*} \\
-    \textrm{where } A=\beta XX^T+\mathbf{\Sigma}_p^{-1}, \mathbf{f}_*=\mathbf{f}_*(\mathbf{x}_*)
-    $$
+  
+  $$
+  \begin{align*}
+  &p(\mathbf{f}_*|\mathbf{x}_*,X,\mathbf{y})\\
+  &=\int p(\mathbf{f}_*|X_*,\mathbf{w})p(\mathbf{w}|X,\mathbf{y})d\mathbf{w}\\
+  &=\mathcal{N}(\beta X_*^TA^{-1}X\mathbf{y},\mathbf{x}_*^TA^{-1}\mathbf{x}_*)
+  \end{align*} \\
+  \textrm{where } A=\beta XX^T+\mathbf{\Sigma}_p^{-1}, \mathbf{f}_*=\mathbf{f}_*(\mathbf{x}_*)
+  $$
 
-    
+  
 
 #### **2. kernel trick**
 
-- $$\phi: \mathbb{R}^D \rarr \mathbb{R}^N$$ : input space → high dim feature space (N>>D)
+$$\phi: \mathbb{R}^D \longrightarrow \mathbb{R}^N$$ : input space → high dim feature space (N>>D)
 
-- $$\mathbf{f}(\mathbf{x})=\phi(\mathbf{x})^T\mathbf{w}$$
-- $$\phi(\mathbf{x})=\left(\phi(\mathbf{x}_1\right) \cdots \phi(\mathbf{x}_n)) \in \mathbb{R}^{N\times n}$$
+
+
+$$\mathbf{f}(\mathbf{x})=\phi(\mathbf{x})^T\mathbf{w}$$
+
+
+
+$$\phi(\mathbf{x})=\left(\phi(\mathbf{x}_1\right) \cdots \phi(\mathbf{x}_n)) \in \mathbb{R}^{N\times n}$$
 
 
 
@@ -111,11 +128,20 @@ $$
 $$
 
 
-- $$A=\beta\Phi\Phi^T+\mathbf{\Sigma}_p^{-1}, A \in \mathbb{R}^{N\times N}$$
-- N>>1, $$A^{-1}$$: computationally incompatible
-- $$\mathbf{K}=\Phi^T\Sigma_p\Phi, \phi_*=\phi(\mathbf{x}_*)$$
 
-- $$A\mathbf{\Sigma}_p\Phi=\beta\Phi(\mathbf{K}+\beta^{-1}\mathbf{I})=\mathbf{\Sigma}_p\Phi(\mathbf{K}+\beta^{-1}\mathbf{I})^{-1}$$
+$$A=\beta\Phi\Phi^T+\mathbf{\Sigma}_p^{-1}, A \in \mathbb{R}^{N\times N}$$
+
+
+
+N>>1, $$A^{-1}$$: computationally incompatible
+
+
+
+$$\mathbf{K}=\Phi^T\Sigma_p\Phi, \phi_*=\phi(\mathbf{x}_*)$$
+
+
+
+$$A\mathbf{\Sigma}_p\Phi=\beta\Phi(\mathbf{K}+\beta^{-1}\mathbf{I})=\mathbf{\Sigma}_p\Phi(\mathbf{K}+\beta^{-1}\mathbf{I})^{-1}$$
 
 
 
@@ -126,6 +152,7 @@ $$
 $$
 
 
+
 ### 2. function space view
 
 $$
@@ -134,10 +161,19 @@ $$
 
 
 
-- $$\mathbf{f}=\mathbf{f}(\mathbf{x})=\Phi\mathbf{w}$$
-- $$\mathbf{y}=\mathbf{f}+\boldsymbol{\epsilon}, \quad \epsilon_n\sim\mathcal{N}(0,\beta^{-1}),n=1,\cdots,N$$
-- $$\mathbf{y}|\mathbf{f}\sim\mathcal{N}(\mathbf{f},\beta^{-1}\mathbf{I}_N)$$
-- $$\mathbf{f}\sim\mathcal{N}(\mathbf{0},\mathbf{K}), \quad \mathbf{K}=\alpha^{-1}\Phi\Phi^T$$
+$$\mathbf{f}=\mathbf{f}(\mathbf{x})=\Phi\mathbf{w}$$
+
+
+
+$$\mathbf{y}=\mathbf{f}+\boldsymbol{\epsilon}, \quad \epsilon_n\sim\mathcal{N}(0,\beta^{-1}),n=1,\cdots,N$$
+
+
+
+$$\mathbf{y}|\mathbf{f}\sim\mathcal{N}(\mathbf{f},\beta^{-1}\mathbf{I}_N)$$
+
+
+
+$$\mathbf{f}\sim\mathcal{N}(\mathbf{0},\mathbf{K}), \quad \mathbf{K}=\alpha^{-1}\Phi\Phi^T$$
 
 
 
@@ -151,11 +187,13 @@ $$
 
 (proof)
 
-If $$p(\mathbf{x})=\mathcal{N}(\mu,\Lambda^{-1}), p(\mathbf{y}|\mathbf{x})=\mathcal{N}(A\mathbf{x}+b,L^{-1})$, then $p(\mathbf{y})=\mathcal{N}(A\mu+b,L^{-1}+A\Lambda^{-1}A^T)$$. 
 
-So, 
 
-$$p(\mathbf{y})=\int p(\mathbf{y}|\mathbf{f})p(\mathbf{f})d\mathbf{y}=\mathcal{N}(\mathbf{0},\beta^{-1}\mathbf{I}_N+\mathbf{K})$$
+If $$p(\mathbf{x})=\mathcal{N}(\mu,\Lambda^{-1}), p(\mathbf{y}|\mathbf{x})=\mathcal{N}(A\mathbf{x}+b,L^{-1})$, then $p(\mathbf{y})=\mathcal{N}(A\mu+b,L^{-1}+A\Lambda^{-1}A^T)$$.
+
+ 
+
+So, $$p(\mathbf{y})=\int p(\mathbf{y}|\mathbf{f})p(\mathbf{f})d\mathbf{y}=\mathcal{N}(\mathbf{0},\beta^{-1}\mathbf{I}_N+\mathbf{K})$$
 
 
 
@@ -163,22 +201,26 @@ $$p(\mathbf{y})=\int p(\mathbf{y}|\mathbf{f})p(\mathbf{f})d\mathbf{y}=\mathcal{N
 
 predictive value(vector) $$\mathbf{f}_*$$ about new input $$\mathbf{x}_*$$
 
+
 $$
 \begin{pmatrix} \mathbf{y} \\ \mathbf{y}_* \end{pmatrix} \sim \left( \begin{pmatrix} \mathbf{0} \\ 0 \end{pmatrix}, \begin{pmatrix} \mathbf{K}+\beta^{-1}\mathbf{I}_N & \mathbf{k}_* \\ \mathbf{k}_*^T & \mathbf{k}_{**}+\beta^{-1} \end{pmatrix} \right)
 $$
-where $$\mathbf{k}_*=\mathbf{k}(\mathbf{x}_n,\mathbf{x}_*), \mathbf{k}_{**}=\mathbf{k}(\mathbf{x}_*,\mathbf{x}_*)$$
 
+
+where $$\mathbf{k}_*=\mathbf{k}(\mathbf{x}_n,\mathbf{x}_*), \mathbf{k}_{**}=\mathbf{k}(\mathbf{x}_*,\mathbf{x}_*)$$
 
 $$
 \mathbf{y}_*|\mathbf{y}\sim\mathcal{N}\left(\mathbf{k}^T(\mathbf{K}+\beta^{-1}\mathbf{I}_N)^{-1}\mathbf{y}, \mathbf{k}_{**}+\beta^{-1}-\mathbf{k}_*^T(\mathbf{K}+\beta^{-1}\mathbf{I}_N)^{-1}\mathbf{k}_*\right)
 $$
 
+(proof)
 
-- (proof)
-  - Using lemma $$p(\mathbf{x}_a|\mathbf{x}_b)=\mathcal{N}\left(\boldsymbol{\mu}_a+\mathbf{\Sigma}_{ab}\mathbf{\Sigma}_{bb}^{-1}(\mathbf{x}_b-\boldsymbol{\mu}_b), \mathbf{\Sigma}_{aa}-\mathbf{\Sigma}_{ab}\mathbf{\Sigma}_{bb}^{-1}\mathbf{\Sigma}_{ba}\right)$$,
-  - $$\boldsymbol{\mu}_{\mathbf{y}_*|\mathbf{y}}=0+k_*^T(K+\beta^{-1}I)^{-1}(\mathbf{y}-0)=k_*C^{-1}\mathbf{y}$$
-  - $$\Sigma_{\mathbf{y}_*|\mathbf{y}}=k_{**}+\beta^{-1}-k_*^T(K+\beta^{-1}I_N)^{-1}k_
-    *=k_{**}+\beta^{-1}-k_*^TC^{-1}k_*$$
+
+
+- Using lemma $$p(\mathbf{x}_a|\mathbf{x}_b)=\mathcal{N}\left(\boldsymbol{\mu}_a+\mathbf{\Sigma}_{ab}\mathbf{\Sigma}_{bb}^{-1}(\mathbf{x}_b-\boldsymbol{\mu}_b), \mathbf{\Sigma}_{aa}-\mathbf{\Sigma}_{ab}\mathbf{\Sigma}_{bb}^{-1}\mathbf{\Sigma}_{ba}\right)$$,
+- $$\boldsymbol{\mu}_{\mathbf{y}_*|\mathbf{y}}=0+k_*^T(K+\beta^{-1}I)^{-1}(\mathbf{y}-0)=k_*C^{-1}\mathbf{y}$$
+- $$\Sigma_{\mathbf{y}_*|\mathbf{y}}=k_{**}+\beta^{-1}-k_*^T(K+\beta^{-1}I_N)^{-1}k_
+  *=k_{**}+\beta^{-1}-k_*^TC^{-1}k_*$$
 
 
 
@@ -196,7 +238,11 @@ $$
 
 ### 3. Hyper-parameter
 
+
+
 MLE에서 likelihood $$p(\mathbf{y}|\theta)$$를 계산 → conjugate gradients와 같은 방법으로
+
+
 
 - $$\log p(\mathbf{y}|\theta)=\frac{1}{2}\log|\mathbf{C}|-\frac{1}{2}\mathbf{y}^T\mathbf{C}^{-1}\mathbf{y}-\frac{N}{2}\log(2\pi)$$
 
