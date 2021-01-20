@@ -102,8 +102,9 @@ $$
 p(\mathbf{w}|\mathbf{y},X)=\mathcal{N}(\bar{\mathbf{w}},A^{-1})
 $$
 
-
 (proof)
+
+
 $$
 p(\mathbf{w}|\mathbf{y},X) = p(\mathbf{y}|X,\mathbf{w})p(\mathbf{w})/p(\mathbf{y}|X)
 $$
@@ -156,8 +157,8 @@ Then,
 
 
 $$
-\mathbf{f}_*|\mathbf{x}_*,X,\mathbf{y}\sim\mathcal{N}(\beta \phi(\mathbf{x}_*)^TA^{-1}\Phi\mathbf{y},\phi(\mathbf{x}_*)^TA^{-1}\phi(\mathbf{x}_*)) \\
-\textrm{where } A=\beta\Phi\Phi^T+\mathbf{\Sigma}_p^{-1}, A \in \mathbb{R}^{N\times N}
+\begin{aligned}\mathbf{f}_*|\mathbf{x}_*,X,\mathbf{y}&\sim\mathcal{N}(\beta \phi(\mathbf{x}_*)^TA^{-1}\Phi\mathbf{y},\phi(\mathbf{x}_*)^TA^{-1}\phi(\mathbf{x}_*)) \\
+\textrm{where } A&=\beta\Phi\Phi^T+\mathbf{\Sigma}_p^{-1}, A \in \mathbb{R}^{N\times N}\end{aligned}
 $$
 
 
@@ -214,12 +215,20 @@ $$
 
 
 
-If $$p(\mathbf{x})=\mathcal{N}(\mu,\Lambda^{-1}), p(\mathbf{y}|\mathbf{x})=\mathcal{N}(A\mathbf{x}+b,L^{-1})$$, then $$p(\mathbf{y})=\mathcal{N}(A\mu+b,L^{-1}+A\Lambda^{-1}A^T)$$
-
+If 
+$$
+p(\mathbf{x})=\mathcal{N}(\mu,\Lambda^{-1}), p(\mathbf{y}|\mathbf{x})=\mathcal{N}(A\mathbf{x}+b,L^{-1})
+$$
+, then 
+$$
+p(\mathbf{y})=\mathcal{N}(A\mu+b,L^{-1}+A\Lambda^{-1}A^T)
+$$
  
 
-So, $$p(\mathbf{y})=\int p(\mathbf{y}|\mathbf{f})p(\mathbf{f})d\mathbf{y}=\mathcal{N}(\mathbf{0},\beta^{-1}\mathbf{I}_N+\mathbf{K})$$
-
+So, 
+$$
+p(\mathbf{y})=\int p(\mathbf{y}|\mathbf{f})p(\mathbf{f})d\mathbf{y}=\mathcal{N}(\mathbf{0},\beta^{-1}\mathbf{I}_N+\mathbf{K})
+$$
 
 
 **2. Prediction**
@@ -231,18 +240,28 @@ $$
 \begin{pmatrix} \mathbf{y} \\ \mathbf{y}_* \end{pmatrix} \sim \left( \begin{pmatrix} \mathbf{0} \\ 0 \end{pmatrix}, \begin{pmatrix} \mathbf{K}+\beta^{-1}\mathbf{I}_N & \mathbf{k}_* \\ \mathbf{k}_*^T & \mathbf{k}_{**}+\beta^{-1} \end{pmatrix} \right)
 $$
 
+where 
+$$
+\mathbf{k}_*=\mathbf{k}(\mathbf{x}_n,\mathbf{x}_*), \mathbf{k}_{**}=\mathbf{k}(\mathbf{x}_*,\mathbf{x}_*)
+$$
 
-where $$\mathbf{k}_*=\mathbf{k}(\mathbf{x}_n,\mathbf{x}_*), \mathbf{k}_{**}=\mathbf{k}(\mathbf{x}_*,\mathbf{x}_*)$$
+
 
 $$
 \mathbf{y}_*|\mathbf{y}\sim\mathcal{N}\left(\mathbf{k}^T(\mathbf{K}+\beta^{-1}\mathbf{I}_N)^{-1}\mathbf{y}, \mathbf{k}_{**}+\beta^{-1}-\mathbf{k}_*^T(\mathbf{K}+\beta^{-1}\mathbf{I}_N)^{-1}\mathbf{k}_*\right)
 $$
 
+
+
 (proof)
 
 
 
-Using lemma $$p(\mathbf{x}_a|\mathbf{x}_b)=\mathcal{N}\left(\boldsymbol{\mu}_a+\mathbf{\Sigma}_{ab}\mathbf{\Sigma}_{bb}^{-1}(\mathbf{x}_b-\boldsymbol{\mu}_b), \mathbf{\Sigma}_{aa}-\mathbf{\Sigma}_{ab}\mathbf{\Sigma}_{bb}^{-1}\mathbf{\Sigma}_{ba}\right)$$,
+Using lemma 
+$$
+p(\mathbf{x}_a|\mathbf{x}_b)=\mathcal{N}\left(\boldsymbol{\mu}_a+\mathbf{\Sigma}_{ab}\mathbf{\Sigma}_{bb}^{-1}(\mathbf{x}_b-\boldsymbol{\mu}_b), \mathbf{\Sigma}_{aa}-\mathbf{\Sigma}_{ab}\mathbf{\Sigma}_{bb}^{-1}\mathbf{\Sigma}_{ba}\right)
+$$
+,
 
 
 
@@ -270,7 +289,11 @@ $$
 
 ### 3. Hyper-parameter
 
-MLE에서 likelihood $$p(\mathbf{y}|\theta)$$를 계산 → conjugate gradients와 같은 방법으로
+MLE에서 likelihood 
+$$
+p(\mathbf{y}|\theta)
+$$
+를 계산 → conjugate gradients와 같은 방법으로
 
 
 
