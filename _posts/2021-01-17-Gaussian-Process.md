@@ -82,6 +82,7 @@ $$
 $$
 
 
+
 likelihood: $$p(\mathbf{y}|X,\mathbf{w})=\mathcal{N}(\mathbf{y}|X^T\mathbf{w},\beta^{-1})$$
 
 
