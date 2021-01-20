@@ -47,28 +47,14 @@ $$
 여기서, $$\mathbf{w}\sim\mathcal{N}(\mathbf{w}|\mathbf{0},\alpha^{-1})$$라 가정했고, $$\mathbf{f}$$는 $$\mathbf{w}$$에 대한 선형결합이므로 $$\mathbf{f}$$는 가우시안 분포입니다.
 
 
-
-~~~latex
-```math
+$$
 \begin{aligned}
 \mathbb{E}(\mathbf{f})&=\Phi\mathbb{E}(\mathbf{w})=\mathbf{0} \\
 \mathrm{Cov}(\mathbf{f})&=\mathbb{E}(\mathbf{f}\mathbf{f}^T)=\Phi\mathbb{E}(\mathbf{w}\mathbf{w}^T)\Phi^T=\alpha^{-1}\Phi\Phi^T=\mathbf{K} \\
-K_{ij}&=k(\mathbf{x}_i,\mathbf{x}_j)=\alpha^{-1}\phi(\mathbf{x}_i)^T\phi(\mathbf{x}_j)
+[\mathbf{K}]_{i,j}&=K_{ij}=k(\mathbf{x}_i,\mathbf{x}_j)=\alpha^{-1}\phi(\mathbf{x}_i)^T\phi(\mathbf{x}_j)
 \end{aligned}
-```
-~~~
+$$
 
-
-
-$$\mathbb{E}(\mathbf{f})=\Phi\mathbb{E}(\mathbf{w})=\mathbf{0}$$
-
-
-
-$$\mathrm{Cov}(\mathbf{f})=\mathbb{E}(\mathbf{f}\mathbf{f}^T)=\Phi\mathbb{E}(\mathbf{w}\mathbf{w}^T)\Phi^T=\alpha^{-1}\Phi\Phi^T=\mathbf{K}$$
-
-
-
-$$K_{ij}=k(\mathbf{x}_i,\mathbf{x}_j)=\alpha^{-1}\phi(\mathbf{x}_i)^T\phi(\mathbf{x}_j)$$
 
 
 
@@ -110,6 +96,7 @@ posterior: $$p(\mathbf{w}|\mathbf{y},X)=\mathcal{N}(\bar{\mathbf{w}},A^{-1})$$
 $$
 p(\mathbf{w}|\mathbf{y},X) = p(\mathbf{y}|X,\mathbf{w})p(\mathbf{w})/p(\mathbf{y}|X)
 $$
+
 
 
 $$
@@ -158,14 +145,10 @@ Then,
 
 
 $$
-\mathbf{f}_*|\mathbf{x}_*,X,\mathbf{y}\sim\mathcal{N}(\beta \phi(\mathbf{x}_*)^TA^{-1}\Phi\mathbf{y},\phi(\mathbf{x}_*)^TA^{-1}\phi(\mathbf{x}_*))
+\mathbf{f}_*|\mathbf{x}_*,X,\mathbf{y}\sim\mathcal{N}(\beta \phi(\mathbf{x}_*)^TA^{-1}\Phi\mathbf{y},\phi(\mathbf{x}_*)^TA^{-1}\phi(\mathbf{x}_*)) \\
+\textrm{where } A=\beta\Phi\Phi^T+\mathbf{\Sigma}_p^{-1}, A \in \mathbb{R}^{N\times N}
 $$
 
-
-
-$$
-A=\beta\Phi\Phi^T+\mathbf{\Sigma}_p^{-1}, A \in \mathbb{R}^{N\times N}
-$$
 
 
 N>>1, $$A^{-1}$$: computationally incompatible
@@ -193,28 +176,18 @@ $$
 ### 2. function space view
 
 $$
-\mathbf{y}(\mathbf{x})=\mathcal{GP}(m(\mathbf{x}),k(\mathbf{x},\mathbf{x}')+\beta^{-1})
-$$
-
-
-
-$$
-\mathbf{f}=\mathbf{f}(\mathbf{x})=\Phi\mathbf{w}
-$$
-
-
-$$
-\mathbf{y}=\mathbf{f}+\boldsymbol{\epsilon}, \quad \epsilon_n\sim\mathcal{N}(0,\beta^{-1}),n=1,\cdots,N
+\begin{aligned}
+\mathbf{y}(\mathbf{x})&=\mathcal{GP}(m(\mathbf{x}),k(\mathbf{x},\mathbf{x}')+\beta^{-1}) \\
+\mathbf{y}&=\mathbf{f}+\boldsymbol{\epsilon}, \quad \epsilon_n\sim\mathcal{N}(0,\beta^{-1}),n=1,\cdots,N
+\end{aligned}
 $$
 
 
 $$
-\mathbf{y}|\mathbf{f}\sim\mathcal{N}(\mathbf{f},\beta^{-1}\mathbf{I}_N)
-$$
-
-
-$$
-\mathbf{f}\sim\mathcal{N}(\mathbf{0},\mathbf{K}), \quad \mathbf{K}=\alpha^{-1}\Phi\Phi^T
+\begin{aligned}
+\mathbf{y}|\mathbf{f}&\sim\mathcal{N}(\mathbf{f},\beta^{-1}\mathbf{I}_N) \\
+\mathbf{f}&\sim\mathcal{N}(\mathbf{0},\mathbf{K}), \quad \mathbf{K}=\alpha^{-1}\Phi\Phi^T
+\end{aligned}
 $$
 
 
@@ -230,7 +203,7 @@ $$
 
 
 
-If $$p(\mathbf{x})=\mathcal{N}(\mu,\Lambda^{-1}), p(\mathbf{y}|\mathbf{x})=\mathcal{N}(A\mathbf{x}+b,L^{-1})$, then $p(\mathbf{y})=\mathcal{N}(A\mu+b,L^{-1}+A\Lambda^{-1}A^T)$$.
+If $$p(\mathbf{x})=\mathcal{N}(\mu,\Lambda^{-1}), p(\mathbf{y}|\mathbf{x})=\mathcal{N}(A\mathbf{x}+b,L^{-1})$$, then $$p(\mathbf{y})=\mathcal{N}(A\mu+b,L^{-1}+A\Lambda^{-1}A^T)$$
 
  
 
@@ -259,6 +232,7 @@ $$
 
 
 Using lemma $$p(\mathbf{x}_a|\mathbf{x}_b)=\mathcal{N}\left(\boldsymbol{\mu}_a+\mathbf{\Sigma}_{ab}\mathbf{\Sigma}_{bb}^{-1}(\mathbf{x}_b-\boldsymbol{\mu}_b), \mathbf{\Sigma}_{aa}-\mathbf{\Sigma}_{ab}\mathbf{\Sigma}_{bb}^{-1}\mathbf{\Sigma}_{ba}\right)$$,
+
 
 
 $$
