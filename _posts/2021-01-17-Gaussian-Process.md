@@ -85,18 +85,25 @@ $$
 
 
 
-likelihood: $$p(\mathbf{y}|X,\mathbf{w})=\mathcal{N}(\mathbf{y}|X^T\mathbf{w},\beta^{-1})$$
+likelihood: 
+$$
+p(\mathbf{y}|X,\mathbf{w})=\mathcal{N}(\mathbf{y}|X^T\mathbf{w},\beta^{-1})
+$$
 
 
-
-prior: $$p(\mathbf{w})=\mathcal{N}(\mathbf{0},\mathbf{\Sigma}_p)$$
-
-
-
-posterior: $$p(\mathbf{w}|\mathbf{y},X)=\mathcal{N}(\bar{\mathbf{w}},A^{-1})$$
+prior: 
+$$
+p(\mathbf{w})=\mathcal{N}(\mathbf{0},\mathbf{\Sigma}_p)
+$$
 
 
+posterior: 
+$$
+p(\mathbf{w}|\mathbf{y},X)=\mathcal{N}(\bar{\mathbf{w}},A^{-1})
+$$
 
+
+(proof)
 $$
 p(\mathbf{w}|\mathbf{y},X) = p(\mathbf{y}|X,\mathbf{w})p(\mathbf{w})/p(\mathbf{y}|X)
 $$
