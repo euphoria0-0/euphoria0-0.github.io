@@ -270,8 +270,6 @@ $$
 
 ### 3. Hyper-parameter
 
-
-
 MLE에서 likelihood $$p(\mathbf{y}|\theta)$$를 계산 → conjugate gradients와 같은 방법으로
 
 
