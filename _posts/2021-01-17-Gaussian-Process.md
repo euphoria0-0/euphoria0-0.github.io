@@ -281,8 +281,11 @@ $$
 
 - predictive mean
 
-  $$\mathbf{k}_*^T\mathbf{C}^{-1}\mathbf{y}=\sum_{n=1}^Na_n\mathbf{k}(\mathbf{x}_n,\mathbf{x}_*), \quad a_n=[\mathbf{C}^{-1}\mathbf{y}]_n$$
-
+  $$
+\mathbf{k}_*^T\mathbf{C}^{-1}\mathbf{y}=\sum_{n=1}^Na_n\mathbf{k}(\mathbf{x}_n,\mathbf{x}_*), \quad a_n=[\mathbf{C}^{-1}\mathbf{y}]_n
+  $$
+  
+  
   - $$M<<N$$일 때 GP가 효율적이다.
 
 
