@@ -44,7 +44,11 @@ $$
 
 
 
-여기서, $$\mathbf{w}\sim\mathcal{N}(\mathbf{w}|\mathbf{0},\alpha^{-1})$$라 가정했고, $$\mathbf{f}$$는 $$\mathbf{w}$$에 대한 선형결합이므로 $$\mathbf{f}$$는 가우시안 분포입니다.
+여기서, 
+$$
+\mathbf{w}\sim\mathcal{N}(\mathbf{w}|\mathbf{0},\alpha^{-1})
+$$
+라 가정했고, $$\mathbf{f}$$는 $$\mathbf{w}$$에 대한 선형결합이므로 $$\mathbf{f}$$는 가우시안 분포입니다.
 
 
 $$
