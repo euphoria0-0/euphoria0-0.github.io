@@ -22,11 +22,11 @@ comments: true
 
 ## 1. Gaussian Process
 
-weight가 아닌 function에 대해 prior를 직접 정의한다.
+GP는 weight가 아닌 function에 대해 prior를 직접 정의합니다.
 
-infinite function space에서의 distribution을 고려하는 것은 어렵지만, 실제로 input data point(random variable)에 대한 discrete set에서의 function value만 고려하므로 실제로는 finite space에서 생각할 수 있다.
+그럼으로써 infinite function space에서의 distribution을 고려하는 것은 어렵지만, 실제로 input data point(random variable)에 대한 discrete set에서의 function value만 고려하므로 실제로는 finite space에서 생각할 수 있습니다.
 
-GP의 예로, kernel regression을 생각해보자.
+GP의 예로, kernel regression을 생각해볼 수 있습니다.
 
 $$
 f(\mathbf{x})=\mathbf{w}^T\phi(\mathbf{x})
@@ -35,7 +35,7 @@ $$
 $$
 p(\mathbf{w})=\mathcal{N}(\mathbf{w}|\mathbf{0},\alpha^{-1}\mathbf{I})
 $$
-→ $$\mathbf{w}$$에 대한 확률분포를 바탕으로 함수 $$\mathbf{f}$$에 대한 확률분포를 도출할 수 있다.
+→ $$\mathbf{w}$$에 대한 확률분포를 바탕으로 함수 $$\mathbf{f}$$에 대한 확률분포를 도출할 수 있습다.
 
 
 $$
@@ -44,7 +44,19 @@ $$
 
 
 
-$$\mathbf{w}\sim\mathcal{N}(\mathbf{w}|\mathbf{0},\alpha^{-1})$$라 가정했고, $$\mathbf{f}$$는 $$\mathbf{w}$$에 대한 선형결합이므로 $$\mathbf{f}$$는 가우시안 분포
+여기서, $$\mathbf{w}\sim\mathcal{N}(\mathbf{w}|\mathbf{0},\alpha^{-1})$$라 가정했고, $$\mathbf{f}$$는 $$\mathbf{w}$$에 대한 선형결합이므로 $$\mathbf{f}$$는 가우시안 분포입니다.
+
+
+
+~~~latex
+```math
+\begin{aligned}
+\mathbb{E}(\mathbf{f})&=\Phi\mathbb{E}(\mathbf{w})=\mathbf{0} \\
+\mathrm{Cov}(\mathbf{f})&=\mathbb{E}(\mathbf{f}\mathbf{f}^T)=\Phi\mathbb{E}(\mathbf{w}\mathbf{w}^T)\Phi^T=\alpha^{-1}\Phi\Phi^T=\mathbf{K} \\
+K_{ij}&=k(\mathbf{x}_i,\mathbf{x}_j)=\alpha^{-1}\phi(\mathbf{x}_i)^T\phi(\mathbf{x}_j)
+\end{aligned}
+```
+~~~
 
 
 
