@@ -105,6 +105,7 @@ $$
 (proof)
 
 
+
 $$
 p(\mathbf{w}|\mathbf{y},X) = p(\mathbf{y}|X,\mathbf{w})p(\mathbf{w})/p(\mathbf{y}|X)
 $$
@@ -223,7 +224,7 @@ $$
 $$
 p(\mathbf{y})=\mathcal{N}(A\mu+b,L^{-1}+A\Lambda^{-1}A^T)
 $$
- 
+
 
 So, 
 $$
