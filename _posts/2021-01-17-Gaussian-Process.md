@@ -334,5 +334,5 @@ $$
 ###### Reference
 
 1. Bishop, C. M. (2006). *Pattern recognition and machine learning*. springer.
-2. Rasmussen, C. E. (2003, February). Gaussian processes in machine learning. In *Summer School on Machine Learning* (pp. 63-71). Springer, Berlin, Heidelberg.
-3. 최성준 교수님, edwithh, Bayesian Deep Learning
+2. Williams, C. K., & Rasmussen, C. E. (2006). *Gaussian processes for machine learning* (Vol. 2, No. 3, p. 4). Cambridge, MA: MIT press.
+3. 최성준 교수님, edwith, *Bayesian Deep Learning*
