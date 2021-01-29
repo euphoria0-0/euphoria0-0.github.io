@@ -12,7 +12,7 @@ comments: true
 
 
 
-> *먼저, 이 글은 (대부분) PRML (CH6) 공부를 바탕으로 작성된 글입니다. 따라서, 간혹 틀리다거나 더 좋은 해석이 있다면 편하게 댓글 부탁드립니다!*
+> *먼저, 이 글은 (대부분) PRML (CH6) 및 GPML (CH2)공부를 바탕으로 작성된 글입니다. 따라서, 간혹 틀리다거나 더 좋은 해석이 있다면 편하게 댓글 부탁드립니다!*
 
 
 
@@ -273,23 +273,52 @@ $$
 
 
 
-- mean
-  $$
-  A\mathbf{\Sigma}_p\Phi=\beta\Phi(\mathbf{K}+\beta^{-1}\mathbf{I})=\mathbf{\Sigma}_p\Phi(\mathbf{K}+\beta^{-1}\mathbf{I})^{-1}
-  $$
-  
+(proof)
 
-- covariance
+mean을 구하기 위해, 다음과 같은 process로 계산합니다.
 
-  
 
-  
+$$
+\begin{aligned}
+A\mathbf{\Sigma}_p\Phi&=\beta\Phi(\mathbf{K}+\beta^{-1}\mathbf{I})=\mathbf{\Sigma}_p\Phi(\mathbf{K}+\beta^{-1}\mathbf{I})^{-1} \\
+\beta A^{-1}\Phi&=\beta A^{-1}\Phi(\beta\cdot\mathbf{I}+\mathbf{K})(\beta\cdot\mathbf{I}+\mathbf{K})^{-1}\\
+&=A^{-1}\cdot A\Sigma_p\Phi(\beta\cdot\mathbf{I}+\mathbf{K})^{-1}
+\end{aligned}
+$$
+
+
+위를 이용해, predictive mean은,
+
+
+$$
+\begin{aligned}
+\beta\phi(\mathbf{x}_*)^TA^{-1}\Phi\mathbf{y}&=\phi(\mathbf{x}_*)^T\Sigma_p\Phi(\beta\cdot\mathbf{I}+\mathbf{K})^{-1}\mathbf{y} \\
+&=\mathbf{k}(X,\mathbf{x}_*)(\beta\cdot\mathbf{I}+\mathbf{k}(X,X))^{-1}\mathbf{y}
+\end{aligned}
+$$
+
+
+다음으로, Covariance를 구합니다. 
+
+
+$$
+\begin{aligned}
+&\phi(\mathbf{x}_*)^TA^{-1}\phi(\mathbf{x}_*)\\
+&=\phi(\mathbf{x}_*)^T\Sigma_p\phi(\mathbf{x}_*)-\phi(\mathbf{x}_*)^T\Sigma_p\Phi(\beta\mathbf{I}+\Phi^T\Sigma_p\Phi)^{-1}\Phi^T\Sigma_p\phi(\mathbf{x}_*) \\
+&=\mathbf{k}(\mathbf{x}_*,\mathbf{x}_*)-\mathbf{k}(X,\mathbf{x}_*)^T[\beta\mathbf{I}+\mathbf{k}(X,X)]^{-1}\mathbf{k}(X,\mathbf{x}_*)
+\end{aligned}
+$$
+
+
+따라서, basis function을 이용한 bayesian linear regression에 kernel function을 도입하여 Gaussian Process Regression을 유도하였고 위의 식은 predictive distribution입니다. 이제, weight space에서 살펴본 GPR이 function space에서 본 GPR과 같음을 보일 것입니다.
+
+
 
 
 
 ### 2. function space view
 
-y가 GP를 따르는 함수이면서 error가 포함되어 있다고 하면, 다음과 같이 정의할 수 있다.
+$$\mathbf{y}$$가 GP를 따르는 함수이면서 error가 포함되어 있다고 하면, 다음과 같이 정의할 수 있습니다.
 
 
 $$
