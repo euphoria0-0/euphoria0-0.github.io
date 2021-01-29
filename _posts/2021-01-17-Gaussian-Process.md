@@ -22,9 +22,9 @@ comments: true
 
 ## 1. Gaussian Process
 
-GP는 weight가 아닌 function에 대해 prior를 직접 정의합니다.
+Gaussian process $$f$$는 수많은 random variable의 컬렉션 중의 어떤 유한한 부분집합이 (multivariate) Gaussian distribution을 따르는 것을 말합니다. 다시 말해, Gaussian random vector를 infinite-dim의 function 형태로 일반화한 것을 이야기 합니다.
 
-그럼으로써 infinite function space에서의 distribution을 고려하는 것은 어렵지만, 실제로 input data point(random variable)에 대한 discrete set에서의 function value만 고려하므로 실제로는 finite space에서 생각할 수 있습니다.
+GP는 weight가 아닌 function에 대해 prior를 직접 정의합니다. 그럼으로써 infinite function space에서의 distribution을 고려하는 것은 어렵지만, 실제로 input data point(random variable)에 대한 discrete set에서의 function value만 고려하므로 실제로는 finite space에서 생각할 수 있습니다.
 
 GP의 예로, kernel regression을 생각해볼 수 있습니다.
 
@@ -70,7 +70,9 @@ $$
 
 **정의**
 
-dataset $$\mathcal{D}=\{(\mathbf{x}_i,y_i)\}_{i=1}^n, X=[\mathbf{x}_1^T, \cdots, \mathbf{x}_n^T]$$
+Bayesian Linear Regression을 다시 생각해봅시다. 데이터는 $$\mathcal{D}=\{(\mathbf{x}_i,y_i)\}_{i=1}^n, X=[\mathbf{x}_1^T, \cdots, \mathbf{x}_n^T]$$로 주어지면, 
+
+(1) function와 target은 다음과 같이 주어집니다.
 
 
 
@@ -85,21 +87,22 @@ $$
 
 
 
-likelihood: 
+(2) 그리고, likelihood, (weight의) prior는 다음과 같습니다.
 $$
-p(\mathbf{y}|X,\mathbf{w})=\mathcal{N}(\mathbf{y}|X^T\mathbf{w},\beta^{-1})
-$$
-
-
-prior: 
-$$
-p(\mathbf{w})=\mathcal{N}(\mathbf{0},\mathbf{\Sigma}_p)
+\begin{aligned} 
+p(\mathbf{y}|X,\mathbf{w})&=\mathcal{N}(\mathbf{y}|X^T\mathbf{w},\beta^{-1}) \\
+p(\mathbf{w})&=\mathcal{N}(\mathbf{0},\mathbf{\Sigma}_p)
+\end{aligned}
 $$
 
 
-posterior: 
+
+(3) 그렇다면, Bayesian rule을 이용해 posterior는 다음과 같이 구할 수 있습니다.
 $$
-p(\mathbf{w}|\mathbf{y},X)=\mathcal{N}(\bar{\mathbf{w}},A^{-1})
+\begin{aligned}
+p(\mathbf{w}|\mathbf{y},X)&=\mathcal{N}(\beta A^{-1}X\mathbf{y},A^{-1}) \\
+\text{where } A&=\beta XX^T+\mathbf{\Sigma}_p^{-1}
+\end{aligned}
 $$
 
 (proof)
@@ -115,32 +118,67 @@ $$
 $$
 \begin{align*}
 &\log p(\mathbf{w}|\mathbf{y},X) \\
-&\propto\ [-(\mathbf{y}-X^T\mathbf{w})^T\beta\mathbf{I}(\mathbf{y}-X^T\mathbf{w})][-\frac{1}{2}\mathbf{w}^T\mathbf{\Sigma}_p^{-1}\mathbf{w}] \\
-&=-\frac{1}{2}(\mathbf{w}-\bar{\mathbf{w}})^TA(\mathbf{w}-\bar{\mathbf{w}}) \\
+&\propto\ [-(\mathbf{y}-X^T\mathbf{w})^T\beta\mathbf{I}(\mathbf{y}-X^T\mathbf{w})][-\mathbf{w}^T\mathbf{\Sigma}_p^{-1}\mathbf{w}] \\
+&\propto -\mathbf{w}^T(\beta XX^T+\Sigma_p^{-1})\mathbf{w} -\mathbf{y}^T\cdot\beta\mathbf{I}\cdot X^T\mathbf{w} - \mathbf{w}^TX\cdot\beta\mathbf{I}\cdot X^T\mathbf{w} \\
+&=-(\mathbf{w}-\bar{\mathbf{w}})^TA(\mathbf{w}-\bar{\mathbf{w}}) \\
 &\textrm{where } \bar{\mathbf{w}}=\beta A^{-1}X\mathbf{y}, A=\beta XX^T+\mathbf{\Sigma}_p^{-1}
 \end{align*}
 $$
 
 
 
-predictive distribution
+(4) posterior를 구했으니, 이제 예측분포(predictive distribution)를 구할 수 있습니다.
 
 
 
 $$
-\begin{align*}
-&p(\mathbf{f}_*|\mathbf{x}_*,X,\mathbf{y})\\
-&=\int p(\mathbf{f}_*|X_*,\mathbf{w})p(\mathbf{w}|X,\mathbf{y})d\mathbf{w}\\
-&=\mathcal{N}(\beta X_*^TA^{-1}X\mathbf{y},\mathbf{x}_*^TA^{-1}\mathbf{x}_*)
-\end{align*} \\
-\textrm{where } A=\beta XX^T+\mathbf{\Sigma}_p^{-1}, \mathbf{f}_*=\mathbf{f}_*(\mathbf{x}_*)
+\begin{aligned}
+p(\mathbf{y}_*|\mathbf{x}_*,X,\mathbf{y})&=\mathcal{N}(\beta X_*^TA^{-1}X\mathbf{y},\mathbf{x}_*^TA^{-1}\mathbf{x}_*) \\
+\textrm{where } A&=\beta XX^T+\mathbf{\Sigma}_p^{-1}
+\end{aligned}
 $$
+
+
+
+(proof)
+$$
+p(\mathbf{f}_*|\mathbf{x}_*,X,\mathbf{y}) =\int p(\mathbf{f}_*|X_*,\mathbf{w})p(\mathbf{w}|X,\mathbf{y})d\mathbf{w}
+$$
+를 풀기 위해, Gaussian distribution의 joint 분포를 conditional Gaussian distribution으로 계산할 수 있는 lemma를 사용합니다.
+
+(lemma)
+$$
+\begin{aligned}
+p(\mathbf{w})&=\mathcal{N}(\boldsymbol{\mu},\Lambda^{-1}) \\
+p(y_*|\mathbf{w})&=\mathcal{N}(A\mathbf{w}+\mathbf{b},L^{-1}) \\
+p(y_*)&=\mathcal{N}(A\boldsymbol{\mu}+\mathbf{b},L^{-1}+A\Lambda^{-1}A^T)
+\end{aligned}
+$$
+
+
+를 이용하면,
+
+
+$$
+\begin{aligned}
+p(\mathbf{w})&=\mathcal{N}(\bar{\mathbf{w}},A^{-1}) \\
+p(\mathbf{y}_*|\mathbf{w})&=\mathcal{N}(\mathbf{x}_*^T\mathbf{w},\beta \mathbf{I}) \\
+p(\mathbf{y}_*)&=\mathcal{N}(\mathbf{x}_*^T\bar{\mathbf{w}},\beta\mathbf{I}+\mathbf{x}_*^TA^{-1}\mathbf{x}_*)
+\end{aligned}
+$$
+
+
+로 풀 수 있습니다.
 
 
 
 #### **2. kernel trick**
 
-$$\phi: \mathbb{R}^D \longrightarrow \mathbb{R}^N$$ : input space → high dim feature space (N>>D)
+자, 이제 3단원에서 했던 것들처럼, feature space로 mapping하는 basis function을 도입합니다. basis function은, $$\phi: \mathbb{R}^D \longrightarrow \mathbb{R}^N$$ : input space → high dim feature space (N>>D)로 정의하고,
+
+
+
+(1) function를 다음과 같이 정의합니다. 1.의 (1)과 비슷한 형태입니다.
 
 
 
@@ -154,7 +192,31 @@ $$
 $$
 
 
-Then,
+
+(2) likelihood와 weight의 prior는 1.의 (2)와 유사합니다.
+
+
+$$
+\begin{aligned} 
+p(\mathbf{y}|X,\mathbf{w})&=\mathcal{N}(\mathbf{y}|\Phi^T\mathbf{w},\beta^{-1}) \\
+p(\mathbf{w})&=\mathcal{N}(\mathbf{0},\mathbf{\Sigma}_p)
+\end{aligned}
+$$
+
+
+(3) posterior
+
+
+$$
+\begin{aligned}
+p(\mathbf{w}|\mathbf{y},X)&=\mathcal{N}(\beta A^{-1}\Phi^T\mathbf{y},A^{-1}) \\
+\text{where } A&=\beta \Phi\Phi^T+\mathbf{\Sigma}_p^{-1}
+\end{aligned}
+$$
+
+
+(4) predictive distribution은 다음과 같습니다.
+
 
 
 $$
@@ -164,8 +226,36 @@ $$
 
 
 
-N>>1, $$A^{-1}$$: computationally incompatible
+(5) 여기서, N이 클 경우 $$A^{-1}$$를 계산하는 것은 굉장히 computationally incompatible합니다. 따라서, N>>n인 경우, matrix inversion formulation을 활용해 계산해야하는 역행렬 dim을 계산이 쉽게 바꿉니다.
 
+
+$$
+(Z+UW^{-1}V^T)^{-1}=Z^{-1}-Z^{-1}U(W^{-1}+V^TZ^{-1}U)^{-1}V^TZ^{-1}
+$$
+
+$$
+A^{-1}=(\Sigma_p^{-1}+\beta\Phi\Phi^T)^{-1}=\Sigma_p+\Sigma_p\Phi(\beta\mathbf{I}+\Phi^T\Sigma_p\Phi)^{-1}\Phi^T\Sigma_p
+$$
+
+
+
+따라서, 계산해야하는 역행렬은 $$n\times n$$행렬인 $$(\beta\mathbf{I}+\Phi^T\Sigma_p\Phi)^{-1}$$ 입니다.
+
+
+
+(6) 이제, kernel 을 정의할 수 있습니다. kernel function을 다음과 같이 정의합니다.
+
+
+$$
+\begin{aligned}
+k(\mathbf{x},\mathbf{x}')&=\phi(\mathbf{x})^T\Sigma_p\phi(\mathbf{x}') \\
+&=\phi(\mathbf{x})^T(UDU^T)^{1/2}(UDU^T)^{1/2}\phi(\mathbf{x}') \\
+&=\psi(\mathbf{x})\psi(\mathbf{x}')
+\end{aligned}
+$$
+
+
+그렇다면, Covariance function은 다음과 같이 정의할 수 있습니다.
 
 
 $$
@@ -173,12 +263,9 @@ $$
 $$
 
 
-$$
-A\mathbf{\Sigma}_p\Phi=\beta\Phi(\mathbf{K}+\beta^{-1}\mathbf{I})=\mathbf{\Sigma}_p\Phi(\mathbf{K}+\beta^{-1}\mathbf{I})^{-1}
-$$
 
+(7) 그렇다면, 여기서 kernel function을 이용해 구한 covariance matrix을 다음과 같이 나타낼 수 있습니다.
 
-Then,
 
 $$
 \begin{aligned}\mathbf{f}_*|\mathbf{x}_*,X,\mathbf{y}&\sim\mathcal{N}\left(\beta\phi(\mathbf{x}_*)^TA^{-1}\Phi\mathbf{y}, \phi(\mathbf{x}_*)^TA^{-1}\phi(\mathbf{x}_*)\right) \\ &\sim\mathcal{N}\left(\phi_*\mathbf{\Sigma}_p \Phi(\mathbf{K}+\beta^{-1}\mathbf{I})^{-1}\mathbf{y}, \phi_*^T\mathbf{\Sigma}_p^{-1}\phi_*-\phi_*^T\mathbf{\Sigma}_p\Phi(\mathbf{K}+\beta^{-1}\mathbf{I})^{-1}\Phi^T\mathbf{\Sigma}_p\phi_*\right) \\ &\sim\mathcal{N}\left(k_*(K+\beta^{-1}\mathbf{I})^{-1}\mathbf{y}, k_{**}-k_*(K+\beta^{-1})^{-1}k_* \right) \end{aligned}
@@ -186,7 +273,24 @@ $$
 
 
 
+- mean
+  $$
+  A\mathbf{\Sigma}_p\Phi=\beta\Phi(\mathbf{K}+\beta^{-1}\mathbf{I})=\mathbf{\Sigma}_p\Phi(\mathbf{K}+\beta^{-1}\mathbf{I})^{-1}
+  $$
+  
+
+- covariance
+
+  
+
+  
+
+
+
 ### 2. function space view
+
+y가 GP를 따르는 함수이면서 error가 포함되어 있다고 하면, 다음과 같이 정의할 수 있다.
+
 
 $$
 \begin{aligned}
@@ -202,7 +306,6 @@ $$
 \mathbf{f}&\sim\mathcal{N}(\mathbf{0},\mathbf{K}), \quad \mathbf{K}=\alpha^{-1}\Phi\Phi^T
 \end{aligned}
 $$
-
 
 #### **1. Inference**
 
