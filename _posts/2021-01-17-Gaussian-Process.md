@@ -466,8 +466,6 @@ $$
 
 GPR에서 어떤 파라미터의 형태를 찾아보기는 어렵습니다. kernel function만 정의하면 되기 때문입니다. 하지만 kernel function 안에 들어가있는 hyper-parameter에 대한 값은 정해주어야 합니다. 이 hyper-parameter를 학습하기 위해서는 다양한 방법 중 다음과 같은 방법을 사용합니다.
 
-
-
 MLE에서 likelihood 를 최대화 하듯이, GPR에서는 Hyper parameter에 대한 'marginal' likelihood  $$p(\mathbf{y}|\theta)$$를 최대화 합니다.
 
 
@@ -540,15 +538,15 @@ noise = 1 # noise variance(inverse beta)
 ## Fitting
 # distances for kernel function
 def distance(x1,x2):
-				return np.dot(np.subtract(x1,x2), np.subtract(x1,x2)) # Gaussian kernel
+	return np.dot(np.subtract(x1,x2), np.subtract(x1,x2)) # Gaussian kernel
 
 def distance_matrix(mat1, mat2):
-		n1,n2 = mat1.shape[0],mat2.shape[0]
-		dist = np.zeros([n1,n2], dtype=np.float64)
-		for i in range(n1):
-				dist[i,i:] = np.array(list(map(lambda j: distance(X[i,:],X[j,:]), range(i, n2))))
-		dist = np.maximum(dist, dist.T)
-		return dist
+    n1,n2 = mat1.shape[0],mat2.shape[0]
+    dist = np.zeros([n1,n2], dtype=np.float64)
+    for i in range(n1):
+        dist[i,i:] = np.array(list(map(lambda j: distance(X[i,:],X[j,:]), range(i, n2))))
+    dist = np.maximum(dist, dist.T)
+    return dist
 
 dist = distance_matrix(X, X)
 dist_pred = distance_matrix(X, X_pred)
@@ -556,7 +554,7 @@ dist_pred_pred = distance_matrix(X_pred, X_pred)
 
 # Gram Matrix
 def gram_matrix(dist, theta):
-		return np.exp(dist / theta)
+	return np.exp(dist / theta)
 
 K = gram_matrix(dist, theta)
 k_pred = gram_matrix(dist_pred , theta)
