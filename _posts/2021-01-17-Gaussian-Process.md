@@ -352,6 +352,8 @@ $$
 #### **1. Inference**
 
 GP를 위와 같이 정의하면, function $$\mathbf{y}$$는 다음과 같이 유도할 수 있습니다.
+
+
 $$
 \mathbf{y}\sim\mathcal{N}(\mathbf{y}|\mathbf{0},\mathbf{C}), \quad \mathbf{C}=\mathbf{K}+\beta^{-1}\mathbf{I}_N
 $$
@@ -366,7 +368,9 @@ $$
 
 
 $$
-p(\mathbf{x})=\mathcal{N}(\mu,\Lambda^{-1}), p(\mathbf{y}|\mathbf{x})=\mathcal{N}(A\mathbf{x}+b,L^{-1})
+\begin{aligned}
+p(\mathbf{x})&=\mathcal{N}(\mu,\Lambda^{-1})\\ p(\mathbf{y}|\mathbf{x})&=\mathcal{N}(A\mathbf{x}+b,L^{-1})
+\end{aligned}
 $$
 
 
@@ -464,9 +468,7 @@ $$
 
 ### 3. Hyper-parameter
 
-GPR에서 어떤 파라미터의 형태를 찾아보기는 어렵습니다. kernel function만 정의하면 되기 때문입니다. 하지만 kernel function 안에 들어가있는 hyper-parameter에 대한 값은 정해주어야 합니다. 이 hyper-parameter를 학습하기 위해서는 다양한 방법 중 다음과 같은 방법을 사용합니다.
-
-MLE에서 likelihood 를 최대화 하듯이, GPR에서는 Hyper parameter에 대한 'marginal' likelihood  $$p(\mathbf{y}|\theta)$$를 최대화 합니다.
+GPR에서 어떤 파라미터의 형태를 찾아보기는 어렵습니다. kernel function만 정의하면 되기 때문입니다. 하지만 kernel function 안에 들어가있는 hyper-parameter에 대한 값은 정해주어야 합니다. 이 hyper-parameter를 학습하기 위한 다양한 방법 중 여기서는 'marginal likelihood' 방법을 사용합니다. MLE에서 likelihood 를 최대화 하듯이, GPR에서는 Hyper parameter에 대한 'marginal' likelihood  $$p(\mathbf{y}|\theta)$$를 최대화 합니다.
 
 
 
@@ -508,7 +510,7 @@ $$
 
 ### 5. Code Implementation
 
-여기까지, GPR이었습니다. 이제 이를 Python 코드로 작성해보겠습니다. 주로 numpy를 이용해 작성하였고 능력 부족으로 complexity는 고려가 거의 안되었습니다.(...ㅠ)
+여기까지, GPR이었습니다. 이제 이를 Python 코드로 작성해보겠습니다. 주로 numpy를 이용해 작성하였고 능력 부족으로 complexity는 고려가 거의 안되었습니다.(...ㅠ) 혹시 코드 구현에 대해 좋은 의견이 있으신 분은 조언 부탁드립니다!
 
 
 
@@ -576,7 +578,7 @@ nll = np.dot(y.T,a) /2 + log_func(L.diagonal()).sum() + num_inputs * np.log(2*np
 
 
 
-(4) 예측합시다. 아, 여기서 stable computation을 위해 gauss elimination을 사용합니다.
+(4) 예측합시다. 여기서 stable computation을 위해 gauss elimination을 사용합니다.
 
 ```python
 ## Prediction
