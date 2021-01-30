@@ -516,7 +516,7 @@ $$
 
 (1) 먼저, 세팅을 한 후,
 
-```
+```python
 import numpy as np
 from sklearn.preprocessing import StandardScaler, MinMaxScaler
 
@@ -536,7 +536,7 @@ noise = 1 # noise variance(inverse beta)
 
 (2) 모델을 피팅합니다. stable한 computation을 위해 NLL 계산 중 cholesky decomposition을 사용합니다.
 
-```
+```Python
 ## Fitting
 # distances for kernel function
 def distance(x1,x2):
@@ -572,7 +572,7 @@ nll = np.dot(y.T,a) /2 + log_func(L.diagonal()).sum() + num_inputs * np.log(2*np
 
 (3) 여기서, NLL을 이용해 hyper-parameter를 learning합니다. NLL을 minimize하기 위한 optimization 방법은 주로 gradient descent 혹은 conjugate gradient descent를 사용합니다. 여기 코드에는 포함시키지 않았습니다.
 
-```
+```python
 ## Learning Hyper-parameters using NLL
 ```
 
@@ -580,7 +580,7 @@ nll = np.dot(y.T,a) /2 + log_func(L.diagonal()).sum() + num_inputs * np.log(2*np
 
 (4) 예측합시다. 아, 여기서 stable computation을 위해 gauss elimination을 사용합니다.
 
-```
+```python
 ## Prediction
 # predictive mean
 K_f = K + noise * np.identity(K.shape[0])
