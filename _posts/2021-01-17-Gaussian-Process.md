@@ -152,9 +152,9 @@ $$
 $$
 p(\mathbf{f}_*|\mathbf{x}_*,X,\mathbf{y}) =\int p(\mathbf{f}_*|X_*,\mathbf{w})p(\mathbf{w}|X,\mathbf{y})d\mathbf{w}
 $$
-를 풀기 위해, Gaussian distribution의 joint 분포를 conditional Gaussian distribution으로 계산할 수 있는 lemma를 사용합니다.
+를 풀기 위해, Gaussian distribution의 joint 분포를 conditional Gaussian distribution으로 계산할 수 있는 lemma를 사용합니다. 아래에서 다시 사용할 것이니 기억해주세요!
 
-(lemma)
+(lemma 1)
 
 
 $$
@@ -331,7 +331,7 @@ $$
 
 ### 2. function space view
 
-$$\mathbf{y}$$가 GP를 따르는 함수이면서 error가 포함되어 있다고 하면, 다음과 같이 정의할 수 있습니다.
+$$\mathbf{y}$$가 GP를 따르는 함수이면서 error(noise)가 포함되어 있다고 하면, 다음과 같이 정의할 수 있습니다.
 
 
 $$
@@ -351,6 +351,7 @@ $$
 
 #### **1. Inference**
 
+GP를 위와 같이 정의하면, function $$\mathbf{y}$$는 다음과 같이 유도할 수 있습니다.
 $$
 \mathbf{y}\sim\mathcal{N}(\mathbf{y}|\mathbf{0},\mathbf{C}), \quad \mathbf{C}=\mathbf{K}+\beta^{-1}\mathbf{I}_N
 $$
@@ -361,30 +362,43 @@ $$
 
 
 
-If 
+여기서 우리는 위의 lemma 1 을 사용할 것입니다. 다시 언급하자면, 
+
+
 $$
 p(\mathbf{x})=\mathcal{N}(\mu,\Lambda^{-1}), p(\mathbf{y}|\mathbf{x})=\mathcal{N}(A\mathbf{x}+b,L^{-1})
 $$
-, then 
+
+
+이면,
+
+
 $$
 p(\mathbf{y})=\mathcal{N}(A\mu+b,L^{-1}+A\Lambda^{-1}A^T)
 $$
 
 
-So, 
+
+입니다. 따라서, function $$\mathbf{y}$$는 다음과 같이 구할 수 있습니다.
+
+
 $$
 p(\mathbf{y})=\int p(\mathbf{y}|\mathbf{f})p(\mathbf{f})d\mathbf{y}=\mathcal{N}(\mathbf{0},\beta^{-1}\mathbf{I}_N+\mathbf{K})
 $$
 
 
+
 **2. Prediction**
 
-predictive value(vector) $$\mathbf{f}_*$$ about new input $$\mathbf{x}_*$$
+predictive value(vector) $$\mathbf{f}_*$$ 의 분포는 새로운 input을 $$\mathbf{x}_*$$라 한다면, 다음과 같습니다.
+
 
 
 $$
 \begin{pmatrix} \mathbf{y} \\ \mathbf{y}_* \end{pmatrix} \sim \left( \begin{pmatrix} \mathbf{0} \\ 0 \end{pmatrix}, \begin{pmatrix} \mathbf{K}+\beta^{-1}\mathbf{I}_N & \mathbf{k}_* \\ \mathbf{k}_*^T & \mathbf{k}_{**}+\beta^{-1} \end{pmatrix} \right)
 $$
+
+
 
 where 
 $$
@@ -403,11 +417,15 @@ $$
 
 
 
-Using lemma 
+위를 계산하기 위해 다음과 같은 lemma 2 를 사용합니다. 이는 분할 행렬로 나타나진 joint Gaussian distribution에서 두 independent한 variables에 대한 conditional Gaussian distribution으로 나타내는 것입니다.
+
+
 $$
 p(\mathbf{x}_a|\mathbf{x}_b)=\mathcal{N}\left(\boldsymbol{\mu}_a+\mathbf{\Sigma}_{ab}\mathbf{\Sigma}_{bb}^{-1}(\mathbf{x}_b-\boldsymbol{\mu}_b), \mathbf{\Sigma}_{aa}-\mathbf{\Sigma}_{ab}\mathbf{\Sigma}_{bb}^{-1}\mathbf{\Sigma}_{ba}\right)
 $$
-,
+
+
+이 lemma 2 를 이용하면, 다음과 같이 예측 평균과 분산을 구할 수 있습니다.
 
 
 
@@ -421,18 +439,26 @@ $$
 $$
 
 
-- $$\mathbf{C}$$는 positive definite이어야 한다!
 
-  - $$K$$의 eigen value ≥0 ⇒ $$k(x_i,x_j)$$가 모든 $$x_i,x_j$$에 대해 positive definite이게 됨
+이렇게 구해진 predictive distribution은 위의 weight space view에서 본 predictive distribution과 같음을 확인할 수 있습니다.
 
-- predictive mean
+
+
+여기서, 짚고 넘어가야 할 점이,
+
+
+- $$\mathbf{C}$$는 positive definite이어야 합니다.
+
+  - $$K$$의 eigen value ≥0 이면, $$k(x_i,x_j)$$가 모든 $$x_i,x_j$$에 대해 positive definite이게 됩니다.
+
+- predictive mean은 다음과 같이 다시 적을 수 있습니다.
 
   $$
 \mathbf{k}_*^T\mathbf{C}^{-1}\mathbf{y}=\sum_{n=1}^Na_n\mathbf{k}(\mathbf{x}_n,\mathbf{x}_*), \quad a_n=[\mathbf{C}^{-1}\mathbf{y}]_n
   $$
   
   
-  - $$M<<N$$일 때 GP가 효율적이다.
+  - $$M<<N$$일 때 GP가 효율적임은 gram matrix 계산의 complexity로 인해 그렇습니다.
 
 
 
@@ -461,6 +487,111 @@ $$
 
 
 ### 4. ARD: Automatic Relevance Determination
+
+ARD는 각 input variable에 대해 다른 parameter를 사용하여 각 입력 값에 대해 상대적인 중요도(유용성)를 산출해내는 방법입니다. 
+
+
+
+다음과 같은 커널 함수를 생각해봅시다.
+
+
+$$
+k(\mathbf{x},\mathbf{x}')=\theta_0\exp\{-\frac{1}{2}\sum_{i=1}^2\eta_i(x_i-x_i')^2\}
+$$
+
+
+- $$\eta_i$$ 값이 작아질수록 함수는 해당 input 변수 $$x_i$$에 대해 상대적으로 덜 민감하게 됩니다.
+- 반대로 $$\eta_i$$ 값이 커지면 함수는 $$x_i$$에 민감하게 반응하여 함수값이 요동치게 됩니다.
+- MLE를 적용하여 데이터로부터 이 파라미터를 조절하면 예측 분포에 적게 영향을 미치는($$\eta_i$$값이 작은) input 변수를 찾을 수 있습니다. 이렇게 영향을 적게 미치는 입력 변수를 제거할 수 있습니다. 즉, ARD를 이용해 변수를 선택할 수 있습니다!
+
+
+
+
+
+### 5. Code Implementation
+
+여기까지, GPR이었습니다. 이제 이를 Python 코드로 작성해보겠습니다. 주로 numpy를 이용해 작성하였고 능력 부족으로 complexity는 고려가 거의 안되었습니다.(...ㅠ)
+
+
+
+(1) 먼저, 세팅을 한 후,
+
+```
+import numpy as np
+from sklearn.preprocessing import StandardScaler, MinMaxScaler
+
+## Settings
+# load data
+X, y = load_data_function()
+num_outputs = y.shape[1]
+num_inputs, num_features = X.shape
+scaler = StandardScaler() # or MinMaxScaler()
+X = scaler.fit_transform(X)
+# initial hyper-parameter(s): scala or list
+theta = 1
+noise = 1 # noise variance(inverse beta)
+```
+
+
+
+(2) 모델을 피팅합니다. stable한 computation을 위해 NLL 계산 중 cholesky decomposition을 사용합니다.
+
+```
+## Fitting
+# distances for kernel function
+def distance(x1,x2):
+				return np.dot(np.subtract(x1,x2), np.subtract(x1,x2)) # Gaussian kernel
+
+def distance_matrix(mat1, mat2):
+		n1,n2 = mat1.shape[0],mat2.shape[0]
+		dist = np.zeros([n1,n2], dtype=np.float64)
+		for i in range(n1):
+				dist[i,i:] = np.array(list(map(lambda j: distance(X[i,:],X[j,:]), range(i, n2))))
+		dist = np.maximum(dist, dist.T)
+		return dist
+
+dist = distance_matrix(X, X)
+dist_pred = distance_matrix(X, X_pred)
+dist_pred_pred = distance_matrix(X_pred, X_pred)
+
+# Gram Matrix
+def gram_matrix(dist, theta):
+		return np.exp(dist / theta)
+
+K = gram_matrix(dist, theta)
+k_pred = gram_matrix(dist_pred , theta)
+k_pred_pred = gram_matrix(dist_pred_pred , theta)
+
+# Negative Log Likelihood
+L = np.cholesky(K_f)
+log_func = np.vectorize(lambda x: np.log(x))
+nll = np.dot(y.T,a) /2 + log_func(L.diagonal()).sum() + num_inputs * np.log(2*np.pi) /2
+```
+
+
+
+(3) 여기서, NLL을 이용해 hyper-parameter를 learning합니다. NLL을 minimize하기 위한 optimization 방법은 주로 gradient descent 혹은 conjugate gradient descent를 사용합니다. 여기 코드에는 포함시키지 않았습니다.
+
+```
+## Learning Hyper-parameters using NLL
+```
+
+
+
+(4) 예측합시다. 아, 여기서 stable computation을 위해 gauss elimination을 사용합니다.
+
+```
+## Prediction
+# predictive mean
+K_f = K + noise * np.identity(K.shape[0])
+a = linalg.solve_triangular(L.T, linalg.solve_triangular(L, y, lower=True))
+pred_mean = np.dot(k_pred.T, a)
+# predictive covariance
+v = linalg.solve_triangular(L, k_pred)
+pred_cov = k_pred_pred - np.dot(v.T, v) + noise
+```
+
+
 
 
 
