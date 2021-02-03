@@ -539,35 +539,37 @@ noise = 1 # noise variance(inverse beta)
 
 (2) 모델을 피팅합니다. stable한 computation을 위해 NLL 계산 중 cholesky decomposition을 사용합니다.
 
-```Python
+```python
 ## Fitting
 # distances for kernel function
 def distance(x1,x2):
 	return np.dot(np.subtract(x1,x2), np.subtract(x1,x2)) # Gaussian kernel
 
-def distance_matrix(mat1, mat2):
+def distance_matrix(mat1, mat2, same=True):
 	n1,n2 = mat1.shape[0],mat2.shape[0]
 	dist = np.zeros([n1,n2], dtype=np.float64)
-    for i in range(n1):
-        dist[i,i:] = np.array(list(map(lambda j: distance(X[i,:],X[j,:]), range(i, n2))))
-    dist = np.maximum(dist, dist.T)
+    if same:
+        for i in range(n1):
+            dist[i,i:] = np.array(list(map(lambda j: distance(mat1[i,:],mat2[j,:]), range(i, n2))))
+        dist = np.maximum(dist, dist.T)
+    else:
+        for i in range(n1):
+            dist[i,i:] = np.array(list(map(lambda j: distance(mat1[i,:],mat2[j,:]), range(n2))))
     return dist
 
 dist = distance_matrix(X, X)
-dist_pred = distance_matrix(X, X_pred)
-dist_pred_pred = distance_matrix(X_pred, X_pred)
 
 # Gram Matrix
 def gram_matrix(dist, theta):
-	return np.exp(dist / theta)
+	return np.exp(- dist / theta)
+log_func = np.vectorize(lambda x: np.log(x))
 
 K = gram_matrix(dist, theta)
-k_pred = gram_matrix(dist_pred , theta)
-k_pred_pred = gram_matrix(dist_pred_pred , theta)
+K_f = K + noise * np.identity(K.shape[0])
 
 # Negative Log Likelihood
 L = np.cholesky(K_f)
-log_func = np.vectorize(lambda x: np.log(x))
+a = linalg.solve_triangular(L.T, linalg.solve_triangular(L, y, lower=True))
 nll = np.dot(y.T,a) /2 + log_func(L.diagonal()).sum() + num_inputs * np.log(2*np.pi) /2
 ```
 
@@ -585,10 +587,20 @@ nll = np.dot(y.T,a) /2 + log_func(L.diagonal()).sum() + num_inputs * np.log(2*np
 
 ```python
 ## Prediction
+# load data
+X_pred, y_pred = load_data_function()
+X_pred = scaler.transform(X_pred)
+
+# predictive kernel functions
+dist_pred = distance_matrix(X, X_pred)
+dist_pred_pred = distance_matrix(X_pred, X_pred)
+
+k_pred = gram_matrix(dist_pred , theta)
+k_pred_pred = gram_matrix(dist_pred_pred , theta)
+
 # predictive mean
-K_f = K + noise * np.identity(K.shape[0])
-a = linalg.solve_triangular(L.T, linalg.solve_triangular(L, y, lower=True))
 pred_mean = np.dot(k_pred.T, a)
+
 # predictive covariance
 v = linalg.solve_triangular(L, k_pred)
 pred_cov = k_pred_pred - np.dot(v.T, v) + noise
