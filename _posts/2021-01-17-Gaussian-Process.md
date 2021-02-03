@@ -20,7 +20,9 @@ comments: true
 
 
 
-## 1. Gaussian Process
+# 1. Gaussian Process
+
+------
 
 Gaussian process $$f$$는 수많은 random variable의 컬렉션 중의 어떤 유한한 부분집합이 (multivariate) Gaussian distribution을 따르는 것을 말합니다. 다시 말해, Gaussian random vector를 infinite-dim의 function 형태로 일반화한 것을 이야기 합니다.
 
@@ -63,12 +65,13 @@ $$
 
 
 
-
 ## 2. Gaussian Process Regression
 
-### 1. weight space view
+------
 
-#### **1. Bayesian formulation about linear regression**
+## **1. weight space view**
+
+### 1. Bayesian formulation about linear regression
 
 **정의**
 
@@ -185,7 +188,7 @@ $$
 
 
 
-#### **2. kernel trick**
+### 2. kernel trick
 
 자, 이제 3단원에서 했던 것들처럼, feature space로 mapping하는 basis function을 도입합니다. basis function은, $$\phi: \mathbb{R}^n \longrightarrow \mathbb{R}^N$$ : input space → high dim feature space (N>>n)로 정의하고,
 
@@ -329,7 +332,7 @@ $$
 
 
 
-### 2. function space view
+## **2. function space view**
 
 $$\mathbf{y}$$가 GP를 따르는 함수이면서 error(noise)가 포함되어 있다고 하면, 다음과 같이 정의할 수 있습니다.
 
@@ -349,7 +352,7 @@ $$
 \end{aligned}
 $$
 
-#### **1. Inference**
+### 1. Inference
 
 GP를 위와 같이 정의하면, function $$\mathbf{y}$$는 다음과 같이 유도할 수 있습니다.
 
@@ -392,7 +395,7 @@ $$
 
 
 
-**2. Prediction**
+### 2. Prediction
 
 predictive value(vector) $$\mathbf{f}_*$$ 의 분포는 새로운 input을 $$\mathbf{x}_*$$라 한다면, 다음과 같습니다.
 
@@ -466,7 +469,7 @@ $$
 
 
 
-### 3. Hyper-parameter
+## **3. Hyper-parameter**
 
 GPR에서 어떤 파라미터의 형태를 찾아보기는 어렵습니다. kernel function만 정의하면 되기 때문입니다. 하지만 kernel function 안에 들어가있는 hyper-parameter에 대한 값은 정해주어야 합니다. 이 hyper-parameter를 학습하기 위한 다양한 방법 중 여기서는 'marginal likelihood' 방법을 사용합니다. MLE에서 likelihood 를 최대화 하듯이, GPR에서는 Hyper parameter에 대한 'marginal' likelihood  $$p(\mathbf{y}|\theta)$$를 최대화 합니다.
 
@@ -486,7 +489,7 @@ $$
 
 
 
-### 4. ARD: Automatic Relevance Determination
+## **4. ARD: Automatic Relevance Determination**
 
 ARD는 각 input variable에 대해 다른 parameter를 사용하여 각 입력 값에 대해 상대적인 중요도(유용성)를 산출해내는 방법입니다. 
 
@@ -508,7 +511,7 @@ $$
 
 
 
-### 5. Code Implementation
+## **5. Code Implementation**
 
 여기까지, GPR이었습니다. 이제 이를 Python 코드로 작성해보겠습니다. 주로 numpy를 이용해 작성하였고 능력 부족으로 complexity는 고려가 거의 안되었습니다.(...ㅠ) 혹시 코드 구현에 대해 좋은 의견이 있으신 분은 조언 부탁드립니다!
 
@@ -543,8 +546,8 @@ def distance(x1,x2):
 	return np.dot(np.subtract(x1,x2), np.subtract(x1,x2)) # Gaussian kernel
 
 def distance_matrix(mat1, mat2):
-    n1,n2 = mat1.shape[0],mat2.shape[0]
-    dist = np.zeros([n1,n2], dtype=np.float64)
+	n1,n2 = mat1.shape[0],mat2.shape[0]
+	dist = np.zeros([n1,n2], dtype=np.float64)
     for i in range(n1):
         dist[i,i:] = np.array(list(map(lambda j: distance(X[i,:],X[j,:]), range(i, n2))))
     dist = np.maximum(dist, dist.T)
@@ -597,7 +600,9 @@ pred_cov = k_pred_pred - np.dot(v.T, v) + noise
 
 
 
-## 3. Gaussian Process Classifier
+# 3. Gaussian Process Classifier
+
+------
 
 
 
