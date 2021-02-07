@@ -545,7 +545,7 @@ noise = 1 # noise variance(inverse beta)
 def distance(x1,x2):
 	return np.dot(np.subtract(x1,x2), np.subtract(x1,x2)) # Gaussian kernel
 
-def distance_matrix(mat1, mat2, same=True):
+def distance_matrix(mat1, mat2, same=False):
 	n1,n2 = mat1.shape[0],mat2.shape[0]
 	dist = np.zeros([n1,n2], dtype=np.float64)
     if same:
@@ -557,7 +557,7 @@ def distance_matrix(mat1, mat2, same=True):
             dist[i,i:] = np.array(list(map(lambda j: distance(mat1[i,:],mat2[j,:]), range(n2))))
     return dist
 
-dist = distance_matrix(X, X)
+dist = distance_matrix(X, X, same=True)
 
 # Gram Matrix
 def gram_matrix(dist, theta):
@@ -593,7 +593,7 @@ X_pred = scaler.transform(X_pred)
 
 # predictive kernel functions
 dist_pred = distance_matrix(X, X_pred)
-dist_pred_pred = distance_matrix(X_pred, X_pred)
+dist_pred_pred = distance_matrix(X_pred, X_pred, same=True)
 
 k_pred = gram_matrix(dist_pred , theta)
 k_pred_pred = gram_matrix(dist_pred_pred , theta)
