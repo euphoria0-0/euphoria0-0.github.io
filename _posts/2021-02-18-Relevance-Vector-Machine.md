@@ -42,38 +42,38 @@ RVM은 Bayesian SVM이므로 Bayesian Approach로 SVM을 구하고자 합니다.
 1. posterior 구하기
 
     RVM이 상정하는 모델과 분포는 다음과 같이 표현할 수 있습니다. 여기서, kernel function은 제약이 없고 어떤 basis function도 사용가능한 것이 RVM의 장점입니다. 기존의 SVM은 positive definite인 kernel function만 사용가능했습니다.
-
-
+    
+    
     $$
     \begin{aligned}
     y(\mathbf{x})&=\sum_n^N w_n k(\mathbf{x},\mathbf{x}_n)+b \\
     p(t|\mathbf{x},\mathbf{w},\beta)&=\mathcal{N}(t|y(\mathbf{x}),\beta^{-1})
     \end{aligned}
     $$
-
-
+    
+    
     따라서 likelihood는 다음과 같이 나타낼 수 있습니다.
-
-
+    
+    
     $$
     p(\mathbf{t}|X,\mathbf{w},\beta)=\prod p(t_n|x_n,\mathbf{w},\beta^{-1})=\mathcal{N}(\mathbf{t}|\Phi\mathbf{w},\beta^{-1}I)
     $$
-
-
+    
+    
     그리고 weight에 대한 prior는 다음과 같이 표현합니다.
-
-
+    
+    
     $$
     \begin{aligned}
     p(\mathbf{w}|\boldsymbol{\alpha})=\prod\mathcal{N}(w_i|\mathbf{0},\alpha_i^{-1})&=\mathcal{N}(\mathbf{w}|\mathbf{0},\textrm{diag}(\alpha_i^{-1}))=\mathcal{N}(\mathbf{w}|\mathbf{0},A^{-1}) \\
     A&=\textrm{diag}(\alpha_i)
     \end{aligned}
     $$
-
-
+    
+    
     이제, likellihood와 prior를 이용해 posterior를 구할 수 있습니다. posterior는 다음과 같이 구해지며, 증명은 아래에 있습니다.
-
-
+    
+    
     $$
     \begin{aligned}
     p(\mathbf{w}|\mathbf{t},X,\boldsymbol{\alpha},\beta)&=\mathcal{N}(\mathbf{w}|\mathbf{m},\Sigma) \\
@@ -81,20 +81,15 @@ RVM은 Bayesian SVM이므로 Bayesian Approach로 SVM을 구하고자 합니다.
     \Sigma&=(A+\beta\Phi^\text{T}\Phi)^{-1}
     \end{aligned}
     $$
-
     
-
+    
     <details>
         <summary>증명</summary>
         <div markdown="1">
             ![/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 1.png](/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 1.png)
         </div>
     </details>
-
     
-
-    ![/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 1.png](/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 1.png)
-
     
 
 2. evidence approximation을 이용해 hyper-parameter 구하기
@@ -104,52 +99,56 @@ RVM은 Bayesian SVM이므로 Bayesian Approach로 SVM을 구하고자 합니다.
     
 
     marginal likelihood는 Gaussian distribution의 convolution 형태이므로 Gaussian distribution으로 나타낼 수 있습니다. 분포는 다음과 같으며 증명은 아래를 참고하시면 됩니다.
-
-
+    
+    
     $$
     \begin{aligned}
     p(\mathbf{t}|X,\boldsymbol{\alpha},\beta)&=\int p(\mathbf{t}|X,\mathbf{w},\beta)p(\mathbf{w}|\boldsymbol{\alpha})d\mathbf{w} \\
     &=\mathcal{N}(\mathbf{t}|\mathbf{0},C)
     \end{aligned}
     $$
-
+    
     $$
     C=\beta^{-1}I+\Phi A^{-1}\Phi
     $$
-
     
-
+    
     <details>
         <summary>증명</summary>
         <div markdown="1">
             ![/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 3.png](/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 3.png)
         </div>
     </details>
-
     
-
-    ![/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 3.png](/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 3.png)
-
     
-
+    
     이제 (log) marginal likelihood를 maximize합니다.
-
-
+    
+    
     $$
     \begin{aligned}
     \ln p(\mathbf{t}|X,\boldsymbol{\alpha},\beta)&=-\frac{1}{2}\left[N\ln(2\pi)+\ln|C|+\mathbf{t}^\textrm{T}C^{-1}\mathbf{t}\right] \\
     \nabla \ln p(\mathbf{t}|X,\boldsymbol{\alpha},\beta)&=-\frac{1}{2}\left[Tr[C^{-1}\frac{\partial C}{\partial \alpha_i}]+\mathbf{t}^\textrm{T}C^{-1}\frac{\partial C}{\partial \alpha_i}C^{-1}\mathbf{t}\right]=0
     \end{aligned}
     $$
-
-
-    - optimal $$\alpha, \beta$$ 구하는 과정 (evidence 근사 이용)
-        1. $$\alpha, \beta$$ 초깃값
-        2. (posterior) mean, cov 평가
-        3. hyper-parameter 재추정
-        4. 수렴까지 2-3. 반복
-
     
+    
+    위를 풀면 다음과 같은 newer hyper-parameter를 구할 수 있습니다.
+    
+    
+    $$
+    \alpha_i^{new}=\frac{\gamma_i}{m_i^2},\text{ }(\beta^{new})^{-1}=\frac{\|\mathbf{t}-\Phi\mathbf{w}\|^2}{N-\sum_i\gamma_i} \\
+    \gamma_i=1-\alpha_i\Sigma_{ii}, m_i=[\mathbf{m}]_i, \Sigma_{ii}=[\Sigma]_{ii}
+    $$
+    
+    
+    - optimal $$\alpha, \beta$$ 구하는 과정 (evidence 근사 이용)
+      1. $$\alpha, \beta$$ 초깃값
+      2. (posterior) mean, cov 평가
+      3. hyper-parameter 재추정
+      4. 수렴까지 2-3. 반복
+    
+      
 
 3. relevance vector와 sparse 의미
 
@@ -165,8 +164,8 @@ RVM은 Bayesian SVM이므로 Bayesian Approach로 SVM을 구하고자 합니다.
 4. predictive distribution
 
     모델을 추정했으니 이번엔 예측을 합니다. 이 또한 앞의 Bayesian approach를 이용한 모델들에서 많이 다뤘습니다. 새로운 input $$\mathbf{x}^*$$에 대한 예측값을 $$t^*$$라고 하면, 식은 다음과 같고, 이에 대한 증명은 아래와 같습니다.
-
-
+    
+    
     $$
     \begin{aligned}
     p(t^*|\mathbf{x}^*,X,\mathbf{t},\boldsymbol{\alpha}^*,\beta^*)&=\int p(t^*|\mathbf{x}^*,\mathbf{w},\beta^*)p(\mathbf{w}|X,t^*,\alpha^*,\beta^*)d\mathbf{w} \\
@@ -174,9 +173,9 @@ RVM은 Bayesian SVM이므로 Bayesian Approach로 SVM을 구하고자 합니다.
     \sigma^2(\mathbf{x}^*)&=(\beta^*)^{-1}+\phi(\mathbf{x}^*)^\textrm{T}\Sigma^*\phi(\mathbf{x}^*)
     \end{aligned}
     $$
+    
 
-
-    ![/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 7.png](/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 7.png)
+![/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 7.png](/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 7.png)
 
 
 
