@@ -182,8 +182,6 @@ RVM은 Bayesian SVM이므로 Bayesian Approach로 SVM을 구하고자 합니다.
     $$
     
 
-    
-
     <details>
         <summary>증명</summary>
         <div markdown="1">
@@ -251,13 +249,13 @@ RVM의 Sparsity(희박도)에 대한 통찰을 이 챕터에서 설명합니다.
     
         ![/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 15.png](/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 15.png)
     
-        - $s_i$ (sparsity of $\varphi_i$) : basis function이 모델의 다른 basis vector와 overlap되는 정도를 의미합니다.
-        - $q_i$ (quality of $\varphi_i$) : $\mathbf{t}$와 $\mathbf{y}_{-i}$ 간 error와 basis vector $\varphi_i$가 align된 정도를 의미합니다.
+        - $$s_i$$ (sparsity of $$\varphi_i$$) : basis function이 모델의 다른 basis vector와 overlap되는 정도를 의미합니다.
+        - $$q_i$$ (quality of $$\varphi_i$$) : $$\mathbf{t}$$와 $$\mathbf{y}_{-i}$$ 간 error와 basis vector $$\varphi_i$$가 align된 정도를 의미합니다.
         
         
     
 3. Sparsity와 Quality의 상대적인 크기
-    1. Stationary points of the marginal likelihood with respect to $\alpha_i$
+    1. Stationary points of the marginal likelihood with respect to $$\alpha_i$$
 
         ![/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 16.png](/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 16.png)
 
@@ -293,45 +291,79 @@ RVM의 Sparsity(희박도)에 대한 통찰을 이 챕터에서 설명합니다.
 
 ## 3. RVM for Classification
 
-RVM을 이용해 Classification을 풀어봅시다!
-
-
-
-![/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 20.png](/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 20.png)
+RVM을 이용해 Classification을 풀어봅시다. 이 또한 GP Classifier와 유사합니다. 다만 posterior를 근사하기 위해선 Gaussian Approximation이 필요합니다.
 
 
 
 1. posterior 구하기
 
-    Gaussian approximation 필요 - Laplace Approximation 이용
+    Classification에서 모델은 다음과 같습니다. 
 
-    ![/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 21.png](/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 21.png)
+    
+    $$
+    y(\mathbf{x},\mathbf{w})=\sigma(\mathbf{w}^\textrm{T}\phi(\mathbf{x}))
+    $$
+    
 
+    prior는 위의 regression task와 같이 다음과 같이 정의합니다.
+
+    
+    $$
+    p(\mathbf{w}|\alpha)=\prod\mathcal{N}(w_i|0,\alpha_i^{-1})=\mathcal{N}(\mathbf{w}|\mathbf{0},\textrm{diag}(\alpha_i^{-1}))
+    $$
+    
+
+    Classification task에서 GP는 Gaussian approximation이 필요했습니다. 여기서는 Laplace Approximation을 이용하겠습니다. Laplace Approximation은 posterior의 mode를 가우시안의 mean, negative Hessian matrix를 covariance matrix로 근사하는 방법입니다. 이를 이용하면 posterior는 다음과 같이 구할 수 있습니다.
+
+    
+    $$
+    p(\mathbf{w}|\mathbf{t}|\boldsymbol{\alpha})\approx\mathcal{N}(\mathbf{w}|\mathbf{w}^*,\Sigma) \\
+    \mathbf{w}^*=A^{-1}\Phi^\textrm{T}(\mathbf{t}-\mathbf{y})\\
+    \Sigma=(\Phi^\textrm{T}B\Phi+A)^{-1}
+    $$
     
 
     <details>
         <summary>gradient, Hessian 증명</summary>
         <div markdown="1">
+            ![/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 21.png](/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 21.png)
             ![/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 22.png](/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 22.png)
         </div>
     </details>
+
+    ![/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 21.png](/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 21.png)
 
     ![/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 22.png](/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 22.png)
 
     
 
-2. marginal likelihood
+2. learning hyper-parameter using marginal likelihood
 
-    ![/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 23.png](/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 23.png)
+    다음의 marginal likelihood를 maximize함으로써 hyper-parameter를 구합니다.
 
+    
+    $$
+    \begin{aligned}
+    p(\mathbf{t}|\boldsymbol{\alpha})&=\int p(\mathbf{t}|\mathbf{w})p(\mathbf{w}|\boldsymbol{\alpha})d\mathbf{w} \\
+    &\simeq p(\mathbf{t}|\mathbf{w}^*)p(\mathbf{w}^*|\alpha)\frac{(2\pi)^{M/2}}{|\Sigma|^{1/2}}
+    \end{aligned}
+    $$
+    
+    $$
+    \alpha_i^{new}=\frac{\gamma_i}{m_i^2}, \quad
+    \gamma_i=1-\alpha_i\Sigma_{ii}
+    $$
     
 
     <details>
         <summary>re-estimated hyper-parameter 증명</summary>
         <div markdown="1">
-            .
+            (아직 미완성)
+            ![/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 23.png](/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 23.png)
         </div>
     </details>
+
+    ![/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 23.png](/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 23.png)
 
     
 
@@ -339,7 +371,7 @@ RVM을 이용해 Classification을 풀어봅시다!
 
     1. $$\alpha$$ 초기화
     2. initial $$\alpha$$에 대한 posterior의 Gaussian approximation (marginal likelihood)
-    3. $$\alpha=\argmax marginal\text{ }likelihood$$
+    3. $$\alpha=\arg\max marginal\text{ }likelihood$$
     4. 수렴까지 2-3. 반복
 
 4. 기타 논점
@@ -348,7 +380,7 @@ RVM을 이용해 Classification을 풀어봅시다!
 
       ![/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 25.png](/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 25.png)*source: PRML book*
 
-    - relevance vector가 decision boundary 쪽에 없다는 것은 $\phi_i(\mathbf{x})$와 $\mathbf{t}$가 잘 align해서 0이 안된 경우이고, 잘 align하지 않으면 0이 되므로 sparse해진다. (잘 align하지 않은 애들은 decision boundary 근처에 있는 애들)
+    - relevance vector가 decision boundary 쪽에 없다는 것은 $$\phi_i(\mathbf{x})$$와 $$\mathbf{t}$$가 잘 align해서 0이 안된 경우이고, 잘 align하지 않으면 0이 되므로 sparse해진다. (잘 align하지 않은 애들은 decision boundary 근처에 있는 애들)
 
       ![/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 26.png](/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 26.png)*source: PRML book*
 
