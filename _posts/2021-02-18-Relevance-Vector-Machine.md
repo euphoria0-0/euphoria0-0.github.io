@@ -45,37 +45,37 @@ RVM은 Bayesian SVM이므로 Bayesian Approach로 SVM을 구하고자 합니다.
 
     RVM이 상정하는 모델과 분포는 다음과 같이 표현할 수 있습니다. 여기서, kernel function은 제약이 없고 어떤 basis function도 사용가능한 것이 RVM의 장점입니다. 기존의 SVM은 positive definite인 kernel function만 사용가능했습니다.
 
-    
+
     $$
     \begin{aligned}
     y(\mathbf{x})&=\sum_n^N w_n k(\mathbf{x},\mathbf{x}_n)+b \\
     p(t|\mathbf{x},\mathbf{w},\beta)&=\mathcal{N}(t|y(\mathbf{x}),\beta^{-1})
     \end{aligned}
     $$
-    
+
 
     따라서 likelihood는 다음과 같이 나타낼 수 있습니다.
 
-    
+
     $$
     p(\mathbf{t}|X,\mathbf{w},\beta)=\prod p(t_n|x_n,\mathbf{w},\beta^{-1})=\mathcal{N}(\mathbf{t}|\Phi\mathbf{w},\beta^{-1}I)
     $$
-    
+
 
     그리고 weight에 대한 prior는 다음과 같이 표현합니다.
 
-    
+
     $$
     \begin{aligned}
     p(\mathbf{w}|\boldsymbol{\alpha})=\prod\mathcal{N}(w_i|\mathbf{0},\alpha_i^{-1})&=\mathcal{N}(\mathbf{w}|\mathbf{0},\textrm{diag}(\alpha_i^{-1}))=\mathcal{N}(\mathbf{w}|\mathbf{0},A^{-1}) \\
     A&=\textrm{diag}(\alpha_i)
     \end{aligned}
     $$
-    
+
 
     이제, likellihood와 prior를 이용해 posterior를 구할 수 있습니다. posterior는 다음과 같이 구해지며, 증명은 아래에 있습니다.
 
-    
+
     $$
     \begin{aligned}
     p(\mathbf{w}|\mathbf{t},X,\boldsymbol{\alpha},\beta)&=\mathcal{N}(\mathbf{w}|\mathbf{m},\Sigma) \\
@@ -83,6 +83,16 @@ RVM은 Bayesian SVM이므로 Bayesian Approach로 SVM을 구하고자 합니다.
     \Sigma&=(A+\beta\Phi^\text{T}\Phi)^{-1}
     \end{aligned}
     $$
+
+    
+
+    <details>
+        <summary>증명</summary>
+        <div markdown="1">
+            ![/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 1.png](/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 1.png)
+        </div>
+    </details>
+
     
 
     ![/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 1.png](/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 1.png)
@@ -97,17 +107,27 @@ RVM은 Bayesian SVM이므로 Bayesian Approach로 SVM을 구하고자 합니다.
 
     marginal likelihood는 Gaussian distribution의 convolution 형태이므로 Gaussian distribution으로 나타낼 수 있습니다. 분포는 다음과 같으며 증명은 아래를 참고하시면 됩니다.
 
-    
+
     $$
     \begin{aligned}
     p(\mathbf{t}|X,\boldsymbol{\alpha},\beta)&=\int p(\mathbf{t}|X,\mathbf{w},\beta)p(\mathbf{w}|\boldsymbol{\alpha})d\mathbf{w} \\
     &=\mathcal{N}(\mathbf{t}|\mathbf{0},C)
     \end{aligned}
     $$
-    
+
     $$
     C=\beta^{-1}I+\Phi A^{-1}\Phi
     $$
+
+    
+
+    <details>
+        <summary>증명</summary>
+        <div markdown="1">
+            ![/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 3.png](/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 3.png)
+        </div>
+    </details>
+
     
 
     ![/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 3.png](/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 3.png)
@@ -116,14 +136,14 @@ RVM은 Bayesian SVM이므로 Bayesian Approach로 SVM을 구하고자 합니다.
 
     이제 (log) marginal likelihood를 maximize합니다.
 
-    
+
     $$
     \begin{aligned}
     \ln p(\mathbf{t}|X,\boldsymbol{\alpha},\beta)&=-\frac{1}{2}\left[N\ln(2\pi)+\ln|C|+\mathbf{t}^\textrm{T}C^{-1}\mathbf{t}\right] \\
     \nabla \ln p(\mathbf{t}|X,\boldsymbol{\alpha},\beta)&=-\frac{1}{2}\left[Tr[C^{-1}\frac{\partial C}{\partial \alpha_i}]+\mathbf{t}^\textrm{T}C^{-1}\frac{\partial C}{\partial \alpha_i}C^{-1}\mathbf{t}\right]=0
     \end{aligned}
     $$
-    
+
 
     - optimal $$\alpha, \beta$$ 구하는 과정 (evidence 근사 이용)
         1. $$\alpha, \beta$$ 초깃값
@@ -135,11 +155,8 @@ RVM은 Bayesian SVM이므로 Bayesian Approach로 SVM을 구하고자 합니다.
 
 3. relevance vector와 sparse 의미
 
-    **relevance vector**는 support vector처럼, 어떤 과정을 통해서 남은 벡터만을 이용해 모델에 학습시킨 데이터를 의미합니다. 위에서 구한 $$\alpha_i$$에 대해서 $$\alpha_i \longrightarrow \infty$$이면, $$w_i|\alpha_i$$의 mean과 variance가 0에 가까워지고, 실제 모델에서 $$\sum w_i\phi(\mathbf{x_i})$$를 계산할 때 $$\phi(\mathbf{x_i})$$ 값에 관계없이 0이 되므로 $$\phi(\mathbf{x_i})$$ 벡터가 아무 역할을 못하게 됩니다. 따라서 이러한 벡터는 제거하고, 0이 되지 않는 $$w_i$$에 해당하는 $$\mathbf{x_i}$$를 relevance vector라고 합니다. 'relevance'라고 하는 이유는 이러한 과정이 marginal likelihood를 maximize하는 ARD(Automatic Relevance Determination)를 통해 나오기 때문인 것 같습니다.(저의 추정)
-
-    
-
-    여기서 의미하는 **sparse**는 위에서 relevance vector만 남고 나머지는 모델에서 제거되므로, 고려하는 데이터가 적다는 의미에서 sparse라고 합니다. 모델 자체가 적은 데이터 수로 학습이 되므로 이를 sparse model이라고 합니다. SVM에 비해 얼마나 sparse하냐면, 아래와 같습니다. 
+    - **relevance vector**는 support vector처럼, 어떤 과정을 통해서 남은 벡터만을 이용해 모델에 학습시킨 데이터를 의미합니다. 위에서 구한 $$\alpha_i$$에 대해서 $$\alpha_i \longrightarrow \infty$$이면, $$w_i|\alpha_i$$의 mean과 variance가 0에 가까워지고, 실제 모델에서 $$\sum w_i\phi(\mathbf{x_i})$$를 계산할 때 $$\phi(\mathbf{x_i})$$ 값에 관계없이 0이 되므로 $$\phi(\mathbf{x_i})$$ 벡터가 아무 역할을 못하게 됩니다. 따라서 이러한 벡터는 제거하고, 0이 되지 않는 $$w_i$$에 해당하는 $$\mathbf{x_i}$$를 relevance vector라고 합니다. 'relevance'라고 하는 이유는 이러한 과정이 marginal likelihood를 maximize하는 ARD(Automatic Relevance Determination)를 통해 나오기 때문인 것 같습니다.(저의 추정)
+    - 여기서 의미하는 **sparse**는 위에서 relevance vector만 남고 나머지는 모델에서 제거되므로, 고려하는 데이터가 적다는 의미에서 sparse라고 합니다. 모델 자체가 적은 데이터 수로 학습이 되므로 이를 sparse model이라고 합니다. SVM에 비해 얼마나 sparse하냐면, 아래와 같습니다. 
 
     
 
@@ -151,7 +168,7 @@ RVM은 Bayesian SVM이므로 Bayesian Approach로 SVM을 구하고자 합니다.
 
     모델을 추정했으니 이번엔 예측을 합니다. 이 또한 앞의 Bayesian approach를 이용한 모델들에서 많이 다뤘습니다. 새로운 input $$\mathbf{x}^*$$에 대한 예측값을 $$t^*$$라고 하면, 식은 다음과 같고, 이에 대한 증명은 아래와 같습니다.
 
-    
+
     $$
     \begin{aligned}
     p(t^*|\mathbf{x}^*,X,\mathbf{t},\boldsymbol{\alpha}^*,\beta^*)&=\int p(t^*|\mathbf{x}^*,\mathbf{w},\beta^*)p(\mathbf{w}|X,t^*,\alpha^*,\beta^*)d\mathbf{w} \\
@@ -159,7 +176,7 @@ RVM은 Bayesian SVM이므로 Bayesian Approach로 SVM을 구하고자 합니다.
     \sigma^2(\mathbf{x}^*)&=(\beta^*)^{-1}+\phi(\mathbf{x}^*)^\textrm{T}\Sigma^*\phi(\mathbf{x}^*)
     \end{aligned}
     $$
-    
+
 
     ![/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 7.png](/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 7.png)
 
@@ -192,8 +209,8 @@ RVM의 Sparsity(희박도)에 대한 통찰을 이 챕터에서 설명합니다.
 
     - $$\varphi$$와 $$\mathbf{t}$$의 방향이 잘 align하면, 이를 relevance vector로 고려하여 모델에 포함시킵니다.
     - $$\varphi$$와 $$\mathbf{t}$$의 방향이 잘 align하지 않으면,
-        - $$\alpha \rightarrow \infin$$가 되어 해당 항이 0이 되고, 공분산에 대한 $$\varphi$$의 영향이 없어 모델로부터 제거됩니다.
-        - $$\alpha <\infin$$이면(오른쪽 그림) 해당 항에 값이 주어지고 공분산이 커져(퍼져) 데이터에는 낮은 확률이 부여되어, $\mathbf{t}$에서의 밀도(확률)값이 낮아집니다. 이는 분포가 퍼지고(데이터로부터 멀어짐) → 따라서 이 경우 align하는지 안 하는지에 따라 뺄 수 있습니다. 여기서는 align하지 않은 경우이므로 데이터를 뺍니다.
+        - $$\alpha \rightarrow \infty$$가 되어 해당 항이 0이 되고, 공분산에 대한 $$\varphi$$의 영향이 없어 모델로부터 제거됩니다.
+        - $$\alpha <\infty$$이면(오른쪽 그림) 해당 항에 값이 주어지고 공분산이 커져(퍼져) 데이터에는 낮은 확률이 부여되어, $\mathbf{t}$에서의 밀도(확률)값이 낮아집니다. 이는 분포가 퍼지고(데이터로부터 멀어짐) → 따라서 이 경우 align하는지 안 하는지에 따라 뺄 수 있습니다. 여기서는 align하지 않은 경우이므로 데이터를 뺍니다.
 
     ![/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled% 10.png](/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 10.png)*source: PRML book*
 
@@ -205,7 +222,7 @@ RVM의 Sparsity(희박도)에 대한 통찰을 이 챕터에서 설명합니다.
 
     
 
-    1. posterior의 covariance matrix에서 $\alpha_i$의 기여분을 따로 빼냅니다.
+    1. posterior의 covariance matrix에서 $$\alpha_i$$의 기여분을 따로 빼냅니다.
 
         ![/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 11.png](/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 11.png)
 
@@ -219,7 +236,7 @@ RVM의 Sparsity(희박도)에 대한 통찰을 이 챕터에서 설명합니다.
 
         
 
-    3. $\alpha_i$에 대한 dependence를 포함하는 function은 아래와 같이 계산됩니다.
+    3. $$\alpha_i$$에 대한 dependence를 포함하는 function은 아래와 같이 계산됩니다.
     
         ![/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 14.png](/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 14.png)
     
@@ -237,15 +254,15 @@ RVM의 Sparsity(희박도)에 대한 통찰을 이 챕터에서 설명합니다.
 
         위 식이 0이 될 때는,
 
-        1. $\alpha_i \ge 0$일 때, 
-            1. $q_i^2 < s_i$일 때 :  $\alpha_i \rightarrow \infin$ 가 됩니다.
-            2. $q_i^2 > s_i$일 때 : 
+        1. $$\alpha_i \ge 0$$일 때, 
+            1. $$q_i^2 < s_i$$일 때 :  $$\alpha_i \rightarrow \infin$$ 가 됩니다.
+            2. $$q_i^2 > s_i$$일 때 : 
 
                 ![/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 17.png](/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 17.png)
 
         ⇒ 따라서, 이의 상대적 크기가 basis vector가 모델에서 제거되는지 아닌지 결정하게 됩니다.
 
-        → 이는 $\alpha_i$에 대해 closed form 형태의 해가 나타나게 됩니다.
+        → 이는 $$\alpha_i$$에 대해 closed form 형태의 해가 나타나게 됩니다.
     
         
     
