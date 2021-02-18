@@ -1,5 +1,5 @@
 ---
-title: [PRML] Relevance Vector Machine
+title: Relevance Vector Machine
 author: euphoria0-0
 date: 2021-02-18 23:56:00 +0800
 categories: [AI, Machine Learning]
@@ -7,7 +7,6 @@ tags: [Machine Learning, PRML, Bayesian, RVM]
 toc: true
 math: true
 comments: true
-
 ---
 
 
@@ -18,19 +17,23 @@ comments: true
 
 # Relevance Vector Machine
 
-> RVM은 Bayesian SVM이다!  evidence approximation 과정에서 SVM보다 더 sparse해진다.
-> 장점: 더 sparse한데도 성능은 좋다. hyper-parameter tuning은 자동적으로 결정된다
-> 단점: training 자체는 SVM보다 느리다.
+> RVM은 Bayesian SVM입니다!  evidence approximation 과정에서 SVM보다 더 sparse해진다는 특징이 있습니다.
+> 장점: 더 sparse한데도 성능은 꽤 좋습니다. hyper-parameter tuning은 자동적으로 결정될 수 있습니다.
+> 단점: training 자체는 SVM보다 느립니다.
+
+
 
 - SVM의 단점
-    - 결과가 deterministic
-    - binary classification만 잘함
-    - hyper-parameter tuning은 validation을 해야함
-    - kernel function은 positive definite이어야 하고 training data points를 중심으로 표현돼야 함
+    - 결과가 deterministic하다.
+    - binary classification만 잘하며 multi-class classification은 잘 못한다.
+    - hyper-parameter tuning은 validation을 해야 한다.
+    - kernel function은 positive definite이어야 하고 training data points를 중심으로 표현돼야 한다.
+    
+    
 
 ## 1. Regression using RVM
 
-RVM은 Bayesian SVM이므로 Bayesian Approach로 SVM을 구하고자 한다.
+RVM은 Bayesian SVM이므로 Bayesian Approach로 SVM을 구하고자 한다. RVM은 GP의 한 케이스이다.
 
 
 
@@ -44,7 +47,7 @@ RVM은 Bayesian SVM이므로 Bayesian Approach로 SVM을 구하고자 한다.
         
         
 
-2. evidence approximation을 이용한 hyper-parameter 구하기
+2. evidence approximation을 이용해 hyper-parameter 구하기
 
     ![/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 2.png](/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 2.png)
 
@@ -53,6 +56,9 @@ RVM은 Bayesian SVM이므로 Bayesian Approach로 SVM을 구하고자 한다.
         ![/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 3.png](/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 3.png)
 
     - re-estimated hyper-parameter 증명
+    
+        
+    
     - optimal $$\alpha, \beta$$ 구하는 과정 (evidence 근사 이용)
         1. $$\alpha, \beta$$ 초깃값
         2. (posterior) mean, cov 평가
@@ -77,10 +83,11 @@ RVM은 Bayesian SVM이므로 Bayesian Approach로 SVM을 구하고자 한다.
 
         ![/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 7.png](/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 7.png)
 
-- localized basis function의 경우 basis function이 없는 input space의 region에서 예측분산이 작아진다. 이런 경우 RVM은 데이터 도메인 밖에서 extrapolate할수록 예측에 확신을 준다. → *멀리 있는 데이터를 relevance로 선택하게 된다?!*
+
+
+- localized basis function의 경우 basis function이 없는 input space의 region에서 예측분산이 작아진다. 이런 경우 RVM은 데이터 도메인 밖에서 extrapolate할수록 예측에 확신을 준다. → *멀리 있는 데이터를 relevance로 선택하게 된다?!* -> degenerate of covariance function과의 연관성이 무엇인지 (?)
 - RVM의 단점
     - training time이 길다: 하지만 SVM이 hyper-parameter tuning을 위해 validation을 하는 시간을 빼면 생각보다 안 느리고, 더 sparse하므로 빨리 계산할 수 있다.
-- RVM은 GP의 한 케이스이다.
 
 
 
@@ -101,9 +108,11 @@ RVM은 Bayesian SVM이므로 Bayesian Approach로 SVM을 구하고자 한다.
 
     ![/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled% 10.png](/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 10.png)
 
-2. Sparsity와 Quality
+2. 수학적 설명과 Sparsity와 Quality에 대한 정의
 
     we make explicit all of the dependence of the marginal likelihood on a particular αi and then determine its stationary points explicitly
+
+    
 
     1. posterior의 covariance matrix에서 $\alpha_i$의 기여분을 따로 빼낸다.
 
@@ -120,9 +129,12 @@ RVM은 Bayesian SVM이므로 Bayesian Approach로 SVM을 구하고자 한다.
         ![/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 14.png](/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 14.png)
 
         ![/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 15.png](/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 15.png)
-
+    
         - $s_i$ (sparsity of $\varphi_i$) : basis function이 모델의 다른 basis vector와 overlap되는 정도
         - $q_i$ (quality of $\varphi_i$) : $\mathbf{t}$와 $\mathbf{y}_{-i}$ 간 error와 basis vector $\varphi_i$가 align된 정도
+        
+        
+    
 3. Sparsity와 Quality의 상대적인 크기
     1. Stationary points of the marginal likelihood with respect to $\alpha_i$
 
@@ -139,18 +151,28 @@ RVM은 Bayesian SVM이므로 Bayesian Approach로 SVM을 구하고자 한다.
         ⇒ 따라서, 이의 상대적 크기가 basis vector가 모델에서 제거되는지 아닌지 결정하게 됨
 
         → 이는 $\alpha_i$에 대해 closed form 형태의 해가 나타남.
-
+    
+        
+    
 4. Sequential Sparse Bayesian Learning Algorithm
 
     basis vector가 모델이 포함되는지 아닌지 반복해서 확인
 
     ![/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 18.png](/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 18.png)
 
+    
+
 5. efficient implementation
 
+    아래처럼 $$Q$$와 $$S$$에 대해 미리 계산하면 효율적으로 RVM을 구현할 수 있다.
+    
     ![/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 19.png](/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 19.png)
 
 ## 3. RVM for Classification
+
+RVM을 이용해 Classification을 풀어보자.
+
+
 
 ![/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 20.png](/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 20.png)
 
