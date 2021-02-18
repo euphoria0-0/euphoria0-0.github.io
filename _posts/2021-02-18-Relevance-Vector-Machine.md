@@ -86,7 +86,6 @@ RVM은 Bayesian SVM이므로 Bayesian Approach로 SVM을 구하고자 합니다.
         <summary>증명</summary>
         <div markdown="1">
             ![/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 1.png](/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 1.png)
-            ![/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 1.png](/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 1.png)
         </div>
     </details>
 
@@ -100,60 +99,58 @@ RVM은 Bayesian SVM이므로 Bayesian Approach로 SVM을 구하고자 합니다.
 
     
 
-    marginal likelihood는 Gaussian distribution의 convolution 형태이므로 Gaussian distribution으로 나타낼 수 있습니다. 분포는 다음과 같으며 증명은 아래를 참고하시면 됩니다.
+    1. marginal likelihood는 Gaussian distribution의 convolution 형태이므로 Gaussian distribution으로 나타낼 수 있습니다. 분포는 다음과 같으며 증명은 아래를 참고하시면 됩니다.
 
+       
+       $$
+       \begin{aligned}
+       p(\mathbf{t}|X,\boldsymbol{\alpha},\beta)&=\int p(\mathbf{t}|X,\mathbf{w},\beta)p(\mathbf{w}|\boldsymbol{\alpha})d\mathbf{w} \\
+       &=\mathcal{N}(\mathbf{t}|\mathbf{0},C)
+       \end{aligned}
+       $$
+       
+       $$
+       C=\beta^{-1}I+\Phi A^{-1}\Phi
+       $$
+       
 
-    $$
-    \begin{aligned}
-    p(\mathbf{t}|X,\boldsymbol{\alpha},\beta)&=\int p(\mathbf{t}|X,\mathbf{w},\beta)p(\mathbf{w}|\boldsymbol{\alpha})d\mathbf{w} \\
-    &=\mathcal{N}(\mathbf{t}|\mathbf{0},C)
-    \end{aligned}
-    $$
+       <details>
+           <summary>증명</summary>
+           <div markdown="1">
+               ![/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 3.png](/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 3.png)
+           </div>
+       </details>
 
-    $$
-    C=\beta^{-1}I+\Phi A^{-1}\Phi
-    $$
+       ![/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 3.png](/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 3.png)
 
-    <details>
-        <summary>증명</summary>
-        <div markdown="1">
-            ![/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 3.png](/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 3.png)
-            ![/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 3.png](/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 3.png)
-        </div>
-    </details>
+       
 
-    ![/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 3.png](/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 3.png)
+    2. 이제 (log) marginal likelihood를 maximize합니다.
+       $$
+       \begin{aligned}
+       \ln p(\mathbf{t}|X,\boldsymbol{\alpha},\beta)&=-\frac{1}{2}\left[N\ln(2\pi)+\ln|C|+\mathbf{t}^\textrm{T}C^{-1}\mathbf{t}\right] \\
+       \nabla \ln p(\mathbf{t}|X,\boldsymbol{\alpha},\beta)&=-\frac{1}{2}\left[Tr[C^{-1}\frac{\partial C}{\partial \alpha_i}]+\mathbf{t}^\textrm{T}C^{-1}\frac{\partial C}{\partial \alpha_i}C^{-1}\mathbf{t}\right]=0
+       \end{aligned}
+       $$
+       
+
+       위를 풀면 다음과 같은 newer hyper-parameter를 구할 수 있습니다.
+
+       
+       $$
+       \alpha_i^{new}=\frac{\gamma_i}{m_i^2},\text{ }(\beta^{new})^{-1}=\frac{\|\mathbf{t}-\Phi\mathbf{w}\|^2}{N-\sum_i\gamma_i} \\
+       \gamma_i=1-\alpha_i\Sigma_{ii}, m_i=[\mathbf{m}]_i, \Sigma_{ii}=[\Sigma]_{ii}
+       $$
+       
+
+    3. optimal $$\alpha, \beta$$ 구하는 과정 (evidence 근사 이용)
+
+       1. $$\alpha, \beta$$ 초깃값
+       2. (posterior) mean, cov 평가
+       3. hyper-parameter 재추정
+       4. 수렴까지 2-3. 반복
 
     
-
-
-    이제 (log) marginal likelihood를 maximize합니다.
-
-
-    $$
-    \begin{aligned}
-    \ln p(\mathbf{t}|X,\boldsymbol{\alpha},\beta)&=-\frac{1}{2}\left[N\ln(2\pi)+\ln|C|+\mathbf{t}^\textrm{T}C^{-1}\mathbf{t}\right] \\
-    \nabla \ln p(\mathbf{t}|X,\boldsymbol{\alpha},\beta)&=-\frac{1}{2}\left[Tr[C^{-1}\frac{\partial C}{\partial \alpha_i}]+\mathbf{t}^\textrm{T}C^{-1}\frac{\partial C}{\partial \alpha_i}C^{-1}\mathbf{t}\right]=0
-    \end{aligned}
-    $$
-
-
-    위를 풀면 다음과 같은 newer hyper-parameter를 구할 수 있습니다.
-
-
-    $$
-    \alpha_i^{new}=\frac{\gamma_i}{m_i^2},\text{ }(\beta^{new})^{-1}=\frac{\|\mathbf{t}-\Phi\mathbf{w}\|^2}{N-\sum_i\gamma_i} \\
-    \gamma_i=1-\alpha_i\Sigma_{ii}, m_i=[\mathbf{m}]_i, \Sigma_{ii}=[\Sigma]_{ii}
-    $$
-
-
-    - optimal $$\alpha, \beta$$ 구하는 과정 (evidence 근사 이용)
-      1. $$\alpha, \beta$$ 초깃값
-      2. (posterior) mean, cov 평가
-      3. hyper-parameter 재추정
-      4. 수렴까지 2-3. 반복
-
-      
 
 3. relevance vector와 sparse 의미
 
@@ -175,7 +172,7 @@ RVM은 Bayesian SVM이므로 Bayesian Approach로 SVM을 구하고자 합니다.
 
     모델을 추정했으니 이번엔 예측을 합니다. 이 또한 앞의 Bayesian approach를 이용한 모델들에서 많이 다뤘습니다. 새로운 input $$\mathbf{x}^*$$에 대한 예측값을 $$t^*$$라고 하면, 식은 다음과 같고, 이에 대한 증명은 아래와 같습니다.
 
-
+    
     $$
     \begin{aligned}
     p(t^*|\mathbf{x}^*,X,\mathbf{t},\boldsymbol{\alpha}^*,\beta^*)&=\int p(t^*|\mathbf{x}^*,\mathbf{w},\beta^*)p(\mathbf{w}|X,t^*,\alpha^*,\beta^*)d\mathbf{w} \\
@@ -183,17 +180,22 @@ RVM은 Bayesian SVM이므로 Bayesian Approach로 SVM을 구하고자 합니다.
     \sigma^2(\mathbf{x}^*)&=(\beta^*)^{-1}+\phi(\mathbf{x}^*)^\textrm{T}\Sigma^*\phi(\mathbf{x}^*)
     \end{aligned}
     $$
-
-
-![/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 7.png](/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 7.png)
-
-
-
-- localized basis function의 경우 basis function이 없는 input space의 region에서 예측분산이 작아진다. 이런 경우 RVM은 데이터 도메인 밖에서 extrapolate할수록 예측에 확신을 준다. → *멀리 있는 데이터를 relevance로 선택하게 된다?!* -> degenerate of covariance function과의 연관성이 무엇인지 (?)
+    
 
     
 
-- RVM의 단점은 training time이 길다는 것입니다. 하지만 SVM이 hyper-parameter tuning을 위해 validation을 하고, RVM이 더 sparse하므로(모델에서 계산되는 데이터가 적으므로) 그렇게 느리지 않을 수 있습니다.
+    <details>
+        <summary>증명</summary>
+        <div markdown="1">
+            ![/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 7.png](/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 7.png)
+        </div>
+    </details>
+
+    ![/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 7.png](/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 7.png)
+
+5. 기타 논점
+   - localized basis function의 경우 basis function이 없는 input space의 region에서 예측분산이 작아진다. 이런 경우 RVM은 데이터 도메인 밖에서 extrapolate할수록 예측에 확신을 준다. → *멀리 있는 데이터를 relevance로 선택하게 된다?!* -> degenerate of covariance function과의 연관성이 무엇인지 (?)
+   - RVM의 단점은 training time이 길다는 것입니다. 하지만 SVM이 hyper-parameter tuning을 위해 validation을 하고, RVM이 더 sparse하므로(모델에서 계산되는 데이터가 적으므로) 그렇게 느리지 않을 수 있습니다.
 
 
 
@@ -305,11 +307,18 @@ RVM을 이용해 Classification을 풀어봅시다!
 
     ![/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 21.png](/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 21.png)
 
-    - gradient, hessian 증명
+    
 
-        ![/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 22.png](/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 22.png)
-        
-        
+    <details>
+        <summary>gradient, Hessian 증명</summary>
+        <div markdown="1">
+            ![/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 22.png](/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 22.png)
+        </div>
+    </details>
+
+    ![/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 22.png](/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 22.png)
+
+    
 
 2. marginal likelihood
 
@@ -317,29 +326,42 @@ RVM을 이용해 Classification을 풀어봅시다!
 
     
 
-    - re-estimated hyper-parameter
-
-        ![/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 24.png](/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 24.png)
-    
-        
-    
-    - $\alpha$ 구하는 과정
-        1. $\alpha$ 초기화
-        2. initial $\alpha$에 대한 posterior의 Gaussian approximation (marginal likelihood)
-        3. $\alpha=\argmax marginal\text{ }likelihood$
-        4. 수렴까지 2-3. 반복
-        
-        
-- Analysis of Sparsity: classfication case
-
-    ![/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 25.png](/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 25.png)*source: PRML book*
+    <details>
+        <summary>re-estimated hyper-parameter 증명</summary>
+        <div markdown="1">
+            .
+        </div>
+    </details>
 
     
 
-- relevance vector가 decision boundary 쪽에 없다는 것은 $\phi_i(\mathbf{x})$와 $\mathbf{t}$가 잘 align해서 0이 안된 경우이고, 잘 align하지 않으면 0이 되므로 sparse해진다. (잘 align하지 않은 애들은 decision boundary 근처에 있는 애들)
+3. $$\alpha$$ 구하는 과정
 
-    ![/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 26.png](/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 26.png)*source: PRML book*
+    1. $$\alpha$$ 초기화
+    2. initial $$\alpha$$에 대한 posterior의 Gaussian approximation (marginal likelihood)
+    3. $$\alpha=\argmax marginal\text{ }likelihood$$
+    4. 수렴까지 2-3. 반복
 
-    ![/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 27.png](/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 27.png)*source: PRML book*
+4. 기타 논점
 
-    
+    - Analysis of Sparsity: classfication case
+
+      ![/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 25.png](/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 25.png)*source: PRML book*
+
+    - relevance vector가 decision boundary 쪽에 없다는 것은 $\phi_i(\mathbf{x})$와 $\mathbf{t}$가 잘 align해서 0이 안된 경우이고, 잘 align하지 않으면 0이 되므로 sparse해진다. (잘 align하지 않은 애들은 decision boundary 근처에 있는 애들)
+
+      ![/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 26.png](/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 26.png)*source: PRML book*
+
+      ![/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 27.png](/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 27.png)*source: PRML book*
+
+
+
+여기까지, Bayesian SVM이라고 할 수 있는 Relevance Vector Machine 이었습니다. 질문이나 오류 건의는 언제나 환영입니다. 감사합니다.
+
+
+
+
+
+###### Reference
+
+1. Bishop, C. M. (2006). *Pattern recognition and machine learning*. springer.
