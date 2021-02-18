@@ -17,13 +17,11 @@ comments: true
 
 # Relevance Vector Machine
 
-> RVM은 Bayesian SVM입니다!  
->
-> 특징: evidence approximation 과정에서 SVM보다 더 sparse해진다는 특징이 있습니다.
->
-> 장점: 더 sparse한데도 성능은 꽤 좋습니다. hyper-parameter tuning은 자동적으로 결정될 수 있습니다.
->
-> 단점: training 자체는 SVM보다 느립니다.
+- Summary!
+  - RVM은 Bayesian SVM입니다! 
+  - 특징: evidence approximation 과정에서 SVM보다 더 sparse해진다는 특징이 있습니다.
+  - 장점: 더 sparse한데도 성능은 꽤 좋습니다. hyper-parameter tuning은 자동적으로 결정될 수 있습니다.
+  - 단점: training 자체는 SVM보다 느립니다.
 
 
 
@@ -155,7 +153,7 @@ RVM은 Bayesian SVM이므로 Bayesian Approach로 SVM을 구하고자 합니다.
 
 3. relevance vector와 sparse 의미
 
-    - **relevance vector**는 support vector처럼, 어떤 과정을 통해서 남은 벡터만을 이용해 모델에 학습시킨 데이터를 의미합니다. 위에서 구한 $$\alpha_i$$에 대해서 $$\alpha_i \longrightarrow \infty$$이면, $$w_i|\alpha_i$$의 mean과 variance가 0에 가까워지고, 실제 모델에서 $$\sum w_i\phi(\mathbf{x_i})$$를 계산할 때 $$\phi(\mathbf{x_i})$$ 값에 관계없이 0이 되므로 $$\phi(\mathbf{x_i})$$ 벡터가 아무 역할을 못하게 됩니다. 따라서 이러한 벡터는 제거하고, 0이 되지 않는 $$w_i$$에 해당하는 $$\mathbf{x_i}$$를 relevance vector라고 합니다. 'relevance'라고 하는 이유는 이러한 과정이 marginal likelihood를 maximize하는 ARD(Automatic Relevance Determination)를 통해 나오기 때문인 것 같습니다.(저의 추정)
+    - relevance vector는 support vector처럼, 어떤 과정을 통해서 남은 벡터만을 이용해 모델에 학습시킨 데이터를 의미합니다. 위에서 구한 $$\alpha_i$$에 대해서 $$\alpha_i \longrightarrow \infty$$이면, $$w_i|\alpha_i$$의 mean과 variance가 0에 가까워지고, 실제 모델에서 $$\sum w_i\phi(\mathbf{x_i})$$를 계산할 때 $$\phi(\mathbf{x_i})$$ 값에 관계없이 0이 되므로 $$\phi(\mathbf{x_i})$$ 벡터가 아무 역할을 못하게 됩니다. 따라서 이러한 벡터는 제거하고, 0이 되지 않는 $$w_i$$에 해당하는 $$\mathbf{x_i}$$를 **relevance vector**라고 합니다. 'relevance'라고 하는 이유는 이러한 과정이 marginal likelihood를 maximize하는 ARD(Automatic Relevance Determination)를 통해 나오기 때문인 것 같습니다.(저의 추정)
     - 여기서 의미하는 **sparse**는 위에서 relevance vector만 남고 나머지는 모델에서 제거되므로, 고려하는 데이터가 적다는 의미에서 sparse라고 합니다. 모델 자체가 적은 데이터 수로 학습이 되므로 이를 sparse model이라고 합니다. SVM에 비해 얼마나 sparse하냐면, 아래와 같습니다. 
 
     
@@ -255,7 +253,7 @@ RVM의 Sparsity(희박도)에 대한 통찰을 이 챕터에서 설명합니다.
         위 식이 0이 될 때는,
 
         1. $$\alpha_i \ge 0$$일 때, 
-            1. $$q_i^2 < s_i$$일 때 :  $$\alpha_i \rightarrow \infin$$ 가 됩니다.
+            1. $$q_i^2 < s_i$$일 때 :  $$\alpha_i \rightarrow \infty$$ 가 됩니다.
             2. $$q_i^2 > s_i$$일 때 : 
 
                 ![/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 17.png](/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 17.png)
