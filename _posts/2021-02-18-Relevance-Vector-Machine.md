@@ -156,7 +156,7 @@ RVM은 Bayesian SVM이므로 Bayesian Approach로 SVM을 구하고자 합니다.
 
     
 
-    relevance vector는 support vector처럼, 어떤 과정을 통해서 남은 벡터만을 이용해 모델에 학습시킨 데이터를 의미합니다. 위에서 구한 $$\alpha_i$$에 대해서 $$\alpha_i \longrightarrow \infty$$이면, $$w_i|\alpha_i$$의 mean과 variance가 0에 가까워지고, 실제 모델에서 $$\sum w_i\phi(\mathbf{x_i})$$를 계산할 때 $$\phi(\mathbf{x_i})$$ 값에 관계없이 0이 되므로 $$\phi(\mathbf{x_i})$$ 벡터가 아무 역할을 못하게 됩니다. 따라서 이러한 벡터는 제거하고, 0이 되지 않는 $$w_i$$에 해당하는 $$\mathbf{x_i}$$를 **relevance vector**라고 합니다. 'relevance'라고 하는 이유는 이러한 과정이 marginal likelihood를 maximize하는 ARD(*Automatic Relevance Determination*)를 통해 나오기 때문인 것 같습니다.(저의 추정)
+    relevance vector는 support vector처럼, 어떤 과정을 통해서 남은 벡터만을 이용해 모델에 학습시킨 데이터를 의미합니다. 위에서 구한 $$\alpha_i$$에 대해서 $$\alpha_i \longrightarrow \infty$$이면, $$w_i|\alpha_i$$의 mean과 variance가 0에 가까워지고, 실제 모델에서 $$\sum w_i\phi(\mathbf{x_i})$$를 계산할 때 $$\phi(\mathbf{x_i})$$ 값에 관계없이 0이 되므로 $$\phi(\mathbf{x_i})$$ 벡터가 아무 역할을 못하게 됩니다. 따라서 이러한 벡터는 제거하고, 0이 되지 않는 $$w_i$$에 해당하는 $$\mathbf{x_i}$$를 **relevance vector**라고 합니다. *relevance* 라고 하는 이유는 이러한 과정이 marginal likelihood를 maximize하는 ARD(*Automatic Relevance Determination*)를 통해 나오기 때문인 것 같습니다.(저의 추정)
 
     
 
