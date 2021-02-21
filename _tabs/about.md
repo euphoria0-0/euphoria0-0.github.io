@@ -20,13 +20,33 @@ Data Scientist, ML Engineer
 
 
 ### Interests
-I'm interested in Human-in-the-loop ML in Data Science fields.
+ML과 데이터를 활용한 실제 세계의 다양한 문제를 푸는 것에 관심이 많습니다.
 
-Basically, I believe that AI and human should interact to solve some problems, not AI algorithms only.
+요즘은 Bayesian, Human-in-the-loop ML과 Causal Learning에 주로 집중하고 있습니다.
+
+기본적으로 AI 알고리즘만이 아닌, AI가 사람을 돕는 형태로 다양한 문제를 풀어야 한다고 생각합니다.
+
+AI의 역할을 항상 유의하면서도, 이를 이용해 세상을 밝히기 위해 고민하고 있습니다.
+
+
+
+I'm super enthusiatstic to solve various problems around us using ML and data!
+
+Currently, I'm interested in Human-in-the-loop ML and Causal Learning in Data Science fields.
+
+I believe that AI and human should interact to solve some problems, not AI algorithms only.
 
 We should note the role of AI and would use that toward better worlds, hopefully.
 
-Currently, I'm focusing on Active Learning and Causal Learning for HITL.
+
+
+### Blog
+
+이 블로그는 저의 공부와 이 분야 고민거리에 대한 내용을 주로 담고자 합니다.
+
+처음엔 공부 내용 정리가 목적이었지만, 나만의 언어로 질 좋은 글을 쓰고자 노력하고 있습니다.
+
+저의 관심사에 함께해주시고, 틀린 부분 지적이나 토론 거리 제안은 언제든지 환영입니다.
 
 
 
@@ -39,5 +59,7 @@ Currently, I'm focusing on Active Learning and Causal Learning for HITL.
 
 
 
+
+저의 블로그에 들려주셔서 감사합니다.
 
 ### :hugs: Thank you for your interest!
