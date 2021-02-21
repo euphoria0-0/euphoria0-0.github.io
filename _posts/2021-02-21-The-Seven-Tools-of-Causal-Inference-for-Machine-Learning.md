@@ -33,7 +33,7 @@ Causal Hierarchy는 위에서 말한 질문들에 대해 개념화하고 각 개
 
 ![/assets/img/posts/2021-02-21-The-Seven-Tools-of-Causal-Inference-for-Machine-Learning/Untitled_Diagram.png](/assets/img/posts/2021-02-21-The-Seven-Tools-of-Causal-Inference-for-Machine-Learning/Untitled_Diagram.png){: width="50%" height="50%"}
 
-​		
+​	
 
 1. **Association**
 
@@ -55,7 +55,7 @@ Causal Hierarchy는 위에서 말한 질문들에 대해 개념화하고 각 개
 
     
 
-    Intervention은 $$P(y|do(x),z)$$와 같이 나타내며, $$Z=z$$라는 사건을 관측하고 Intervention을 통해 $$X=x$$라고 값을 부여했을 때(이를 $$do(x)$$로 표기합니다), $$Y=y$$라는 사건이 발생할 확률을 의미합니다.
+    Intervention은 $$P(y|do(x),z)$$와 같이 나타내며, $$Z=z$$라는 사건을 관측하고 Intervention을 통해 $$X=x$$라고 값을 부여했을 때(이를 intervention을 가했다는 의미에서 $$do(x)$$로 표기합니다), $$Y=y$$라는 사건이 발생할 확률을 의미합니다.
 
     
 
