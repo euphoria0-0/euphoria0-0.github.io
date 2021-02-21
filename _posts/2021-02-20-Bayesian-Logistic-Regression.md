@@ -148,7 +148,7 @@ $$p(\mathcal{C}_1|\phi^*,\mathbf{t}^*)=\int p(\mathcal{C}_1|\phi^*,\mathbf{w})p(
 
     
 
-3. Predictive Distribution
+3. Predictive Distribution 구하기
 
     
 
