@@ -136,7 +136,7 @@ $$p(\mathcal{C}_1|\phi^*,\mathbf{t}^*)=\int p(\mathcal{C}_1|\phi^*,\mathbf{w})p(
 
     
 
-    $$\begin{aligned}p(\mathcal{C}_1|\phi^*,\mathbf{t}^*)\simeq \int\sigma(\mathbf{w}^\textrm{T}\phi^*)q(\mathbf{w})d\mathbf{w}=\int\sigma(a)p(a)da\\ \p(a)=\int\delta(a-\mathbf{w}^\textrm{T}\phi^*)q(\mathbf{w})d\mathbf{w}\end{aligned}$$
+    $$\begin{aligned}p(\mathcal{C}_1|\phi^*,\mathbf{t}^*)\simeq \int\sigma(\mathbf{w}^\textrm{T}\phi^*)q(\mathbf{w})d\mathbf{w}=\int\sigma(a)p(a)da\\ p(a)=\int\delta(a-\mathbf{w}^\textrm{T}\phi^*)q(\mathbf{w})d\mathbf{w}\end{aligned}$$
 
     
 
