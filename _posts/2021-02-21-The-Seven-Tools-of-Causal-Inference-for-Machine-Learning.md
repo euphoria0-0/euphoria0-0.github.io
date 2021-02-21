@@ -31,9 +31,13 @@ Causal Hierarchy는 위에서 말한 질문들에 대해 개념화하고 각 개
 
 ![/assets/img/posts/2021-02-21-The-Seven-Tools-of-Causal-Inference-for-Machine-Learning/Untitled.png](/assets/img/posts/2021-02-21-The-Seven-Tools-of-Causal-Inference-for-Machine-Learning/Untitled.png)
 
-![/assets/img/posts/2021-02-21-The-Seven-Tools-of-Causal-Inference-for-Machine-Learning/Untitled_Diagram.png](/assets/img/posts/2021-02-21-The-Seven-Tools-of-Causal-Inference-for-Machine-Learning/Untitled_Diagram.png){: width="100" height="100"}		
+![/assets/img/posts/2021-02-21-The-Seven-Tools-of-Causal-Inference-for-Machine-Learning/Untitled_Diagram.png](/assets/img/posts/2021-02-21-The-Seven-Tools-of-Causal-Inference-for-Machine-Learning/Untitled_Diagram.png){: width="50%" height="50%"}
+
+​		
 
 1. **Association**
+
+    
 
     Association은 $$p(y|x)$$를 의미하는 것으로, 오로지 통계적 관계(statistical relationships)을 의미합니다. 예로, 치약을 구입하는 고객을 관찰하면 치실을 구입할 가능성이 높다 등은 Association에 해당하며 Conditional expectation으로 추론이 가능합니다. 여기서는 어떤 causal 정보도 필요하지 않으므로 가장 하위 개념이며, 현재 많은 머신러닝 방법들이 사용하는 방식입니다.
 
@@ -45,6 +49,8 @@ Causal Hierarchy는 위에서 말한 질문들에 대해 개념화하고 각 개
 
 2. **Intervention**
 
+    
+
     Intervention은 실제 관찰한 것을 바꾼 것으로, "What if I make it happen?"이라는 미래적 질문으로 대표될 수 있습니다. 예로, 가격을 두 배로 올리면 어떻게 될까요? 라는 질문에는 새 가격에 대한 고객의 선택 혹은 반응이 바뀌게 되므로 일반적으로 우리의 관측치들로는 답할 수 없습니다. 따라서 이는 Association보다 상위개념입니다.
 
     
@@ -55,14 +61,16 @@ Causal Hierarchy는 위에서 말한 질문들에 대해 개념화하고 각 개
 
 3. **Counterfactuals**
 
+    
+
     Counterfactuals는 "What if I had acted differenctly"라는 질문으로, 회고적인 추론이 필요합니다. 이는 Intervention의 미래적 질문에 대해서도 답할 수 있으므로 3 가지 개념 중 가장 상위 개념입니다. 예로, 가격을 두 배로 하면 어떻게 될까요? 라는 질문은 가격이 두 배 였다면 어떻게 될까요? 라는 질문으로 포함될 수 있습니다. Counterfactuals은 약물 치료를 받은 피실험자들에 대해 실험을 재 시행할 수 없으므로, 약물을 받지 않았더라면 그들이 어떻게 행동했을까? 에 대한 질문을 다루고자 합니다. 혹은 민사 법원에서는 피고가 상해의 범인으로 간주되나, 피고의 조치에 대해선 상해가 발생하지 않았을 가능성이 더 높은데, 실제로 피고의 조치가 취해지지 않은 대안 세계를 비교하고자 하는 경우를 다룹니다.
 
     
-    
+
     Counterfactual은 $$P(y_x|x',y')$$와 같이 나타내며, 실제로 $$X=x',Y=y'$$라고 관찰했을 때, $$X=x$$라고 관측했었을 때 $$Y=y$$라는 사건이 나타났을 확률을 의미합니다.
+
     
-    
-    
+
     
 
 ## 3. Causal Inference
