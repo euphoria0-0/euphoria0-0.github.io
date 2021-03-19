@@ -149,17 +149,22 @@ causal discovery는 보통 faithfulness와 같은 가정들을 도입하여 cond
 그렇다면, 기존의 SCM에서는 V가 f를 선택하는 데에 유의한 역할을 하도록, 즉,
 
 
+
 $$
 \begin{aligned} X&=U \\Y&= f(X,V)\end{aligned}
 $$
 
 
+
 로 표현할 수 있고, 일반적인 경우인 V가 관측되지 않고 값이 랜덤으로 선택된다면 SCM을 찾기 어렵습니다. 따라서 우리는 고려할 수 있는 function class에 제약을 가함으로써 실제 causal discovery가 가능토록 만듭니다. 그의 대표적인 예로 ANM(Additive Noise Model)은 아래와 같습니다.
+
 
 
 $$
 \begin{aligned} X&=U \\Y&= f(X)+V\end{aligned}
 $$
+
+
 이는 노이즈 항을 단순히 함수 밖에서 더해줌으로써 어떤 추가 가정없이 효율적으로 function class를 줄일 수 있었습니다.
 
 
