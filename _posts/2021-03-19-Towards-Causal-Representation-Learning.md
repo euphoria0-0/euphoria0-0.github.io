@@ -158,7 +158,7 @@ $$
 
 ### 2-5. Learning Causal Variables
 
-이번 챕터에서는 Causal learning으로 해결하려고 하는 현재 ML의 문제점과 방향을 소개합니다.
+이번 챕터에서는 Causal learning으로 해결하려고 하는 현재 ML의 문제점과 해결 방향을 소개합니다.
 
 #### Problem 1: Learning Disentangled Representations 
 
