@@ -2,7 +2,7 @@
 title: The Seven Tools of Causal Inference for Machine Learning
 author: euphoria0-0
 date: 2021-02-21 18:00:00 +0800
-categories: [AI, Paper Review]
+categories: [Causal Learning, Paper Review]
 tags: [Machine Learning, Paper Review, Causal Learning]
 toc: true
 math: true
