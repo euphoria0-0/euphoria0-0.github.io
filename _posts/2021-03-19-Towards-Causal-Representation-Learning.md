@@ -80,15 +80,23 @@ if two observables X and Y are statistically dependent, then there exists a vari
 
 causal model의 가능한 후보군들에는 DAG(Directed Acyclic Graph), CGM(Causal Graphical Models), SCM이 있습니다.
 
-관측 변수, deterministic한 함수, 설명이 안되는 랜덤 변수를 각각 $$X_i, f_i, U_i$$로 정의합니다. 여기서 $$U_i$$는 위의 Principle에 의해 jointly independent이어야 합니다.
+관측 변수, deterministic한 함수, 설명이 안되는 랜덤 변수를 각각 
+$$
+X_i, f_i, U_i
+$$
+로 정의합니다. 여기서 $$U_i$$는 위의 Principle에 의해 jointly independent이어야 합니다.
 
 
 $$
 X:=f_i(PA_i,U_i), \qquad i=1,\cdots,n
 $$
 
+DAG는 joint distribution을 계산하기 위해 
+$$
+X_j|PA_j \perp \!\!\! \perp ND_j
+$$
 
-DAG는 joint distribution을 계산하기 위해 $$X_j|PA_j \perp \!\!\! \perp ND_j$$라는 Causal Markov condition이 필요합니다.
+라는 Causal Markov condition이 필요합니다.
 
 Causal Graphical Model은 다음과 같이 causal factorization이 가능합니다.
 
@@ -123,7 +131,19 @@ The causal generative process of a system’s variables is composed of autonomou
 
 이는 우리가 intervention을 할 수 있는지, intervention을 통해 무엇을 알 수 있는지에 중요한 원칙입니다. 그리고 Causal 변수에 각각 intervention을 할 수 있는지는 modularity, subsystem의 autonomous 등의 개념에 중요합니다.
 
-Causal factorization에 적용하면 principle은 각 factor $$X_i|PA_i$$들이 독립이라는 것을 의미하는데, 이는 각 메커니즘은 $$P(X_i|PA_i)$$는 다른 메커니즘 $$P(X_j|PA_j)$$ 을 바꾸지도, 이 메커니즘을 안다고 다른 메커니즘에 대한 정보를 알게 되는 것도 아님을 의미합니다. 
+Causal factorization에 적용하면 principle은 각 factor 
+$$
+X_i|PA_i
+$$
+들이 독립이라는 것을 의미하는데, 이는 각 메커니즘은 
+$$
+P(X_i|PA_i)
+$$
+는 다른 메커니즘 
+$$
+P(X_j|PA_j)
+$$
+ 을 바꾸지도, 이 메커니즘을 안다고 다른 메커니즘에 대한 정보를 알게 되는 것도 아님을 의미합니다. 
 
 이는 구조적 할당(structural assignments) 중 하나를 변경해도 다른 할당들은 변하지 않고(invariant), 다른 메커니즘이 외부 영향을 받아도 causal relation은 변하지 않음(autonomous)을 의미합니다. ~~(제가 이해하기로는 autonomous는 그런 의미인 것 같습니다..)~~
 
