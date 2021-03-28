@@ -197,11 +197,77 @@ $$
 
 #### Problem 1: Learning Disentangled Representations 
 
+먼저, causal learning을 통해 representation의 disentangle을 할 수 있습니다. Causal factorization은 아래와 같고 이를 통해 causal representation learning은 이를 통해 disentangle이 가능하다고 보고 있습니다.
 
 
-(..ing)
+$$
+P(S_1,\cdots,S_n)=\prod_{i=1}^n P(S_i|PA_i)
+$$
 
 
+ICM Principle로 인해 노이즈와 매커니즘은 각각 독립이어야 하며 이는 다른 문제나 액션에 대해 불변이거나 독립적으로 intervention이 가능해야 함을 의미합니다. 이러한 경우 우리는 representation의 분리, 즉 disentangle이 가능토록 합니다.
+
+SMS hypothesis는 supervision signal을 주는데, 어떤 factor가 disentangle이 가능한지는 어떤 intervention을 관측할 수 있는지에 따라 다릅니다. 다른 supervision signal은 factor의 부분집합을 알 수 있게되고, 비슷하게, 어떤 변수가 추출되고, 그들의 세분화는 어떤 distribution shifts나 intervention에 의존하게 되는지, 다른 supervision signal이 가능한지를 볼 수 있습니다.
+
+
+
+#### Problem 2: Learning Transferable Mechanisms
+
+이 논문에서는 transfer 가 가능한 메커니즘의 필요성을 기존의 ML 학습 자원의 절약을 요하면서 언급합니다. 이는 물론이고, 다른 태스크나 환경에서도 robust한 학습 모델을 만들기 위해 transfer가 가능한 메커니즘의 필요성을 말하고 있습니다.
+
+
+
+#### Problem 3: Learning interventional world models and reasoning
+
+causal representation learning은 'thinking as acting in an imagined space'를 지향하며, intervention과 이를 통한 reasoning 등으로 이를 실현하고자 합니다.
+
+
+
+### 2-6. Implications for ML
+
+#### 2-6-1. Semi-Supervised Learning
+
+이는 다음 포스팅에서 해당 논문과 함께 소개하고자 합니다!
+
+간단히, semi-supervised learning은 causal direction이 아닌 anticausal direction(Y->X라는 cause and effect 관계가 있을 때 X->Y를 예측하는 것)에서만 작동합니다.
+
+#### 2-6-2. Adversarial Vulnerability
+
+Causal Learning은 adversarial attack에서도 robust하게 학습할 수 있어야 한다. 그러나 기본적으로 adversarial example은 기존의 training distribution과 다르므로 이에 대해서도 robust하고 transferable하게 학습할 수 있는 causal mechanism을 고려할 수 있다고 한다.
+
+#### 2-6-3. Robustness and Strong Generalization
+
+Robustness는 중요하다. causal learning에서는 OOD(Out-of-distribution) generalization을 위해 OOD risk를 정의하고 기존에 empirical risk 뿐만 아니라 OOD risk도 함께 줄일 수 있는 robust predictor를 학습시킬 수 있다.
+
+#### 2-6-4. Multi-Task Learning and Continual Learning
+
+Multiple Task가 존재하는 상황을 가정하는 Multi-task learning과 continual learning에서 causal learning은 data-generating process을 잘 학습하기 위한 SMS hypothesis를 가정한 causal generative model을 도입한다. 여기서 각 process는 서로 다른 태스크나 환경 속에서 공유하는 어떤 representation을 통해 더 잘 학습할 수 있다는 가정을 가진다.
+
+
+
+### 3. Conclusion
+
+그동안 Causal Learning을 통해 기존의 ML이 하기 어려웠던 태스크들을 어떻게 접근함으로써 다룰 수 있게 되었는지를 소개하였다. 이제 이 다음으로 어떤 태스크 혹은 Area들이 있는지를 살펴보며 이 논문 소개를 마치고자 한다.
+
+1. Learning Non-linear causal relations at scale
+
+   비선형의 causal 관계를 학습하고 이를 scalable하게 키우는 것
+
+2. Learning causal variables
+
+   어떤 intervention이 예측에 더 robust하게 학습될 수 있는지 아는 것
+
+3. Understanding the biases of existing deep learning approaches
+
+   DL에서 어떤 부분이 잘 학습하게 하는지 이해하는 것
+
+4. Learning causally correct models for the world and the agent
+
+   RL에서 abstract state representation을 가능하도록 만드는 것
+
+
+
+End of Documents.
 
 
 
