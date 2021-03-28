@@ -42,38 +42,40 @@ RVM은 Bayesian SVM이므로 Bayesian Approach로 SVM을 구하고자 합니다.
 1. posterior 구하기
 
     RVM이 상정하는 모델과 분포는 다음과 같이 표현할 수 있습니다. 여기서, kernel function은 제약이 없고 어떤 basis function도 사용가능한 것이 RVM의 장점입니다. 기존의 SVM은 positive definite인 kernel function만 사용가능했습니다.
-
-
+    
+    
     $$
     \begin{aligned}
     y(\mathbf{x})&=\sum_n^N w_n k(\mathbf{x},\mathbf{x}_n)+b \\
     p(t|\mathbf{x},\mathbf{w},\beta)&=\mathcal{N}(t|y(\mathbf{x}),\beta^{-1})
     \end{aligned}
     $$
-
-
+    
+    
     따라서 likelihood는 다음과 같이 나타낼 수 있습니다.
-
-
+    
+    
     $$
     p(\mathbf{t}|X,\mathbf{w},\beta)=\prod p(t_n|x_n,\mathbf{w},\beta^{-1})=\mathcal{N}(\mathbf{t}|\Phi\mathbf{w},\beta^{-1}I)
     $$
-
-
+    
+    
+    
+    
     그리고 weight에 대한 prior는 다음과 같이 표현합니다.
-
-
+    
+    
     $$
     \begin{aligned}
     p(\mathbf{w}|\boldsymbol{\alpha})=\prod\mathcal{N}(w_i|\mathbf{0},\alpha_i^{-1})&=\mathcal{N}(\mathbf{w}|\mathbf{0},\textrm{diag}(\alpha_i^{-1}))=\mathcal{N}(\mathbf{w}|\mathbf{0},A^{-1}) \\
     A&=\textrm{diag}(\alpha_i)
     \end{aligned}
     $$
-
-
+    
+    
     이제, likellihood와 prior를 이용해 posterior를 구할 수 있습니다. posterior는 다음과 같이 구해지며, 증명은 아래에 있습니다.
-
-
+    
+    
     $$
     \begin{aligned}
     p(\mathbf{w}|\mathbf{t},X,\boldsymbol{\alpha},\beta)&=\mathcal{N}(\mathbf{w}|\mathbf{m},\Sigma) \\
@@ -81,17 +83,20 @@ RVM은 Bayesian SVM이므로 Bayesian Approach로 SVM을 구하고자 합니다.
     \Sigma&=(A+\beta\Phi^\text{T}\Phi)^{-1}
     \end{aligned}
     $$
-
+    
+    
+    
+    
     <details>
         <summary>증명</summary>
         <div markdown="1">
             ![/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 1.png](/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 1.png)
         </div>
     </details>
-
-    ![/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 1.png](/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 1.png)
-
     
+    ![/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 1.png](/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 1.png)
+    
+      
 
 2. evidence approximation을 이용해 hyper-parameter 구하기
 
@@ -142,21 +147,28 @@ RVM은 Bayesian SVM이므로 Bayesian Approach로 SVM을 구하고자 합니다.
        \gamma_i=1-\alpha_i\Sigma_{ii}, m_i=[\mathbf{m}]_i, \Sigma_{ii}=[\Sigma]_{ii}
        $$
        
-
-    3. optimal $$\alpha, \beta$$ 구하는 과정 (evidence 근사 이용)
-
-       1. $$\alpha, \beta$$ 초깃값
+3. optimal $$\alpha, \beta$$ 구하는 과정 (evidence 근사 이용)
+    
+   1. $$\alpha, \beta$$ 초깃값
        2. (posterior) mean, cov 평가
        3. hyper-parameter 재추정
        4. 수렴까지 2-3. 반복
-
     
 
+    
 3. relevance vector와 sparse 의미
 
-    
+     
 
-    relevance vector는 support vector처럼, 어떤 과정을 통해서 남은 벡터만을 이용해 모델에 학습시킨 데이터를 의미합니다. 위에서 구한 $$\alpha_i$$에 대해서 $$\alpha_i \longrightarrow \infty$$이면, $$w_i|\alpha_i$$의 mean과 variance가 0에 가까워지고, 실제 모델에서 $$\sum w_i\phi(\mathbf{x_i})$$를 계산할 때 $$\phi(\mathbf{x_i})$$ 값에 관계없이 0이 되므로 $$\phi(\mathbf{x_i})$$ 벡터가 아무 역할을 못하게 됩니다. 따라서 이러한 벡터는 제거하고, 0이 되지 않는 $$w_i$$에 해당하는 $$\mathbf{x_i}$$를 **relevance vector**라고 합니다. *relevance* 라고 하는 이유는 이러한 과정이 marginal likelihood를 maximize하는 ARD(*Automatic Relevance Determination*)를 통해 나오기 때문인 것 같습니다.(저의 추정)
+    relevance vector는 support vector처럼, 어떤 과정을 통해서 남은 벡터만을 이용해 모델에 학습시킨 데이터를 의미합니다. 위에서 구한 $$\alpha_i$$에 대해서 
+    $$
+    \alpha_i \longrightarrow \infty
+    $$
+    이면, 
+    $$
+    w_i|\alpha_i
+    $$
+    의 mean과 variance가 0에 가까워지고, 실제 모델에서 $$\sum w_i\phi(\mathbf{x_i})$$를 계산할 때 $$\phi(\mathbf{x_i})$$ 값에 관계없이 0이 되므로 $$\phi(\mathbf{x_i})$$ 벡터가 아무 역할을 못하게 됩니다. 따라서 이러한 벡터는 제거하고, 0이 되지 않는 $$w_i$$에 해당하는 $$\mathbf{x_i}$$를 **relevance vector**라고 합니다. *relevance* 라고 하는 이유는 이러한 과정이 marginal likelihood를 maximize하는 ARD(*Automatic Relevance Determination*)를 통해 나오기 때문인 것 같습니다.(저의 추정)
 
     
 

@@ -39,11 +39,19 @@ Causal Hierarchy는 위에서 말한 질문들에 대해 개념화하고 각 개
 
 
 
-Association은 $$p(y|x)$$를 의미하는 것으로, 오로지 통계적 관계(statistical relationships)을 의미합니다. 예로, 치약을 구입하는 고객을 관찰하면 치실을 구입할 가능성이 높다 등은 Association에 해당하며 Conditional expectation으로 추론이 가능합니다. 여기서는 어떤 causal 정보도 필요하지 않으므로 가장 하위 개념이며, 현재 많은 머신러닝 방법들이 사용하는 방식입니다.
+Association은 
+$$
+p(y|x)
+$$
+를 의미하는 것으로, 오로지 통계적 관계(statistical relationships)을 의미합니다. 예로, 치약을 구입하는 고객을 관찰하면 치실을 구입할 가능성이 높다 등은 Association에 해당하며 Conditional expectation으로 추론이 가능합니다. 여기서는 어떤 causal 정보도 필요하지 않으므로 가장 하위 개념이며, 현재 많은 머신러닝 방법들이 사용하는 방식입니다.
 
 
 
-Association은 $$P(y|x)$$로 나타내며, $$X=x$$라는 사건을 관측했을 때, $$Y=y$$라는 사건이 나타날 확률을 의미합니다.
+Association은 
+$$
+P(y|x)
+$$
+로 나타내며, $$X=x$$라는 사건을 관측했을 때, $$Y=y$$라는 사건이 나타날 확률을 의미합니다.
 
 
 
@@ -55,7 +63,11 @@ Intervention은 실제 관찰한 것을 바꾼 것으로, "What if I make it hap
 
 
 
-Intervention은 $$P(y|do(x),z)$$와 같이 나타내며, $$Z=z$$라는 사건을 관측하고 Intervention을 통해 $$X=x$$라고 값을 부여했을 때(이를 intervention을 가했다는 의미에서 $$do(x)$$로 표기합니다), $$Y=y$$라는 사건이 발생할 확률을 의미합니다.
+Intervention은 
+$$
+P(y|do(x),z)
+$$
+와 같이 나타내며, $$Z=z$$라는 사건을 관측하고 Intervention을 통해 $$X=x$$라고 값을 부여했을 때(이를 intervention을 가했다는 의미에서 $$do(x)$$로 표기합니다), $$Y=y$$라는 사건이 발생할 확률을 의미합니다.
 
 
 
@@ -67,7 +79,11 @@ Counterfactuals는 "What if I had acted differenctly"라는 질문으로, 회고
 
 
 
-Counterfactual은 $$P(y_x|x',y')$$와 같이 나타내며, 실제로 $$X=x',Y=y'$$라고 관찰했을 때, $$X=x$$라고 관측했었을 때 $$Y=y$$라는 사건이 나타났을 확률을 의미합니다.
+Counterfactual은 
+$$
+P(y_x|x',y')
+$$
+와 같이 나타내며, 실제로 $$X=x',Y=y'$$라고 관찰했을 때, $$X=x$$라고 관측했었을 때 $$Y=y$$라는 사건이 나타났을 확률을 의미합니다.
 
 
 
