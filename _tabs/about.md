@@ -54,9 +54,9 @@ We should note the role of AI and would use that toward better worlds, hopefully
 [![Gmail Badge](https://img.shields.io/badge/Gmail-d14836?style=flat&logo=Gmail&logoColor=white&link=mailto:euphoria9600@gmail.com)](mailto:euphoria9600@gmail.com)
 
 ### More about me
-[CV(Curriculum Vitae)][/assests/files/cv.pdf]  [![Linkedin Badge](https://img.shields.io/badge/Linkedin-blue?style=flat&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/sy-p-782a62187//)](https://www.linkedin.com/in/sy-p-782a62187/) [![GitHub Badge](http://img.shields.io/badge/-Github-black?style=flat-square&logo=github&link=https://euphoria0-0.github.io)](https://euphoria0-0.github.io)
+[CV][/assests/files/CV.pdf]  [![Linkedin Badge](https://img.shields.io/badge/Linkedin-blue?style=flat&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/sy-p-782a62187//)](https://www.linkedin.com/in/sy-p-782a62187/) [![GitHub Badge](http://img.shields.io/badge/-Github-black?style=flat-square&logo=github&link=https://euphoria0-0.github.io)](https://euphoria0-0.github.io)
 
-
+[![CV](https://img.shields.io/badge/CV-green.svg)](/assets/files/CV.pdf)
 
 
 
