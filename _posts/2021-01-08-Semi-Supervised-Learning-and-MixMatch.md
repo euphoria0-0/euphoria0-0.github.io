@@ -238,14 +238,16 @@ $$
    \mathcal{W}=\textrm{Shuffle}(\textrm{Concat}(\hat{\mathcal{X}},\hat{\mathcal{U}})) \qquad(14)
    $$
    
+2. $$
+   i \in (1,\cdots,|\hat{\mathcal{X}}|)
+   $$
 
-2. $$i \in (1,\cdots,|\hat{\mathcal{X}}|)$$와 섞은 set $$\mathcal{W}$$에 대해 MixUp을 계산합니다.
+   와 섞은 set $$\mathcal{W}$$에 대해 MixUp을 계산합니다.
 
-   
+
    $$
    \mathcal{X}'=\textrm{MixUp}(\hat{\mathcal{X}}_i,\mathcal{W}_i) \qquad(15)
    $$
-   
 
 3. augmented된 unlabeled data와 2.에서 계산하고 남은 $$\mathcal{W}$$에 대해 MixUp을 계산합니다.
 
