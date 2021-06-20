@@ -17,7 +17,7 @@ order: 4
 # Suyeong Park
 ### About me
 
-I'm a master student in the Graduate school of UNIST (MLV Lab). I do research on Machine Learning in Computer Vision. You can find some more information about me in [![CV](https://img.shields.io/badge/CV-green.svg)](/assets/files/CV.pdf).
+I'm a master student in the Graduate school of UNIST. I do research on Machine Learning in Computer Vision. You can find some more information about me in [![CV](https://img.shields.io/badge/CV-green.svg)](/assets/files/CV.pdf).
 
 
 
