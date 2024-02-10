@@ -1,7 +1,7 @@
 ---
 title: Federated Learning 이란?
 author: euphoria0-0
-date: 2024-02-10 23:00:00 +0800
+date: 2024-02-10 00:00:00 +0800
 categories: [Machine Learning]
 tags: [Machine Learning]
 toc: true
