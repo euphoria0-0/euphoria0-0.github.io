@@ -176,7 +176,7 @@ RVM은 Bayesian SVM이므로 Bayesian Approach로 SVM을 구하고자 합니다.
 
     
 
-    ![/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 5.png](/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 5.png)*source: PRML book*
+    ![/assets/img/posts/2021-02-18-Relevance-Vector-Machine/img5.png](/assets/img/posts/2021-02-18-Relevance-Vector-Machine/img5.png)*source: PRML book*
 
     
 
