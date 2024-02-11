@@ -100,7 +100,7 @@ Laplace Approximation은 우리가 posterior를 구할 때 정확한 적분이 �
         </div>
     </details>
 
-    ![/assets/img/posts/2020-12-05-Bayesian-Logistic-Regression/Untitled.png](/assets/img/posts/2020-12-05-Bayesian-Logistic-Regression/Untitled.png)
+    ![/assets/img/posts/2020-12-05-Bayesian-Logistic-Regression/img1.png](/assets/img/posts/2020-12-05-Bayesian-Logistic-Regression/img1.png)
 
     
 
@@ -178,11 +178,11 @@ $$p(\mathcal{C}_1|\phi^*,\mathbf{t}^*)=\int p(\mathcal{C}_1|\phi^*,\mathbf{w})p(
             </div>
         </details>
 
-        ![/assets/img/posts/2020-12-05-Bayesian-Logistic-Regression/Untitled 1.png](/assets/img/posts/2020-12-05-Bayesian-Logistic-Regression/Untitled 1.png)
+        ![/assets/img/posts/2020-12-05-Bayesian-Logistic-Regression/img2.png](/assets/img/posts/2020-12-05-Bayesian-Logistic-Regression/img2.png)
 
-        ![/assets/img/posts/2020-12-05-Bayesian-Logistic-Regression/Untitled 2.png](/assets/img/posts/2020-12-05-Bayesian-Logistic-Regression/Untitled 2.png)
+        ![/assets/img/posts/2020-12-05-Bayesian-Logistic-Regression/img3.png](/assets/img/posts/2020-12-05-Bayesian-Logistic-Regression/img3.png)
 
-        ![/assets/img/posts/Bayesian-Logistic-Regression/2020-12-05-Untitled 3.png](/assets/img/posts/2020-12-05-Bayesian-Logistic-Regression/Untitled 3.png)
+        ![/assets/img/posts/Bayesian-Logistic-Regression/2020-12-05-img4.png](/assets/img/posts/2020-12-05-Bayesian-Logistic-Regression/img4.png)
 
 
 
