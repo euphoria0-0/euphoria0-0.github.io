@@ -90,11 +90,11 @@ RVM은 Bayesian SVM이므로 Bayesian Approach로 SVM을 구하고자 합니다.
     <details>
         <summary>증명</summary>
         <div markdown="1">
-            ![/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 1.png](/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 1.png)
+            ![/assets/img/posts/2021-02-18-Relevance-Vector-Machine/img1.png](/assets/img/posts/2021-02-18-Relevance-Vector-Machine/img1.png)
         </div>
     </details>
     
-    ![/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 1.png](/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 1.png)
+    ![/assets/img/posts/2021-02-18-Relevance-Vector-Machine/img1.png](/assets/img/posts/2021-02-18-Relevance-Vector-Machine/img1.png)
     
       
 
@@ -122,11 +122,11 @@ RVM은 Bayesian SVM이므로 Bayesian Approach로 SVM을 구하고자 합니다.
        <details>
            <summary>증명</summary>
            <div markdown="1">
-               ![/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 3.png](/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 3.png)
+               ![/assets/img/posts/2021-02-18-Relevance-Vector-Machine/img3.png](/assets/img/posts/2021-02-18-Relevance-Vector-Machine/img3.png)
            </div>
        </details>
 
-       ![/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 3.png](/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 3.png)
+       ![/assets/img/posts/2021-02-18-Relevance-Vector-Machine/img3.png](/assets/img/posts/2021-02-18-Relevance-Vector-Machine/img3.png)
 
        
 
@@ -197,11 +197,11 @@ RVM은 Bayesian SVM이므로 Bayesian Approach로 SVM을 구하고자 합니다.
     <details>
         <summary>증명</summary>
         <div markdown="1">
-            ![/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 7.png](/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 7.png)
+            ![/assets/img/posts/2021-02-18-Relevance-Vector-Machine/img7.png](/assets/img/posts/2021-02-18-Relevance-Vector-Machine/img7.png)
         </div>
     </details>
 
-    ![/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 7.png](/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 7.png)
+    ![/assets/img/posts/2021-02-18-Relevance-Vector-Machine/img7.png](/assets/img/posts/2021-02-18-Relevance-Vector-Machine/img7.png)
 
 5. 기타 논점
    - localized basis function의 경우 basis function이 없는 input space의 region에서 예측분산이 작아진다. 이런 경우 RVM은 데이터 도메인 밖에서 extrapolate할수록 예측에 확신을 준다. → *멀리 있는 데이터를 relevance로 선택하게 된다?!* -> degenerate of covariance function과의 연관성이 무엇인지 (?)
@@ -231,7 +231,7 @@ RVM의 Sparsity(희박도)에 대한 통찰을 이 챕터에서 설명합니다.
         - $$\alpha \rightarrow \infty$$가 되어 해당 항이 0이 되고, 공분산에 대한 $$\varphi$$의 영향이 없어 모델로부터 제거됩니다.
         - $$\alpha <\infty$$이면(오른쪽 그림) 해당 항에 값이 주어지고 공분산이 커져(퍼져) 데이터에는 낮은 확률이 부여되어, $\mathbf{t}$에서의 밀도(확률)값이 낮아집니다. 이는 분포가 퍼지고(데이터로부터 멀어짐) → 따라서 이 경우 align하는지 안 하는지에 따라 뺄 수 있습니다. 여기서는 align하지 않은 경우이므로 데이터를 뺍니다.
 
-    ![/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled% 10.png](/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 10.png)*source: PRML book*
+    ![/assets/img/posts/2021-02-18-Relevance-Vector-Machine/img10.png](/assets/img/posts/2021-02-18-Relevance-Vector-Machine/img10.png)*source: PRML book*
 
     
 
@@ -243,23 +243,23 @@ RVM의 Sparsity(희박도)에 대한 통찰을 이 챕터에서 설명합니다.
 
     1. posterior의 covariance matrix에서 $$\alpha_i$$의 기여분을 따로 빼냅니다.
 
-        ![/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 11.png](/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 11.png)
+        ![/assets/img/posts/2021-02-18-Relevance-Vector-Machine/img11.png](/assets/img/posts/2021-02-18-Relevance-Vector-Machine/img11.png)
 
-        ![/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 12.png](/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 12.png)
+        ![/assets/img/posts/2021-02-18-Relevance-Vector-Machine/img12.png](/assets/img/posts/2021-02-18-Relevance-Vector-Machine/img12.png)
 
         
 
     2. log likelihood는 다음과 같이 구할 수 있고, 
 
-        ![/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 13.png](/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 13.png)
+        ![/assets/img/posts/2021-02-18-Relevance-Vector-Machine/img13.png](/assets/img/posts/2021-02-18-Relevance-Vector-Machine/img13.png)
 
         
 
     3. $$\alpha_i$$에 대한 dependence를 포함하는 function은 아래와 같이 계산됩니다.
     
-        ![/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 14.png](/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 14.png)
+        ![/assets/img/posts/2021-02-18-Relevance-Vector-Machine/img14.png](/assets/img/posts/2021-02-18-Relevance-Vector-Machine/img14.png)
     
-        ![/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 15.png](/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 15.png)
+        ![/assets/img/posts/2021-02-18-Relevance-Vector-Machine/img15.png](/assets/img/posts/2021-02-18-Relevance-Vector-Machine/img15.png)
     
         - $$s_i$$ (sparsity of $$\varphi_i$$) : basis function이 모델의 다른 basis vector와 overlap되는 정도를 의미합니다.
         - $$q_i$$ (quality of $$\varphi_i$$) : $$\mathbf{t}$$와 $$\mathbf{y}_{-i}$$ 간 error와 basis vector $$\varphi_i$$가 align된 정도를 의미합니다.
@@ -269,7 +269,7 @@ RVM의 Sparsity(희박도)에 대한 통찰을 이 챕터에서 설명합니다.
 3. Sparsity와 Quality의 상대적인 크기
     1. Stationary points of the marginal likelihood with respect to $$\alpha_i$$
 
-        ![/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 16.png](/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 16.png)
+        ![/assets/img/posts/2021-02-18-Relevance-Vector-Machine/img16.png](/assets/img/posts/2021-02-18-Relevance-Vector-Machine/img16.png)
 
         위 식이 0이 될 때는,
 
@@ -277,7 +277,7 @@ RVM의 Sparsity(희박도)에 대한 통찰을 이 챕터에서 설명합니다.
             1. $$q_i^2 < s_i$$일 때 :  $$\alpha_i \rightarrow \infty$$ 가 됩니다.
             2. $$q_i^2 > s_i$$일 때 : 
 
-                ![/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 17.png](/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 17.png)
+                ![/assets/img/posts/2021-02-18-Relevance-Vector-Machine/img17.png](/assets/img/posts/2021-02-18-Relevance-Vector-Machine/img17.png)
 
         ⇒ 따라서, 이의 상대적 크기가 basis vector가 모델에서 제거되는지 아닌지 결정하게 됩니다.
 
@@ -289,7 +289,7 @@ RVM의 Sparsity(희박도)에 대한 통찰을 이 챕터에서 설명합니다.
 
     basis vector가 모델이 포함되는지 아닌지 반복해서 확인하는 알고리즘 입니다.
 
-    ![/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 18.png](/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 18.png)*source: PRML book*
+    ![/assets/img/posts/2021-02-18-Relevance-Vector-Machine/img18.png](/assets/img/posts/2021-02-18-Relevance-Vector-Machine/img18.png)*source: PRML book*
 
     
 
@@ -297,7 +297,7 @@ RVM의 Sparsity(희박도)에 대한 통찰을 이 챕터에서 설명합니다.
 
     아래처럼 $$Q$$와 $$S$$에 대해 미리 계산하면 효율적으로 RVM을 구현할 수 있습니다.
     
-    ![/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 19.png](/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 19.png)*source: PRML book*
+    ![/assets/img/posts/2021-02-18-Relevance-Vector-Machine/img19.png](/assets/img/posts/2021-02-18-Relevance-Vector-Machine/img19.png)*source: PRML book*
 
 
 
@@ -338,14 +338,14 @@ RVM을 이용해 Classification을 풀어봅시다. 이 또한 GP Classifier와 
     <details>
         <summary>gradient, Hessian 증명</summary>
         <div markdown="1">
-            ![/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 21.png](/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 21.png)
-            ![/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 22.png](/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 22.png)
+            ![/assets/img/posts/2021-02-18-Relevance-Vector-Machine/img21.png](/assets/img/posts/2021-02-18-Relevance-Vector-Machine/img21.png)
+            ![/assets/img/posts/2021-02-18-Relevance-Vector-Machine/img22.png](/assets/img/posts/2021-02-18-Relevance-Vector-Machine/img22.png)
         </div>
     </details>
 
-    ![/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 21.png](/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 21.png)
+    ![/assets/img/posts/2021-02-18-Relevance-Vector-Machine/img21.png](/assets/img/posts/2021-02-18-Relevance-Vector-Machine/img21.png)
 
-    ![/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 22.png](/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 22.png)
+    ![/assets/img/posts/2021-02-18-Relevance-Vector-Machine/img22.png](/assets/img/posts/2021-02-18-Relevance-Vector-Machine/img22.png)
 
     
 
@@ -371,11 +371,11 @@ RVM을 이용해 Classification을 풀어봅시다. 이 또한 GP Classifier와 
         <summary>re-estimated hyper-parameter 증명</summary>
         <div markdown="1">
             (아직 미완성)
-            ![/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 23.png](/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 23.png)
+            ![/assets/img/posts/2021-02-18-Relevance-Vector-Machine/img23.png](/assets/img/posts/2021-02-18-Relevance-Vector-Machine/img23.png)
         </div>
     </details>
 
-    ![/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 23.png](/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 23.png)
+    ![/assets/img/posts/2021-02-18-Relevance-Vector-Machine/img23.png](/assets/img/posts/2021-02-18-Relevance-Vector-Machine/img23.png)
 
     
 
@@ -390,13 +390,13 @@ RVM을 이용해 Classification을 풀어봅시다. 이 또한 GP Classifier와 
 
     - Analysis of Sparsity: classfication case
 
-      ![/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 25.png](/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 25.png)*source: PRML book*
+      ![/assets/img/posts/2021-02-18-Relevance-Vector-Machine/img25.png](/assets/img/posts/2021-02-18-Relevance-Vector-Machine/img25.png)*source: PRML book*
 
     - relevance vector가 decision boundary 쪽에 없다는 것은 $$\phi_i(\mathbf{x})$$와 $$\mathbf{t}$$가 잘 align해서 0이 안된 경우이고, 잘 align하지 않으면 0이 되므로 sparse해진다. (잘 align하지 않은 애들은 decision boundary 근처에 있는 애들)
 
-      ![/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 26.png](/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 26.png)*source: PRML book*
+      ![/assets/img/posts/2021-02-18-Relevance-Vector-Machine/img26.png](/assets/img/posts/2021-02-18-Relevance-Vector-Machine/img26.png)*source: PRML book*
 
-      ![/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 27.png](/assets/img/posts/2021-02-18-Relevance-Vector-Machine/Untitled 27.png)*source: PRML book*
+      ![/assets/img/posts/2021-02-18-Relevance-Vector-Machine/img27.png](/assets/img/posts/2021-02-18-Relevance-Vector-Machine/img27.png)*source: PRML book*
 
 
 
