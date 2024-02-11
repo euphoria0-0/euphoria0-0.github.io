@@ -354,6 +354,6 @@ $$
 
 Schölkopf, B., Janzing, D., Peters, J., Sgouritsa, E., Zhang, K., & Mooij, J. (2012). On causal and anticausal learning. arXiv preprint arXiv:1206.6471.
 
-[http://pl.is.tue.mpg.de/p/causal-anticausal/](http://pl.is.tue.mpg.de/p/causal-anticausal/)
+[https://pl.is.tue.mpg.de/p/causal-anticausal/](https://pl.is.tue.mpg.de/p/causal-anticausal/)
 
-[http://people.tuebingen.mpg.de/p/causality-perspect/slides/Bernhard_CausalLearning.pdf](http://people.tuebingen.mpg.de/p/causality-perspect/slides/Bernhard_CausalLearning.pdf)
+[https://people.tuebingen.mpg.de/p/causality-perspect/](https://people.tuebingen.mpg.de/p/causality-perspect/)
