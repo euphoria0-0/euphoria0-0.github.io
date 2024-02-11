@@ -1,7 +1,7 @@
 ---
 title: Federated Learning 이란?
 author: euphoria0-0
-date: 2024-02-10 00:00:00 +0800
+date: 2024-02-10 02:00:00 +0800
 categories: [Machine Learning]
 tags: [Machine Learning]
 toc: true
@@ -15,13 +15,13 @@ comments: true
 
 Federated Learning (연합학습)은 하나의 중앙 server와 여러 개의 분산된 client가 존재할 때 여러 client가 ‘연합’하여 각자 학습한 후 하나의 모델을 만드는 문제입니다. 여기서, 일반적인 distributed learning과 다른 점은 Federated Learning은 각 client의 **data의 privacy**를 중요하게 여겨, 해당 데이터는 각 client 내부적으로만 가지고 있고, 다른 client와 교환하거나 중앙 서버로 보낼 수 없다고 가정합니다. 따라서 데이터가 유출되어서도, 복원되어서도 안됩니다. 각 클라이언트는 데이터를 보내지 않고 ‘모델 학습 정보’만을 중앙 서버로 보냅니다. 그리고 서버에서는 각 클라이언트로부터 해당 정보를 받아 합친 후 업데이트하여 다시 각 클라이언트로 보내게 됩니다. 이를 통해 각 클라이언트의 privacy를 보호할 수 있고, 중앙 서버에서는 데이터를 모을 storage를 구비할 필요가 없으며 모델 학습을 위한 하드웨어 리소스도 효율적으로 사용할 수 있습니다. 최근 구글, 애플 등에서 연구되고 서비스에 적용되고 있는 분야입니다.
 
-![Fig 1](/assets/img/posts/2024-02-10/FL_intro.jpg)
+![Fig 1](/assets/img/posts/2024-02-10-FL/FL_intro.jpg)
 Fig 1. 연합학습 예시 그림
 
-![Fig 2](/assets/img/posts/2024-02-10/FL_ex1.png)
+![Fig 2](/assets/img/posts/2024-02-10-FL/FL_ex1.png)
 Fig 2. Google Gboard 연합학습 예시 (source: [link](https://ai.googleblog.com/2017/04/federated-learning-collaborative.html))
 
-![Fig 3](/assets/img/posts/2024-02-10/FL_ex2.png)
+![Fig 3](/assets/img/posts/2024-02-10-FL/FL_ex2.png)
 Fig 3. 병원 협력 연합학습 예시 (source: [link](https://www.technologyreview.com/2019/12/11/131629/apple-ai-personalizes-siri-federated-learning/))
 
 ## Problem Statement
