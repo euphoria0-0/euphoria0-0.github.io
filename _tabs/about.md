@@ -27,7 +27,7 @@ Thus, I'm currently focusing on identifying __Causality__ implied on data for mo
 
 ### Curriculum Vitae
 [![CV](https://img.shields.io/badge/CV-green.svg)](/assets/files/CV.pdf)
-[![GitHub Badge](http://img.shields.io/badge/-Github-black?style=flat-square&logo=github&link=https://github.com/euphoria0-0)](https://github.com/euphoria0-0)
+[![GitHub Badge](https://img.shields.io/badge/-Github-black?style=flat-square&logo=github&link=https://github.com/euphoria0-0)](https://github.com/euphoria0-0)
 [![GScholar Badge](https://img.shields.io/badge/-Google%20Scholar-blue)](https://scholar.google.com/citations?user=-pQY91AAAAAJ&hl=ko)
 
 ### Contact
