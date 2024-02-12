@@ -4,13 +4,7 @@ icon: fas fa-info-circle
 order: 4
 ---
 
-> Add Markdown syntax content to file `_tabs/about.md`{: .filepath } and it will show up on this page.
-<!-- {: .prompt-tip } -->
-
-
-
-# Suyeong Park
-### About me
+### About ME
 
 I'm Suyeong Park (박수영 in Korean; pronounced as Su-yeong). My research interests include trustworthy AI for real-world applications, especially causal inference.
 
