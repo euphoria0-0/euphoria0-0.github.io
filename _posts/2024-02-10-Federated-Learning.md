@@ -19,10 +19,10 @@ Federated Learning (연합학습)은 하나의 중앙 server와 여러 개의 �
 Fig 1. 연합학습 예시 그림
 
 ![Fig 2](/assets/img/posts/2024-02-10-FL/FL_ex1.png)
-Fig 2. Google Gboard 연합학습 예시 (source: [link](https://ai.googleblog.com/2017/04/federated-learning-collaborative.html))
+Fig 2. Google Gboard 연합학습 예시 (source: [link](https://ai.googleblog.com/2017/04/federated-learning-collaborative.html)){: width="50%" height="50%"}
 
 ![Fig 3](/assets/img/posts/2024-02-10-FL/FL_ex2.png)
-Fig 3. 병원 협력 연합학습 예시 (source: [link](https://www.technologyreview.com/2019/12/11/131629/apple-ai-personalizes-siri-federated-learning/))
+Fig 3. 병원 협력 연합학습 예시 (source: [link](https://www.technologyreview.com/2019/12/11/131629/apple-ai-personalizes-siri-federated-learning/)){: width="50%" height="50%"}
 
 ## Problem Statement
 
