@@ -44,6 +44,7 @@ $$
 \end{align}
 $$
 
+
 where $F(\cdot)$ is the global objective function and $F_k(\cdot)$ is a local objective function of client $k$, which indicates the client index, $k \in [K]$. $p_k$ is the value that satisfies $\sum_{k=1}^Kp_k=1$. In general, we use the ratio of the number of data points of each client: $p_k=n_k/\sum_{k=1}^Kn_k$ where $n_k$ is the number of local data points of the dataset of $k$-th client $\mathcal{D}_k$, $n_k:=|\mathcal{D}k|$*.*
 
 **Local Objective (Client-side)**
@@ -53,6 +54,7 @@ $$
 \min_{\mathbf{w}} F_k(\mathbf{w})=\min_{\mathbf{w}}\frac{1}{n_k}\sum_{\xi\in\mathcal{D}_k}f(\mathbf{w},\xi),
 \end{align}
 $$
+
 
 where $f(\cdot,\xi)$ denotes loss function for sample $\xi$.
 
