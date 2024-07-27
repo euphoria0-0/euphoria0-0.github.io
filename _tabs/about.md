@@ -19,10 +19,12 @@ I've focused on a research question, 'what information we need between explorati
 I believe 'understanding an intrinsic attributes of things and their interactions using our knowledge' is crucial for utilizing machine learning models in real-world for better human-being life can be achieved by understanding causality of things.
 Thus, I'm currently focusing on identifying __Causality__ implied on data for more reliable ML models.
 
+### Publication
+[![GScholar Badge](https://img.shields.io/badge/-Google%20Scholar-blue)](https://scholar.google.com/citations?user=-pQY91AAAAAJ&hl=ko)
+
 ### Curriculum Vitae
 [![CV](https://img.shields.io/badge/CV-green.svg)](/assets/files/CV.pdf)
 [![GitHub Badge](https://img.shields.io/badge/-Github-black?style=flat-square&logo=github&link=https://github.com/euphoria0-0)](https://github.com/euphoria0-0)
-[![GScholar Badge](https://img.shields.io/badge/-Google%20Scholar-blue)](https://scholar.google.com/citations?user=-pQY91AAAAAJ&hl=ko)
 
 ### Contact
 [![Gmail Badge](https://img.shields.io/badge/Gmail-d14836?style=flat&logo=Gmail&logoColor=white&link=mailto:suyeong.park0@gmail.com)](mailto:suyeong.park0@gmail.com)
