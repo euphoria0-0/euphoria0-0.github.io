@@ -102,7 +102,7 @@ P(Y|X)
 $$
 를 추정할 수 있는지를 소개합니다. 이를 요약하면 다음과 같습니다.
 
-1. Causal direction에서,
+__1. Causal direction에서,__
 
    1. Covariate shift ($$P(X)$$가 바뀌는 경우): 메커니즘 
       $$
@@ -122,7 +122,7 @@ $$
       $$
       인 ANM에서는 가능합니다.
 
-2. Anticausal direction에서,
+__2. Anticausal direction에서,__
 
    1. Covariate shift ($$P(X)$$가 바뀌는 경우): $$P(X)$$의 변화가 메커니즘인 
       $$
@@ -324,29 +324,14 @@ $$
    $$
    를 `Estimating causal conditionals` 로 추정합니다.
 
-2. Semi-Supervised Learning
 
-   .
-
-   
-
-#### 2-2.2. **Additional information about the output**
-
-#### 2-2.3. **Additional information about the input and output**
+<!-- markdownlint-capture -->
+<!-- markdownlint-disable -->
+> 결과적으로, Causal direction에서는 Semi-supervised learning이 불가능하지만, Anticausal direction에서는 가능합니다.
+{: .prompt-tip }
+<!-- markdownlint-restore -->
 
 
-
-
-
-## 4. Modules
-
-
-
-## 5. Empirical Results
-
-
-
-## 6. Conclusion
 
 
 
