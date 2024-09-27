@@ -4,3 +4,9 @@
 @import 'main';
 
 /* append your custom style below */
+
+
+::selection {
+    color: black;
+    background-color: skyblue;
+}
