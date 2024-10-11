@@ -56,7 +56,7 @@ $$
 
 이를 __조건부 독립성 (Conditional Independence)__ 라고 하며 다음과 같이 표기합니다: $X \perp \!\!\! \perp Y \mid Z$
 
-## 3 Graph Structures
+## Three Graph Structures
 
 조건부 독립성 특성을 이용했을 때, conditioning에 따라 (조건부) 독립성 특성이 다른 특이한 그래프 구조가 3가지 있습니다. 그래프의 조건부 독립성 구조를 이용해 인과관계를 찾아낼 수 있습니다
 
